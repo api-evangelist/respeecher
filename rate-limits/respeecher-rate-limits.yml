@@ -1,0 +1,41 @@
+aid: respeecher
+name: Respeecher Rate Limits
+description: >-
+  Documented rate and usage limits across Respeecher's two public APIs, captured
+  from public documentation as of 2026-07-11. Values may change; confirm with
+  the official docs.
+source:
+- url: https://docs.respeecher.com/
+  type: Documentation
+- url: https://space.respeecher.com/docs/limits
+  type: Documentation
+voice_marketplace_api:
+  base_url: https://gateway.respeecher.com
+  auth: API key via api-key header (create at marketplace.respeecher.com/account)
+  limits:
+  - name: Fast requests
+    limit: 500 requests
+    window: 300 seconds
+  - name: Slow requests
+    limit: 100 requests
+    window: 300 seconds
+  - name: Daily requests (plan-dependent)
+    note: >-
+      Subscription plans cap daily requests - roughly 350/day (TTS Only),
+      100/day (Creator), 500/day (Power). Enterprise offers higher/unlimited
+      concurrency.
+space_realtime_tts_api:
+  base_url: https://api.respeecher.com/v1/public/tts/en-rt
+  auth: X-API-Key header, or api_key query-string parameter (for browser WebSocket clients)
+  limits:
+  - name: Concurrent generations
+    limit: 5 concurrent text-to-speech generations per account across all endpoints
+  - name: Bytes endpoint max response size
+    limit: 100 MB per POST /tts/bytes response
+  - name: Bytes endpoint transcript length
+    limit: ~5,000 characters per POST /tts/bytes call
+    note: >-
+      The Bytes endpoint runs under a 120-second HTTP request timeout. For
+      longer transcripts use the SSE or WebSocket streaming endpoints.
+  - name: WebSocket connection lifetime
+    limit: Connections not guaranteed to stay alive beyond 12 hours; idle connections may be closed server-side

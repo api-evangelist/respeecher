@@ -1,0 +1,142 @@
+aid: respeecher
+name: Respeecher
+review:
+  question: Does Respeecher expose a documented public WebSocket API?
+  answer: true
+  date: '2026-07-11'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: true
+  asyncapiScopeNote: |
+    Yes. Respeecher's Space real-time text-to-speech API exposes a documented,
+    self-service public WebSocket endpoint at
+    wss://api.respeecher.com/v1/public/tts/en-rt (and .../ua-rt), documented at
+    space.respeecher.com/docs/api/tts/web-socket with a WebSockets Guide.
+    Respeecher additionally publishes its own AsyncAPI 2.6.0 for these WebSocket
+    channels. Under API Evangelist scope, an AsyncAPI 2.6 document was authored
+    at asyncapi/respeecher-asyncapi.yml modeling the bidirectional TTS channel
+    (context_id multiplexing, chunked input via continue, streamed audio
+    frames). The one-way HTTP SSE (POST /tts/sse) and one-shot POST /tts/bytes
+    transports are modeled as REST, not WebSocket.
+findings:
+  summary: |
+    Respeecher publishes a documented public WebSocket API. It runs two
+    self-service public APIs. (1) The Voice Marketplace API at
+    https://gateway.respeecher.com is request/response REST over HTTPS with a
+    downloadable OpenAPI 3.0.2 spec ("Voice Marketplace API 0.6.0",
+    https://gateway.respeecher.com/api/openapi.json, 38 paths), secured with an
+    api-key header; it covers voices, speech-to-speech conversion orders,
+    text-to-speech, calibration, recordings, projects/folders, credits, and
+    statistics. (2) The Respeecher Space real-time TTS API at
+    https://api.respeecher.com/v1/public/tts/{en-rt|ua-rt} adds three transports
+    - one-shot POST /tts/bytes, one-way HTTP SSE (POST /tts/sse), and a
+    bidirectional WebSocket channel (GET /tts/websocket over
+    wss://api.respeecher.com/...), all authenticated with X-API-Key (or an
+    api_key query parameter for browser WebSocket clients). Streaming starts in
+    under 200ms. A WebSocket surface is therefore documented and public.
+  accessModel: |
+    Both APIs are self-service. Voice Marketplace API keys are generated at
+    marketplace.respeecher.com/account; Space API keys at
+    space.respeecher.com/api-keys. Bespoke, high-touch voice cloning for studios
+    is a separate enterprise engagement (AI Voice Lab, contact-sales).
+  endpointsModeled: false
+  endpointsSource: |
+    Endpoints are real and confirmed from Respeecher's published OpenAPI 3.0.2
+    (gateway.respeecher.com/api/openapi.json), the docs.respeecher.com endpoints
+    reference, and the space.respeecher.com/docs API reference markdown. Nothing
+    was fabricated.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://gateway.respeecher.com
+      documented: true
+      note: Voice Marketplace API. Request/response REST; OpenAPI 3.0.2 published at /api/openapi.json.
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.respeecher.com/v1/public/tts/en-rt
+      documented: true
+      note: Space real-time TTS one-shot POST /tts/bytes (up to ~5,000 chars) and voice list GET /voices.
+    - protocol: SSE
+      scheme: https
+      documented: true
+      note: Space real-time TTS POST /tts/sse streams audio chunks as HTTP Server-Sent Events. One-way, not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      baseURL: wss://api.respeecher.com/v1/public/tts/en-rt
+      documented: true
+      note: >-
+        Bidirectional real-time TTS WebSocket (GET /tts/websocket). Multiplexes
+        concurrent generations by context_id, supports chunked input via
+        continue. Also ua-rt model. Respeecher publishes an AsyncAPI 2.6.0 for it.
+  endpointsConfirmedRest:
+    - GET    https://gateway.respeecher.com/api/v2/voices
+    - GET    https://gateway.respeecher.com/api/v2/voices/search
+    - POST   https://gateway.respeecher.com/api/v2/voices/favorite/{voice_id}
+    - POST   https://gateway.respeecher.com/api/v2/voices/settings
+    - GET    https://gateway.respeecher.com/api/v2/accents/samples
+    - GET    https://gateway.respeecher.com/api/v2/narration-styles/samples
+    - POST   https://gateway.respeecher.com/api/v2/orders
+    - POST   https://gateway.respeecher.com/api/v2/orders/retry/{recording_id}
+    - POST   https://gateway.respeecher.com/api/recordings/conversion-order
+    - POST   https://gateway.respeecher.com/api/recordings/conversion-redo/{recording_id}
+    - POST   https://gateway.respeecher.com/api/v2/recordings/tts
+    - POST   https://gateway.respeecher.com/api/recordings/tts
+    - GET    https://gateway.respeecher.com/api/tts-voices
+    - POST   https://gateway.respeecher.com/api/calibration
+    - POST   https://gateway.respeecher.com/api/calibration/auto
+    - PUT    https://gateway.respeecher.com/api/calibration/{calibration_id}/enable
+    - GET    https://gateway.respeecher.com/api/recordings
+    - POST   https://gateway.respeecher.com/api/recordings
+    - GET    https://gateway.respeecher.com/api/recordings/originals
+    - GET    https://gateway.respeecher.com/api/recordings/conversions
+    - GET    https://gateway.respeecher.com/api/recordings/export
+    - GET    https://gateway.respeecher.com/api/projects
+    - POST   https://gateway.respeecher.com/api/projects
+    - GET    https://gateway.respeecher.com/api/projects/{project_id}/export
+    - GET    https://gateway.respeecher.com/api/folders
+    - GET    https://gateway.respeecher.com/api/credits
+    - GET    https://gateway.respeecher.com/api/stats
+    - GET    https://gateway.respeecher.com/api/models
+    - GET    https://api.respeecher.com/v1/public/tts/en-rt/voices
+    - POST   https://api.respeecher.com/v1/public/tts/en-rt/tts/bytes
+    - POST   https://api.respeecher.com/v1/public/tts/en-rt/tts/sse
+  endpointsConfirmedWebSocket:
+    - GET    wss://api.respeecher.com/v1/public/tts/en-rt/tts/websocket
+    - GET    wss://api.respeecher.com/v1/public/tts/ua-rt/tts/websocket
+sources:
+  - url: https://gateway.respeecher.com/api/openapi.json
+    type: OpenAPI
+    note: Downloadable OpenAPI 3.0.2 for the Voice Marketplace API (title "Voice Marketplace API 0.6.0"), 38 paths.
+  - url: https://docs.respeecher.com/
+    type: Documentation
+    note: Voice Marketplace API docs; api-key auth, keys at marketplace.respeecher.com/account.
+  - url: https://docs.respeecher.com/endpoints-reference/
+    type: APIReference
+    note: Full endpoints reference by category (voices, orders, calibration, recordings, projects, credits, stats).
+  - url: https://space.respeecher.com/docs/quickstart
+    type: Documentation
+    note: Respeecher Space real-time TTS quickstart; base https://api.respeecher.com/v1/public/tts/en-rt, X-API-Key.
+  - url: https://space.respeecher.com/docs/api/tts/web-socket
+    type: APIReference
+    note: WebSocket endpoint wss://api.respeecher.com/v1/public/tts/{en-rt,ua-rt}; documented public WebSocket surface.
+  - url: https://space.respeecher.com/docs/api/tts/sse
+    type: APIReference
+    note: POST /tts/sse HTTP Server-Sent Events streaming (one-way, not WebSocket).
+  - url: https://space.respeecher.com/docs/api/tts/bytes
+    type: APIReference
+    note: POST /tts/bytes one-shot synthesis, up to ~5,000 characters, 120s timeout.
+  - url: https://space.respeecher.com/docs/limits
+    type: Documentation
+    note: 5 concurrent generations/account; 100 MB bytes response; 12h WebSocket connection lifetime.
+  - url: https://www.respeecher.com/real-time-tts-api
+    type: ProductPage
+    note: Real-time TTS marketing page; streaming under 200ms; WebSocket + SSE.
+actions:
+  asyncapiPath: asyncapi/respeecher-asyncapi.yml
+  apisYmlUpdated: true
+  reason: |
+    A documented public WebSocket surface exists (Space real-time TTS), so the
+    answer is true. An AsyncAPI 2.6 document was authored for the bidirectional
+    WebSocket TTS channel, with the WebSocket transport (wss) documented
+    explicitly and the SSE/bytes transports left in the REST OpenAPI so SSE is
+    never misrepresented as WebSocket. All endpoints are sourced from
+    Respeecher's own published OpenAPI and API reference; none were fabricated.

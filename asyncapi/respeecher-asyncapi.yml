@@ -1,0 +1,107 @@
+asyncapi: 2.6.0
+info:
+  title: Respeecher Space Real-Time TTS WebSocket API
+  version: 1.0.0
+  description: >-
+    AsyncAPI description of the Respeecher Space real-time text-to-speech
+    WebSocket channel. A single persistent WebSocket connection carries multiple
+    concurrent text-to-speech generations, differentiated by a client-supplied
+    context_id. Clients may stream input text in chunks by setting continue to
+    true on all but the final chunk, and receive streamed audio frames back on
+    the same connection. This is a genuine bidirectional WebSocket transport
+    (wss://), distinct from the one-shot POST /tts/bytes and the one-way HTTP
+    Server-Sent Events (POST /tts/sse) endpoints, which are modeled in the REST
+    OpenAPI, not here.
+
+    This document was authored by API Evangelist from Respeecher's public
+    documentation (space.respeecher.com/docs). Respeecher also publishes its own
+    AsyncAPI 2.6.0 for these WebSocket channels, referenced under the Space API
+    docs. Message payload fields below reflect documented behavior; consult the
+    official reference for the complete schema.
+  x-transport-notes: >-
+    Transport is WebSocket (wss). Connections are not guaranteed to stay alive
+    longer than 12 hours and idle connections may be closed server-side;
+    reopen periodically and reuse a single connection for multiple generations.
+servers:
+  english:
+    url: api.respeecher.com/v1/public/tts/en-rt
+    protocol: wss
+    description: English (en-rt) real-time TTS model WebSocket base.
+  ukrainian:
+    url: api.respeecher.com/v1/public/tts/ua-rt
+    protocol: wss
+    description: Ukrainian (ua-rt) real-time TTS model WebSocket base.
+channels:
+  /tts/websocket:
+    description: >-
+      Bidirectional real-time text-to-speech channel. The client sends
+      generation requests (optionally streaming input text in chunks) and the
+      server streams back audio frames, all correlated by context_id.
+    bindings:
+      ws:
+        bindingVersion: 0.1.0
+        query:
+          type: object
+          properties:
+            api_key:
+              type: string
+              description: >-
+                API key, accepted as a query-string parameter because browser
+                WebSocket clients cannot set the X-API-Key header. Create keys
+                at space.respeecher.com/api-keys.
+    publish:
+      summary: Client sends text to synthesize on this connection.
+      operationId: sendGenerationRequest
+      message:
+        $ref: '#/components/messages/GenerationRequest'
+    subscribe:
+      summary: Server streams synthesized audio back to the client.
+      operationId: receiveAudioFrame
+      message:
+        $ref: '#/components/messages/AudioFrame'
+components:
+  messages:
+    GenerationRequest:
+      name: generationRequest
+      title: Text-to-speech generation request
+      contentType: application/json
+      payload:
+        type: object
+        required:
+        - context_id
+        properties:
+          context_id:
+            type: string
+            description: >-
+              Client-supplied identifier used to correlate this generation with
+              its returned audio, and to multiplex multiple concurrent
+              generations over one connection.
+          text:
+            type: string
+            description: Input text chunk to synthesize.
+          voice_id:
+            type: string
+            description: Identifier of the voice to synthesize with.
+          continue:
+            type: boolean
+            description: >-
+              Set to true on all but the final chunk when streaming input text
+              in pieces, so prosody stays consistent across chunks.
+          sampling_params:
+            type: object
+            description: >-
+              Optional sampling parameters (see the Voices list response and the
+              Sampling Params Guide) that shape the generated audio.
+    AudioFrame:
+      name: audioFrame
+      title: Streamed audio output frame
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          context_id:
+            type: string
+            description: The context_id of the generation this audio belongs to.
+          audio:
+            type: string
+            description: A chunk of generated audio for the given context_id.

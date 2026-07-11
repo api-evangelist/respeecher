@@ -1,0 +1,47 @@
+aid: respeecher
+name: Respeecher FinOps
+description: >-
+  How spend maps to usage across Respeecher's APIs, for teams budgeting AI voice
+  generation. Captured from public pricing as of 2026-07-11; verify current
+  rates with Respeecher.
+source:
+- url: https://www.respeecher.com/marketplace/pricing
+  type: Pricing
+- url: https://www.respeecher.com/real-time-tts-api
+  type: Pricing
+billing_models:
+- name: Marketplace prepaid credits
+  meter: credits
+  mapping: >-
+    One credit is approximately 4,000 TTS characters or one minute of
+    speech-to-speech conversion. Credit packs range from $5 (5 credits) to $250
+    (500 credits), with 30-50% volume discounts on larger packs.
+  applies_to:
+  - Text-to-Speech API
+  - Speech-to-Speech Conversion API
+- name: Marketplace subscriptions
+  meter: monthly allotment of TTS characters and STS minutes
+  mapping: >-
+    TTS Only $9/mo; Creator $74/mo (400k TTS chars + 90 STS min); Power
+    $414/mo (3M TTS chars + 900 STS min). Yearly billing saves ~17%.
+- name: Space real-time TTS usage-based
+  meter: hours of generated audio (~characters)
+  mapping: >-
+    Pay-as-you-go at about $2 per hour of audio (~$2 per 60,000 characters);
+    no subscription; custom pricing at high volume.
+  applies_to:
+  - Space Real-Time TTS API
+- name: Enterprise / AI Voice Lab
+  meter: per project / negotiated
+  mapping: >-
+    Custom pricing with volume discounts, unlimited concurrency, custom SSO, and
+    dedicated engineering support; bespoke voice cloning priced per project.
+cost_controls:
+- Prepaid credits and pay-as-you-go cap exposure without long-term commitment.
+- Account credit balance readable programmatically via GET /api/credits.
+- Per-plan daily request limits bound throughput and spend.
+- Concurrency cap of 5 simultaneous generations on the real-time API bounds burst cost.
+notes: >-
+  Voice talent revenue share (at least 25% of revenue from their voices) is
+  built into marketplace pricing and does not add a separate line item for
+  buyers.

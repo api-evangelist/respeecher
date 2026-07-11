@@ -1,0 +1,221 @@
+aid: respeecher
+url: https://raw.githubusercontent.com/api-evangelist/respeecher/refs/heads/main/apis.yml
+name: Respeecher
+kind: company
+description: >-
+  Respeecher is an AI voice company known for high-fidelity speech-to-speech
+  (STS) voice conversion and text-to-speech (TTS) used across film, television,
+  games, and advertising. It exposes two documented, self-service public APIs.
+  The Voice Marketplace API (gateway.respeecher.com) provides voice discovery,
+  speech-to-speech conversion orders, text-to-speech synthesis, calibration,
+  recordings, projects/folders, credits, and statistics, secured with an API
+  key. The newer Respeecher Space real-time TTS API (api.respeecher.com)
+  streams lifelike audio in under 200ms via one-shot bytes, HTTP SSE, and a
+  WebSocket channel, with English (en-rt) and Ukrainian (ua-rt) models, official
+  Python and TypeScript SDKs, and LiveKit, Pipecat, Ultravox, and VAPI
+  integrations. Bespoke, high-touch voice cloning for studios is delivered
+  through the enterprise AI Voice Lab.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Voice AI
+- Voice Cloning
+- Speech to Speech
+- Text to Speech
+- Voice Conversion
+- Real Time
+- Media and Entertainment
+created: '2026-07-11'
+modified: '2026-07-11'
+specificationVersion: '0.19'
+apis:
+- aid: respeecher:respeecher-voices-api
+  name: Respeecher Voices API
+  tags:
+  - Voices
+  - Marketplace
+  - Discovery
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.respeecher.com/endpoints-reference/
+  baseURL: https://gateway.respeecher.com
+  properties:
+  - url: https://docs.respeecher.com/
+    type: Documentation
+  - url: https://docs.respeecher.com/endpoints-reference/
+    type: APIReference
+  - url: openapi/respeecher-openapi.yml
+    type: OpenAPI
+  description: >-
+    List, search, favorite, and configure the marketplace catalog of AI voices
+    (GET /api/v2/voices, /api/v2/voices/search, /api/v2/voices/settings) plus
+    accent and narration-style samples used to drive speech-to-speech and
+    text-to-speech conversions. Voices are filterable by gender, age, pitch,
+    nationality, species, and visibility (public, paid, private, kids).
+- aid: respeecher:respeecher-speech-to-speech-api
+  name: Respeecher Speech-to-Speech Conversion API
+  tags:
+  - Speech to Speech
+  - Voice Conversion
+  - Orders
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.respeecher.com/endpoints-reference/
+  baseURL: https://gateway.respeecher.com
+  properties:
+  - url: https://www.respeecher.com/speech-to-speech
+    type: Documentation
+  - url: https://docs.respeecher.com/endpoints-reference/
+    type: APIReference
+  - url: openapi/respeecher-openapi.yml
+    type: OpenAPI
+  description: >-
+    Create and retry speech-to-speech voice conversion jobs that transform an
+    uploaded original recording into a target marketplace voice with accent and
+    semitone pitch control (POST /api/v2/orders, /api/recordings/conversion-order,
+    POST /api/v2/orders/retry/{recording_id}). Convert one performer's voice into
+    another for dubbing, localization, and character work.
+- aid: respeecher:respeecher-text-to-speech-api
+  name: Respeecher Text-to-Speech API
+  tags:
+  - Text to Speech
+  - Synthesis
+  - Narration
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.respeecher.com/api
+  baseURL: https://gateway.respeecher.com
+  properties:
+  - url: https://www.respeecher.com/api
+    type: Documentation
+  - url: https://docs.respeecher.com/endpoints-reference/
+    type: APIReference
+  - url: openapi/respeecher-openapi.yml
+    type: OpenAPI
+  description: >-
+    Generate speech from text using 150+ narration styles on the Voice
+    Marketplace (POST /api/v2/recordings/tts, GET /api/tts-voices). A dedicated
+    Python client (github.com/respeecher/respeecher_tts) wraps this endpoint for
+    non-realtime text-to-speech rendering.
+- aid: respeecher:respeecher-calibration-api
+  name: Respeecher Calibration API
+  tags:
+  - Calibration
+  - Pitch
+  - Voice Profile
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.respeecher.com/endpoints-reference/
+  baseURL: https://gateway.respeecher.com
+  properties:
+  - url: https://docs.respeecher.com/endpoints-reference/
+    type: APIReference
+  - url: openapi/respeecher-openapi.yml
+    type: OpenAPI
+  description: >-
+    Create, list, enable, and delete voice calibrations that determine the mean
+    pitch of a source voice for better pitch matching during conversion
+    (POST /api/calibration, POST /api/calibration/auto,
+    PUT /api/calibration/{calibration_id}/enable).
+- aid: respeecher:respeecher-recordings-api
+  name: Respeecher Recordings API
+  tags:
+  - Recordings
+  - Uploads
+  - Audio
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.respeecher.com/endpoints-reference/
+  baseURL: https://gateway.respeecher.com
+  properties:
+  - url: https://docs.respeecher.com/endpoints-reference/
+    type: APIReference
+  - url: openapi/respeecher-openapi.yml
+    type: OpenAPI
+  description: >-
+    Upload, list, update, export, and delete original recordings and their
+    conversions in WAV, OGG, MP3, and FLAC (GET/POST /api/recordings,
+    /api/recordings/originals, /api/recordings/conversions,
+    /api/recordings/export), with per-recording notes and metadata.
+- aid: respeecher:respeecher-projects-folders-api
+  name: Respeecher Projects and Folders API
+  tags:
+  - Projects
+  - Folders
+  - Organization
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.respeecher.com/endpoints-reference/
+  baseURL: https://gateway.respeecher.com
+  properties:
+  - url: https://docs.respeecher.com/endpoints-reference/
+    type: APIReference
+  - url: openapi/respeecher-openapi.yml
+    type: OpenAPI
+  description: >-
+    Organize recordings and conversions into projects and folders, with
+    pagination, filtering, ZIP export, and account/project/folder statistics
+    (GET/POST /api/projects, /api/folders, GET /api/projects/{project_id}/export,
+    /api/stats).
+- aid: respeecher:respeecher-credits-api
+  name: Respeecher Credits API
+  tags:
+  - Credits
+  - Billing
+  - Usage
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.respeecher.com/endpoints-reference/
+  baseURL: https://gateway.respeecher.com
+  properties:
+  - url: https://docs.respeecher.com/endpoints-reference/
+    type: APIReference
+  - url: openapi/respeecher-openapi.yml
+    type: OpenAPI
+  description: >-
+    Check the account credit balance that meters marketplace text-to-speech and
+    speech-to-speech usage (GET /api/credits). Credits map to TTS characters and
+    STS minutes across the pay-as-you-go and subscription plans.
+- aid: respeecher:respeecher-space-realtime-tts-api
+  name: Respeecher Space Real-Time TTS API
+  tags:
+  - Real Time
+  - Streaming
+  - WebSocket
+  - Text to Speech
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://space.respeecher.com/docs
+  baseURL: https://api.respeecher.com/v1/public/tts/en-rt
+  properties:
+  - url: https://space.respeecher.com/docs/quickstart
+    type: Documentation
+  - url: https://space.respeecher.com/docs/api/tts/web-socket
+    type: APIReference
+  - url: asyncapi/respeecher-asyncapi.yml
+    type: AsyncAPI
+  - url: https://www.respeecher.com/real-time-tts-api
+    type: SignUp
+  description: >-
+    Low-latency real-time text-to-speech that begins streaming audio in under
+    200ms via three transports - one-shot bytes (POST /tts/bytes, up to ~5,000
+    characters), HTTP SSE chunks (POST /tts/sse), and a bidirectional WebSocket
+    channel (wss://api.respeecher.com/v1/public/tts/en-rt, GET /tts/websocket)
+    that streams input text and output audio keyed by context_id. English
+    (en-rt) and Ukrainian (ua-rt) models, X-API-Key auth, official Python and
+    TypeScript SDKs, and LiveKit, Pipecat, Ultravox, and VAPI integrations.
+common:
+- type: LinkedIn
+  url: https://www.linkedin.com/company/respeecher
+- type: Website
+  url: https://www.respeecher.com
+- type: Documentation
+  url: https://docs.respeecher.com/
+- type: Documentation
+  url: https://space.respeecher.com/docs
+- type: SignUp
+  url: https://marketplace.respeecher.com/account
+- type: Plans
+  url: plans/respeecher-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/respeecher-rate-limits.yml
+- type: FinOps
+  url: finops/respeecher-finops.yml
+- type: OpenAPI
+  url: https://gateway.respeecher.com/api/openapi.json
+- url: https://www.respeecher.com/blog
+  type: Blog
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
