@@ -196,6 +196,8 @@ apis:
     (en-rt) and Ukrainian (ua-rt) models, X-API-Key auth, official Python and
     TypeScript SDKs, and LiveKit, Pipecat, Ultravox, and VAPI integrations.
 common:
+- type: DomainSecurity
+  url: security/respeecher-domain-security.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/respeecher
 - type: Website
