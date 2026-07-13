@@ -1,0 +1,23 @@
+# respeecher — AsyncAPI Spectral ruleset (strengthened)
+# Plain Spectral. Rules measured from this provider's own AsyncAPI event
+# conventions by strengthen_asyncapi.py, then self-validated against the spec.
+#
+# Provenance:
+#   - server-secure-protocol: 100% of servers already secure
+extends:
+  - spectral:asyncapi
+rules:
+  server-secure-protocol:
+    description: Servers should use a secure protocol (this API's convention).
+    severity: error
+    given: $.servers[*].protocol
+    then:
+      function: pattern
+      functionOptions:
+        match: ^(amqps|https|ibmmq|jms|kafka-secure|mqtts|secure-mqtt|stomps|wss)$
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
+      function: truthy
