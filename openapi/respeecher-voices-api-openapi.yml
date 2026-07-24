@@ -1,0 +1,694 @@
+openapi: 3.0.2
+info:
+  title: Voice Markertplace accents voices API
+  version: 0.6.0
+servers:
+- url: https://gateway.respeecher.com
+  description: Respeecher Voice Marketplace API gateway
+tags:
+- name: voices
+paths:
+  /api/v2/voices:
+    get:
+      tags:
+      - voices
+      summary: Voice List
+      operationId: voice_list_api_v2_voices_get
+      parameters:
+      - required: false
+        schema:
+          title: Limit
+          maximum: 100.0
+          minimum: 0.0
+          type: integer
+          default: 25
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: Offset
+          minimum: 0.0
+          type: integer
+          default: 0
+        name: offset
+        in: query
+      - required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/VisibilityLevel'
+        name: visibility
+        in: query
+      - required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Species'
+        name: species
+        in: query
+      - required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Gender'
+        name: gender
+        in: query
+      - required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgeGroup'
+        name: age_group
+        in: query
+      - required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/PitchGroup'
+        name: pitch_group
+        in: query
+      - required: false
+        schema:
+          title: Nationality
+          type: array
+          items:
+            type: string
+        name: nationality
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/VoiceSortField'
+          default: default
+        name: sort
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Direction'
+          default: desc
+        name: direction
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v2/voices/search:
+    get:
+      tags:
+      - voices
+      summary: Voice Search
+      operationId: voice_search_api_v2_voices_search_get
+      parameters:
+      - required: true
+        schema:
+          title: Name
+          minLength: 2
+          type: string
+        name: name
+        in: query
+      - required: false
+        schema:
+          title: Limit
+          maximum: 10.0
+          minimum: 0.0
+          type: integer
+          default: 5
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Voice Search Api V2 Voices Search Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/VoicePublic'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v2/voices/favorite/{voice_id}:
+    post:
+      tags:
+      - voices
+      summary: Voice Favorite
+      operationId: voice_favorite_api_v2_voices_favorite__voice_id__post
+      parameters:
+      - required: true
+        schema:
+          title: Voice Id
+          type: string
+          format: uuid4
+        name: voice_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FavoriteUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoicePublic'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v2/voices/settings:
+    post:
+      tags:
+      - voices
+      summary: Voice Settings
+      operationId: voice_settings_api_v2_voices_settings_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoiceSettingsUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoicePublic'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AccentSettingsPublic:
+      title: AccentSettingsPublic
+      type: object
+      properties:
+        favorite:
+          title: Favorite
+          type: boolean
+          default: false
+        semitones_correction:
+          title: Semitones Correction
+          type: number
+          default: 0
+    NarrationStylePublic:
+      title: NarrationStylePublic
+      required:
+      - id
+      - is_default
+      - info
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        is_default:
+          title: Is Default
+          type: boolean
+        info:
+          $ref: '#/components/schemas/NarrationStyleInfoCore'
+        settings:
+          $ref: '#/components/schemas/NarrationStyleSettingPublic'
+    AccentPublic:
+      title: AccentPublic
+      required:
+      - id
+      - is_default
+      - native
+      - info
+      - tiers
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        is_default:
+          title: Is Default
+          type: boolean
+        native:
+          title: Native
+          type: boolean
+        info:
+          $ref: '#/components/schemas/AccentInfoCore'
+        tiers:
+          title: Tiers
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionTierCore'
+        available:
+          title: Available
+          type: boolean
+          default: false
+        settings:
+          $ref: '#/components/schemas/AccentSettingsPublic'
+    FavoriteUpdate:
+      title: FavoriteUpdate
+      required:
+      - favorite
+      type: object
+      properties:
+        favorite:
+          title: Favorite
+          type: boolean
+    NarrationStyleInfoCore:
+      title: NarrationStyleInfoCore
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+    VisibilityLevel:
+      title: VisibilityLevel
+      enum:
+      - public
+      - paid
+      - private
+      - kids
+      type: string
+      description: An enumeration.
+    Gender:
+      title: Gender
+      enum:
+      - male
+      - female
+      type: string
+      description: An enumeration.
+    AccentInfoCore:
+      title: AccentInfoCore
+      required:
+      - name
+      - short_name
+      - locale
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+        short_name:
+          title: Short Name
+          type: string
+        locale:
+          title: Locale
+          type: string
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
+    VoiceSortField:
+      title: VoiceSortField
+      enum:
+      - default
+      - name
+      - pitch
+      - rating
+      - created_at
+      type: string
+      description: An enumeration.
+    Species:
+      title: Species
+      enum:
+      - human
+      - animal
+      - other
+      type: string
+      description: An enumeration.
+    VoiceSettingsUpdate:
+      title: VoiceSettingsUpdate
+      required:
+      - voice_id
+      type: object
+      properties:
+        voice_id:
+          title: Voice Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        accent_id:
+          title: Accent Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        semitones_correction:
+          title: Semitones Correction
+          type: number
+          example: 0.0
+        narration_style_id:
+          title: Narration Style Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+    VoicePublic:
+      title: VoicePublic
+      required:
+      - id
+      - owner_id
+      - name
+      - slug
+      - visibility
+      - rating
+      - active
+      - created_at
+      - accents
+      - narration_styles
+      - tiers
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        owner_id:
+          title: Owner Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        name:
+          title: Name
+          type: string
+        slug:
+          title: Slug
+          type: string
+        visibility:
+          $ref: '#/components/schemas/VisibilityLevel'
+        species:
+          $ref: '#/components/schemas/Species'
+        artist:
+          title: Artist
+          type: string
+        verified_artist:
+          title: Verified Artist
+          type: boolean
+        gender:
+          $ref: '#/components/schemas/Gender'
+        pitch:
+          title: Pitch
+          type: number
+        age_group:
+          $ref: '#/components/schemas/AgeGroup'
+        pitch_group:
+          $ref: '#/components/schemas/PitchGroup'
+        nationality:
+          title: Nationality
+          type: string
+        image_url:
+          title: Image Url
+          type: string
+        thumbnail_url:
+          title: Thumbnail Url
+          type: string
+        description:
+          title: Description
+          maxLength: 2048
+          type: string
+        rating:
+          title: Rating
+          maximum: 100.0
+          minimum: 0.0
+          type: integer
+        active:
+          title: Active
+          type: boolean
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        favorite:
+          title: Favorite
+          type: boolean
+          default: false
+        available:
+          title: Available
+          type: boolean
+          default: false
+        accents:
+          title: Accents
+          type: array
+          items:
+            $ref: '#/components/schemas/AccentPublic'
+        narration_styles:
+          title: Narration Styles
+          type: array
+          items:
+            $ref: '#/components/schemas/NarrationStylePublic'
+        tiers:
+          title: Tiers
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionTierCore'
+    Direction:
+      title: Direction
+      enum:
+      - asc
+      - desc
+      type: string
+      description: An enumeration.
+    SubscriptionTierCore:
+      title: SubscriptionTierCore
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    PitchGroup:
+      title: PitchGroup
+      enum:
+      - low
+      - mid
+      - high
+      type: string
+      description: An enumeration.
+    VoiceListResponse:
+      title: VoiceListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/VoicePublic'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    NarrationStyleSettingPublic:
+      title: NarrationStyleSettingPublic
+      type: object
+      properties:
+        favorite:
+          title: Favorite
+          type: boolean
+          default: false
+    Pagination:
+      title: Pagination
+      required:
+      - count
+      - limit
+      - offset
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        offset:
+          title: Offset
+          type: integer
+    AgeGroup:
+      title: AgeGroup
+      enum:
+      - child
+      - young
+      - adult
+      - senior
+      type: string
+      description: An enumeration.

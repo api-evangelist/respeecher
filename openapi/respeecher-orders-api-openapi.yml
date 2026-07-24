@@ -1,0 +1,303 @@
+openapi: 3.0.2
+info:
+  title: Voice Markertplace accents orders API
+  version: 0.6.0
+servers:
+- url: https://gateway.respeecher.com
+  description: Respeecher Voice Marketplace API gateway
+tags:
+- name: orders
+paths:
+  /api/v2/orders:
+    post:
+      tags:
+      - orders
+      summary: Conversion Order Create
+      operationId: conversion_order_create_api_v2_orders_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Conversion Order Create Api V2 Orders Post
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v2/orders/retry/{recording_id}:
+    post:
+      tags:
+      - orders
+      summary: Conversion Order Retry
+      operationId: conversion_order_retry_api_v2_orders_retry__recording_id__post
+      parameters:
+      - required: true
+        schema:
+          title: Recording Id
+          type: string
+          format: uuid4
+        name: recording_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    OrderConversionRequest:
+      title: OrderConversionRequest
+      required:
+      - voice_id
+      type: object
+      properties:
+        voice_id:
+          title: Voice Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        accent_id:
+          title: Accent Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        semitones_correction:
+          title: Semitones Correction
+          type: number
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    OrderResponse:
+      title: OrderResponse
+      required:
+      - id
+      - user_id
+      - original_id
+      - conversion_id
+      - tracking_id
+      - state
+      - created_at
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        user_id:
+          title: User Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        original_id:
+          title: Original Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        conversion_id:
+          title: Conversion Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        transaction_id:
+          title: Transaction Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        moderation_id:
+          title: Moderation Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        calibration_id:
+          title: Calibration Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        tracking_id:
+          title: Tracking Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        f0:
+          title: F0
+          type: number
+        state:
+          $ref: '#/components/schemas/OrderStates'
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        closed_at:
+          title: Closed At
+          type: string
+          format: date-time
+        error:
+          title: Error
+          type: string
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
+    OrderRequest:
+      title: OrderRequest
+      required:
+      - original_id
+      - conversions
+      type: object
+      properties:
+        original_id:
+          title: Original Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        conversions:
+          title: Conversions
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderConversionRequest'
+        calibration_id:
+          title: Calibration Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        use_calibration:
+          title: Use Calibration
+          type: boolean
+          default: false
+    OrderStates:
+      title: OrderStates
+      enum:
+      - new
+      - pre_processing
+      - post_processing
+      - processing
+      - done
+      - error
+      type: string
+      description: An enumeration.

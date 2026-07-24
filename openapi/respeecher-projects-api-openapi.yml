@@ -1,0 +1,714 @@
+openapi: 3.0.2
+info:
+  title: Voice Markertplace accents projects API
+  version: 0.6.0
+servers:
+- url: https://gateway.respeecher.com
+  description: Respeecher Voice Marketplace API gateway
+tags:
+- name: projects
+paths:
+  /api/projects:
+    get:
+      tags:
+      - projects
+      summary: Project List
+      operationId: project_list_api_projects_get
+      parameters:
+      - required: false
+        schema:
+          title: Limit
+          maximum: 100.0
+          minimum: 0.0
+          type: integer
+          default: 50
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: Offset
+          minimum: 0.0
+          type: integer
+          default: 0
+        name: offset
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/ProjectSortFields'
+          default: created_at
+        name: sort
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Direction'
+          default: desc
+        name: direction
+        in: query
+      - required: false
+        schema:
+          title: Owner
+          type: string
+          format: uuid
+        name: owner
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - projects
+      summary: Project Create
+      operationId: project_create_api_projects_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/projects/by-url:
+    get:
+      tags:
+      - projects
+      summary: Project Get By Url
+      description: Get project by url
+      operationId: project_get_by_url_api_projects_by_url_get
+      parameters:
+      - required: true
+        schema:
+          title: Project Url
+          type: string
+        name: project_url
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/projects/{project_id}:
+    put:
+      tags:
+      - projects
+      summary: Project Update
+      operationId: project_update_api_projects__project_id__put
+      parameters:
+      - required: true
+        schema:
+          title: Project Id
+          type: string
+          format: uuid4
+        name: project_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - projects
+      summary: Project Delete
+      operationId: project_delete_api_projects__project_id__delete
+      parameters:
+      - required: true
+        schema:
+          title: Project Id
+          type: string
+          format: uuid4
+        name: project_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDeleteResp'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - projects
+      summary: Project Rename
+      operationId: project_rename_api_projects__project_id__patch
+      parameters:
+      - required: true
+        schema:
+          title: Project Id
+          type: string
+          format: uuid4
+        name: project_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectRename'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/projects/{project_id}/export:
+    get:
+      tags:
+      - projects
+      summary: Project Export
+      description: Export project recordings into .zip archive
+      operationId: project_export_api_projects__project_id__export_get
+      parameters:
+      - required: true
+        schema:
+          title: Project Id
+          type: string
+          format: uuid4
+        name: project_id
+        in: path
+      - required: false
+        schema:
+          title: Starred Only
+          type: boolean
+          default: false
+        name: starred_only
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ProjectDeleteResp:
+      title: ProjectDeleteResp
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+    ProjectListResponse:
+      title: ProjectListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    ProjectRename:
+      title: ProjectRename
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+    ProjectCreate:
+      title: ProjectCreate
+      required:
+      - name
+      - owner
+      - models
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+        owner:
+          title: Owner
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        models:
+          title: Models
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+          example:
+            model_id-1:
+              param_id-1: param_value-1
+            model_id-2:
+              param_id-2: param_value-2
+              param_id-3: param_value-3
+            00000000-0000-0000-0000-000000000001:
+              00000000-0000-0000-0000-000000000001: param_value-example
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    Pagination:
+      title: Pagination
+      required:
+      - count
+      - limit
+      - offset
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        offset:
+          title: Offset
+          type: integer
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
+    Direction:
+      title: Direction
+      enum:
+      - asc
+      - desc
+      type: string
+      description: An enumeration.
+    ProjectUpdate:
+      title: ProjectUpdate
+      required:
+      - models
+      type: object
+      properties:
+        models:
+          title: Models
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+          example:
+            model_id-1:
+              param_id-1: param_value-1
+            model_id-2:
+              param_id-2: param_value-2
+              param_id-3: param_value-3
+            00000000-0000-0000-0000-000000000001:
+              00000000-0000-0000-0000-000000000001: param_value-example
+    ProjectSortFields:
+      title: ProjectSortFields
+      enum:
+      - name
+      - created_at
+      - last_recording_at
+      type: string
+      description: An enumeration.
+    ProjectResponse:
+      title: ProjectResponse
+      required:
+      - name
+      - slug
+      - owner
+      - url
+      - models
+      - id
+      - active
+      - created_at
+      - last_recording_at
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+        slug:
+          title: Slug
+          maxLength: 60
+          type: string
+        owner:
+          title: Owner
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        url:
+          title: Url
+          maxLength: 200
+          type: string
+        models:
+          title: Models
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+          example:
+            model_id-1:
+              param_id-1: param_value-1
+            model_id-2:
+              param_id-2: param_value-2
+              param_id-3: param_value-3
+            00000000-0000-0000-0000-000000000001:
+              00000000-0000-0000-0000-000000000001: param_value-example
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        active:
+          title: Active
+          type: boolean
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        last_recording_at:
+          title: Last Recording At
+          type: string
+          format: date-time

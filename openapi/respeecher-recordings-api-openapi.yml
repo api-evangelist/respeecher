@@ -1,0 +1,1350 @@
+openapi: 3.0.2
+info:
+  title: Voice Markertplace accents recordings API
+  version: 0.6.0
+servers:
+- url: https://gateway.respeecher.com
+  description: Respeecher Voice Marketplace API gateway
+tags:
+- name: recordings
+paths:
+  /api/recordings:
+    get:
+      tags:
+      - recordings
+      summary: Recording List
+      operationId: recording_list_api_recordings_get
+      parameters:
+      - required: false
+        schema:
+          title: Project Id
+          type: string
+          format: uuid4
+        name: project_id
+        in: query
+      - required: false
+        schema:
+          title: Folder Id
+          type: string
+          format: uuid4
+        name: folder_id
+        in: query
+      - required: false
+        schema:
+          title: Limit
+          maximum: 200.0
+          minimum: 0.0
+          type: integer
+          default: 50
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: Offset
+          minimum: 0.0
+          type: integer
+          default: 0
+        name: offset
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Direction'
+          default: desc
+        name: direction
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - recordings
+      summary: Recording Create
+      operationId: recording_create_api_recordings_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_recording_create_api_recordings_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '413':
+          description: Request Entity Too Large
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/recordings/originals:
+    get:
+      tags:
+      - recordings
+      summary: Recording List Originals
+      operationId: recording_list_originals_api_recordings_originals_get
+      parameters:
+      - required: true
+        schema:
+          title: Folder Id
+          type: string
+          format: uuid4
+        name: folder_id
+        in: query
+      - required: false
+        schema:
+          title: Limit
+          maximum: 200.0
+          minimum: 0.0
+          type: integer
+          default: 50
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: Offset
+          minimum: 0.0
+          type: integer
+          default: 0
+        name: offset
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Direction'
+          default: desc
+        name: direction
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/recordings/{recording_id}:
+    get:
+      tags:
+      - recordings
+      summary: Recording Get
+      operationId: recording_get_api_recordings__recording_id__get
+      parameters:
+      - required: true
+        schema:
+          title: Recording Id
+          type: string
+          format: uuid4
+        name: recording_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - recordings
+      summary: Recording Put
+      operationId: recording_put_api_recordings__recording_id__put
+      parameters:
+      - required: true
+        schema:
+          title: Recording Id
+          type: string
+          format: uuid4
+        name: recording_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordingPutUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - recordings
+      summary: Recording Delete
+      operationId: recording_delete_api_recordings__recording_id__delete
+      parameters:
+      - required: true
+        schema:
+          title: Recording Id
+          type: string
+          format: uuid4
+        name: recording_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Recording Delete Api Recordings  Recording Id  Delete
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecordingDeleteResp'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - recordings
+      summary: Recording Patch
+      operationId: recording_patch_api_recordings__recording_id__patch
+      parameters:
+      - required: true
+        schema:
+          title: Recording Id
+          type: string
+          format: uuid4
+        name: recording_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordingUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/recordings/conversions:
+    get:
+      tags:
+      - recordings
+      summary: Recording List Conversions
+      operationId: recording_list_conversions_api_recordings_conversions_get
+      parameters:
+      - required: true
+        schema:
+          title: Original Id
+          type: string
+          format: uuid4
+        name: original_id
+        in: query
+      - required: false
+        schema:
+          title: Limit
+          maximum: 200.0
+          minimum: 0.0
+          type: integer
+          default: 50
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: Offset
+          minimum: 0.0
+          type: integer
+          default: 0
+        name: offset
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Direction'
+          default: desc
+        name: direction
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/recordings/tts:
+    post:
+      tags:
+      - recordings
+      summary: Recording Create Tts
+      operationId: recording_create_tts_api_recordings_tts_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordingCreateTTS'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/recordings/conversion-order:
+    post:
+      tags:
+      - recordings
+      summary: Recording Conversion Order
+      operationId: recording_conversion_order_api_recordings_conversion_order_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConversionRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Recording Conversion Order Api Recordings Conversion Order Post
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecordingResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/recordings/conversion-redo/{recording_id}:
+    post:
+      tags:
+      - recordings
+      summary: Recording Conversion Redo
+      operationId: recording_conversion_redo_api_recordings_conversion_redo__recording_id__post
+      parameters:
+      - required: true
+        schema:
+          title: Recording Id
+          type: string
+          format: uuid4
+        name: recording_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/recordings/export:
+    get:
+      tags:
+      - recordings
+      summary: Take Export
+      description: Export take recordings into .zip archive
+      operationId: take_export_api_recordings_export_get
+      parameters:
+      - required: true
+        schema:
+          title: Original Id
+          type: string
+          format: uuid4
+        name: original_id
+        in: query
+      - required: false
+        schema:
+          title: Starred Only
+          type: boolean
+          default: false
+        name: starred_only
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v2/recordings/tts:
+    post:
+      tags:
+      - recordings
+      summary: Recording Create Tts V2
+      operationId: recording_create_tts_v2_api_v2_recordings_tts_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordingCreateTTSV2'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    RecordingDeleteResp:
+      title: RecordingDeleteResp
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+    ModelParam:
+      title: ModelParam
+      required:
+      - id
+      - name
+      - value
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        name:
+          title: Name
+          type: string
+        value:
+          title: Value
+          type: string
+    RecordingTypes:
+      title: RecordingTypes
+      enum:
+      - original
+      - converted
+      type: string
+      description: An enumeration.
+    ConversionRequest:
+      title: ConversionRequest
+      required:
+      - original_id
+      - models
+      type: object
+      properties:
+        original_id:
+          title: Original Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        models:
+          title: Models
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+        calibration_id:
+          title: Calibration Id
+          type: string
+          format: uuid4
+    RecordingCreateTTSV2:
+      title: RecordingCreateTTSV2
+      required:
+      - parent_folder_id
+      - text
+      type: object
+      properties:
+        parent_folder_id:
+          title: Parent Folder Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        text:
+          title: Text
+          maxLength: 1000
+          minLength: 1
+          type: string
+        tts_voice_id:
+          title: Tts Voice Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        label:
+          title: Label
+          maxLength: 40
+          type: string
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
+    RecordingPutUpdate:
+      title: RecordingPutUpdate
+      required:
+      - label
+      - starred
+      type: object
+      properties:
+        label:
+          title: Label
+          maxLength: 40
+          type: string
+        starred:
+          title: Starred
+          type: boolean
+    RecordingCreateTTS:
+      title: RecordingCreateTTS
+      required:
+      - parent_folder_id
+      - text
+      - voice_id
+      type: object
+      properties:
+        parent_folder_id:
+          title: Parent Folder Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        text:
+          title: Text
+          maxLength: 1000
+          minLength: 1
+          type: string
+        voice_id:
+          title: Voice Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        label:
+          title: Label
+          maxLength: 40
+          type: string
+    Direction:
+      title: Direction
+      enum:
+      - asc
+      - desc
+      type: string
+      description: An enumeration.
+    Model:
+      title: Model
+      required:
+      - id
+      - name
+      - params
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        name:
+          title: Name
+          type: string
+        params:
+          title: Params
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelParam'
+    NoteRecording:
+      title: NoteRecording
+      required:
+      - id
+      - text
+      - active
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+        text:
+          title: Text
+          maxLength: 2000
+          type: string
+        active:
+          title: Active
+          type: boolean
+    RecordingUpdate:
+      title: RecordingUpdate
+      type: object
+      properties:
+        label:
+          title: Label
+          maxLength: 40
+          type: string
+        starred:
+          title: Starred
+          type: boolean
+    RecordingStates:
+      title: RecordingStates
+      enum:
+      - done
+      - processing
+      - error
+      type: string
+      description: An enumeration.
+    Body_recording_create_api_recordings_post:
+      title: Body_recording_create_api_recordings_post
+      required:
+      - data
+      - parent_folder_id
+      - microphone
+      type: object
+      properties:
+        data:
+          title: Data
+          type: string
+          format: binary
+        parent_folder_id:
+          title: Parent Folder Id
+          type: string
+          format: uuid4
+        microphone:
+          title: Microphone
+          type: string
+        label:
+          title: Label
+          maxLength: 40
+          pattern: ^[a-zA-Z0-9 -]+$
+          type: string
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    RecordingListResponse:
+      title: RecordingListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/RecordingResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    RecordingResponse:
+      title: RecordingResponse
+      required:
+      - id
+      - project_id
+      - type
+      - state
+      - duration
+      - tts
+      - params
+      - active
+      - created_at
+      - listen_count
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        project_id:
+          title: Project Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        parent_folder_id:
+          title: Parent Folder Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        type:
+          $ref: '#/components/schemas/RecordingTypes'
+        url:
+          title: Url
+          type: string
+        waveform_url:
+          title: Waveform Url
+          type: string
+        file_name:
+          title: File Name
+          type: string
+        label:
+          title: Label
+          maxLength: 40
+          type: string
+        state:
+          $ref: '#/components/schemas/RecordingStates'
+        original_id:
+          title: Original Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        model_id:
+          title: Model Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        model_name:
+          title: Model Name
+          type: string
+        calibration_id:
+          title: Calibration Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        calibration_value:
+          title: Calibration Value
+          type: number
+        calibration_name:
+          title: Calibration Name
+          type: string
+        microphone:
+          title: Microphone
+          type: string
+        size:
+          title: Size
+          type: integer
+        duration:
+          title: Duration
+          type: number
+        starred:
+          title: Starred
+          type: boolean
+          default: false
+        tts:
+          title: Tts
+          type: boolean
+        tts_voice:
+          title: Tts Voice
+          type: string
+        tts_voice_id:
+          title: Tts Voice Id
+          type: string
+          format: uuid4
+        text:
+          title: Text
+          type: string
+        params:
+          title: Params
+          anyOf:
+          - type: object
+          - type: array
+            items:
+              $ref: '#/components/schemas/ModelParam'
+        error:
+          title: Error
+          type: string
+        active:
+          title: Active
+          type: boolean
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        converted_at:
+          title: Converted At
+          type: string
+          format: date-time
+        listen_count:
+          title: Listen Count
+          type: integer
+        process_stage:
+          title: Process Stage
+          type: string
+        note:
+          $ref: '#/components/schemas/NoteRecording'
+    Pagination:
+      title: Pagination
+      required:
+      - count
+      - limit
+      - offset
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        offset:
+          title: Offset
+          type: integer

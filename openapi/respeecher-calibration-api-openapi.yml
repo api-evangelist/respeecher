@@ -1,0 +1,570 @@
+openapi: 3.0.2
+info:
+  title: Voice Markertplace accents calibration API
+  version: 0.6.0
+servers:
+- url: https://gateway.respeecher.com
+  description: Respeecher Voice Marketplace API gateway
+tags:
+- name: calibration
+paths:
+  /api/calibration:
+    get:
+      tags:
+      - calibration
+      summary: Calibration List
+      operationId: calibration_list_api_calibration_get
+      parameters:
+      - required: false
+        schema:
+          title: Limit
+          maximum: 200.0
+          minimum: 0.0
+          type: integer
+          default: 50
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: Offset
+          minimum: 0.0
+          type: integer
+          default: 0
+        name: offset
+        in: query
+      - required: false
+        schema:
+          title: Search
+          type: string
+        name: search
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalibrationListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - calibration
+      summary: Calibrate
+      operationId: calibrate_api_calibration_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_calibrate_api_calibration_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalibrationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/calibration/{calibration_id}:
+    get:
+      tags:
+      - calibration
+      summary: Calibration Get
+      operationId: calibration_get_api_calibration__calibration_id__get
+      parameters:
+      - required: true
+        schema:
+          title: Calibration Id
+          type: string
+          format: uuid4
+        name: calibration_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalibrationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - calibration
+      summary: Calibration Delete
+      operationId: calibration_delete_api_calibration__calibration_id__delete
+      parameters:
+      - required: true
+        schema:
+          title: Calibration Id
+          type: string
+          format: uuid4
+        name: calibration_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalibrationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - calibration
+      summary: Calibration Rename
+      operationId: calibration_rename_api_calibration__calibration_id__patch
+      parameters:
+      - required: true
+        schema:
+          title: Calibration Id
+          type: string
+          format: uuid4
+        name: calibration_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalibrationRename'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalibrationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/calibration/{calibration_id}/enable:
+    put:
+      tags:
+      - calibration
+      summary: Calibration Enable
+      operationId: calibration_enable_api_calibration__calibration_id__enable_put
+      parameters:
+      - required: true
+        schema:
+          title: Calibration Id
+          type: string
+          format: uuid4
+        name: calibration_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalibrationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    CalibrationListResponse:
+      title: CalibrationListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/CalibrationResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    Body_calibrate_api_calibration_post:
+      title: Body_calibrate_api_calibration_post
+      required:
+      - name
+      - data
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          pattern: ^[a-zA-Z0-9 -]+$
+          type: string
+        data:
+          title: Data
+          type: string
+          format: binary
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
+    CalibrationRename:
+      title: CalibrationRename
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+    CalibrationResponse:
+      title: CalibrationResponse
+      required:
+      - id
+      - name
+      - user_id
+      - bucket
+      - key
+      - state
+      - created_at
+      - enabled
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+        name:
+          title: Name
+          type: string
+        user_id:
+          title: User Id
+          type: string
+          format: uuid4
+        f0:
+          title: F0
+          type: number
+        algorithm:
+          title: Algorithm
+          type: string
+        bucket:
+          title: Bucket
+          type: string
+        key:
+          title: Key
+          type: string
+        state:
+          $ref: '#/components/schemas/CalibrationStates'
+        error:
+          title: Error
+          type: string
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        calibrated_at:
+          title: Calibrated At
+          type: string
+          format: date-time
+        enabled:
+          title: Enabled
+          type: boolean
+    Pagination:
+      title: Pagination
+      required:
+      - count
+      - limit
+      - offset
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        offset:
+          title: Offset
+          type: integer
+    CalibrationStates:
+      title: CalibrationStates
+      enum:
+      - processing
+      - calibrated
+      - error
+      type: string
+      description: An enumeration.

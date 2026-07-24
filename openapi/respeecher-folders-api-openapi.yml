@@ -1,0 +1,483 @@
+openapi: 3.0.2
+info:
+  title: Voice Markertplace accents folders API
+  version: 0.6.0
+servers:
+- url: https://gateway.respeecher.com
+  description: Respeecher Voice Marketplace API gateway
+tags:
+- name: folders
+paths:
+  /api/folders:
+    get:
+      tags:
+      - folders
+      summary: Folder List
+      description: This is my super cool description
+      operationId: folder_list_api_folders_get
+      parameters:
+      - required: true
+        schema:
+          title: Project Id
+          type: string
+          format: uuid4
+        name: project_id
+        in: query
+      - required: false
+        schema:
+          title: Limit
+          maximum: 200.0
+          minimum: 0.0
+          type: integer
+          default: 50
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: Offset
+          minimum: 0.0
+          type: integer
+          default: 0
+        name: offset
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Direction'
+          default: desc
+        name: direction
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FolderListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - folders
+      summary: Folder Create
+      operationId: folder_create_api_folders_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FolderResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/folders/{folder_id}:
+    get:
+      tags:
+      - folders
+      summary: Folder Get
+      operationId: folder_get_api_folders__folder_id__get
+      parameters:
+      - required: true
+        schema:
+          title: Folder Id
+          type: string
+          format: uuid4
+        name: folder_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FolderResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - folders
+      summary: Folder Delete
+      operationId: folder_delete_api_folders__folder_id__delete
+      parameters:
+      - required: true
+        schema:
+          title: Folder Id
+          type: string
+          format: uuid4
+        name: folder_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Folder Delete Api Folders  Folder Id  Delete
+                type: array
+                items:
+                  type: string
+                  format: uuid4
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - folders
+      summary: Folder Rename
+      operationId: folder_rename_api_folders__folder_id__patch
+      parameters:
+      - required: true
+        schema:
+          title: Folder Id
+          type: string
+          format: uuid4
+        name: folder_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FolderResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    FolderUpdate:
+      title: FolderUpdate
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+    FolderCreate:
+      title: FolderCreate
+      required:
+      - name
+      - project_id
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+        project_id:
+          title: Project Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+    FolderResponse:
+      title: FolderResponse
+      required:
+      - name
+      - project_id
+      - id
+      - active
+      - created_at
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+        project_id:
+          title: Project Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        parent_id:
+          title: Parent Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        active:
+          title: Active
+          type: boolean
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    FolderListResponse:
+      title: FolderListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/FolderResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
+    Direction:
+      title: Direction
+      enum:
+      - asc
+      - desc
+      type: string
+      description: An enumeration.
+    Pagination:
+      title: Pagination
+      required:
+      - count
+      - limit
+      - offset
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        offset:
+          title: Offset
+          type: integer

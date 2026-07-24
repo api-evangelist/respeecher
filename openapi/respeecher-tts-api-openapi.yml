@@ -1,0 +1,128 @@
+openapi: 3.0.2
+info:
+  title: Voice Markertplace accents tts API
+  version: 0.6.0
+servers:
+- url: https://gateway.respeecher.com
+  description: Respeecher Voice Marketplace API gateway
+tags:
+- name: tts
+paths:
+  /api/tts-voices:
+    get:
+      tags:
+      - tts
+      summary: Tts Voice List
+      operationId: tts_voice_list_api_tts_voices_get
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Tts Voice List Api Tts Voices Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/TTSVoicePublic'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
+    TTSVoiceVisibility:
+      title: TTSVoiceVisibility
+      enum:
+      - public
+      - private
+      type: string
+      description: An enumeration.
+    TTSVoicePublic:
+      title: TTSVoicePublic
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        visibility:
+          $ref: '#/components/schemas/TTSVoiceVisibility'
+        name:
+          title: Name
+          maxLength: 100
+          type: string
+        f0:
+          title: F0
+          type: number
+        is_default:
+          title: Is Default
+          type: boolean

@@ -1,0 +1,33 @@
+openapi: 3.0.2
+info:
+  title: Voice Markertplace accents healtz API
+  version: 0.6.0
+servers:
+- url: https://gateway.respeecher.com
+  description: Respeecher Voice Marketplace API gateway
+tags:
+- name: healtz
+paths:
+  /api/healtz:
+    get:
+      tags:
+      - healtz
+      summary: Healtz
+      operationId: healtz_api_healtz_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OK'
+components:
+  schemas:
+    OK:
+      title: OK
+      type: object
+      properties:
+        state:
+          title: State
+          type: string
+          default: OK

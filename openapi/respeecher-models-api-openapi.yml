@@ -1,0 +1,327 @@
+openapi: 3.0.2
+info:
+  title: Voice Markertplace accents models API
+  version: 0.6.0
+servers:
+- url: https://gateway.respeecher.com
+  description: Respeecher Voice Marketplace API gateway
+tags:
+- name: models
+paths:
+  /api/models:
+    get:
+      tags:
+      - models
+      summary: Model List
+      operationId: model_list_api_models_get
+      parameters:
+      - required: false
+        schema:
+          title: Limit
+          maximum: 100.0
+          minimum: 0.0
+          type: integer
+          default: 0
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: Offset
+          minimum: 0.0
+          type: integer
+          default: 0
+        name: offset
+        in: query
+      - required: false
+        schema:
+          title: Search
+          type: string
+        name: search
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/ModelSortFields'
+          default: date_created
+        name: sort
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Direction'
+          default: desc
+        name: direction
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    SliderWidget:
+      title: SliderWidget
+      required:
+      - type
+      - min
+      - max
+      - step
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ParamWidgetTypes'
+        min:
+          title: Min
+          type: number
+        max:
+          title: Max
+          type: number
+        step:
+          title: Step
+          type: number
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    Direction:
+      title: Direction
+      enum:
+      - asc
+      - desc
+      type: string
+      description: An enumeration.
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
+    ModelListResponse:
+      title: ModelListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelUserResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    ModelSortFields:
+      title: ModelSortFields
+      enum:
+      - name
+      - owner
+      - date_created
+      type: string
+      description: An enumeration.
+    ModelUserResponse:
+      title: ModelUserResponse
+      required:
+      - id
+      - name
+      - owner
+      - visibility
+      - m2o
+      - default_model
+      - pipeline
+      - user_can_use_model
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        name:
+          title: Name
+          type: string
+        owner:
+          title: Owner
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        visibility:
+          $ref: '#/components/schemas/ModelVisibilityLevels'
+        m2o:
+          title: M2O
+          type: boolean
+        default_model:
+          title: Default Model
+          type: boolean
+        date_created:
+          title: Date Created
+          type: string
+          format: date-time
+        pipeline:
+          title: Pipeline
+          type: array
+          items:
+            type: string
+            format: uuid4
+          example:
+          - 00000000-0000-0000-0000-000000000001
+          - 00000000-0000-0000-0000-000000000001
+        params:
+          title: Params
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelParamResponse'
+        user_can_use_model:
+          title: User Can Use Model
+          type: boolean
+    ParamWidgetTypes:
+      title: ParamWidgetTypes
+      enum:
+      - slider
+      - dropdown
+      type: string
+      description: An enumeration.
+    Pagination:
+      title: Pagination
+      required:
+      - count
+      - limit
+      - offset
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        offset:
+          title: Offset
+          type: integer
+    ModelVisibilityLevels:
+      title: ModelVisibilityLevels
+      enum:
+      - public
+      - private
+      type: string
+      description: An enumeration.
+    ModelParamResponse:
+      title: ModelParamResponse
+      required:
+      - id
+      - alias
+      - type
+      - widget
+      - default
+      - worker_id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        alias:
+          title: Alias
+          type: string
+        locked:
+          title: Locked
+          type: string
+        type:
+          title: Type
+          type: string
+        widget:
+          title: Widget
+          anyOf:
+          - $ref: '#/components/schemas/DropdownWidget'
+          - $ref: '#/components/schemas/SliderWidget'
+        default:
+          title: Default
+          anyOf:
+          - type: string
+          - type: number
+        worker_id:
+          title: Worker Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+    DropdownWidget:
+      title: DropdownWidget
+      required:
+      - type
+      - options
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ParamWidgetTypes'
+        options:
+          title: Options
+          type: array
+          items:
+            type: string
