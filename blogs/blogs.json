@@ -1,0 +1,21 @@
+{
+  "repo": "respeecher",
+  "feeds": [
+    {
+      "source": "https://www.respeecher.com/blog/rss.xml",
+      "feed_url": "https://www.respeecher.com/blog/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://www.respeecher.com/blog",
+      "feed_url": "https://www.respeecher.com/blog/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-08-01T15:49:00Z"
+}

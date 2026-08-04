@@ -1,0 +1,5512 @@
+openapi: 3.0.2
+info:
+  title: Voice Markertplace API
+  version: 0.6.0
+paths:
+  /api/healtz:
+    get:
+      tags:
+      - healtz
+      summary: Healtz
+      operationId: healtz_api_healtz_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OK'
+  /api/login:
+    post:
+      tags:
+      - auth
+      summary: Login
+      operationId: login_api_login_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginCreds'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '402':
+          description: Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/logout:
+    post:
+      tags:
+      - auth
+      summary: Logout
+      operationId: logout_api_logout_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultSuccessResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/auth:
+    post:
+      tags:
+      - auth
+      summary: Authenticate
+      operationId: authenticate_api_auth_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/calibration:
+    get:
+      tags:
+      - calibration
+      summary: Calibration List
+      operationId: calibration_list_api_calibration_get
+      parameters:
+      - required: false
+        schema:
+          title: Limit
+          maximum: 200.0
+          minimum: 0.0
+          type: integer
+          default: 50
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: Offset
+          minimum: 0.0
+          type: integer
+          default: 0
+        name: offset
+        in: query
+      - required: false
+        schema:
+          title: Search
+          type: string
+        name: search
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalibrationListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - calibration
+      summary: Calibrate
+      operationId: calibrate_api_calibration_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_calibrate_api_calibration_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalibrationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/calibration/{calibration_id}:
+    get:
+      tags:
+      - calibration
+      summary: Calibration Get
+      operationId: calibration_get_api_calibration__calibration_id__get
+      parameters:
+      - required: true
+        schema:
+          title: Calibration Id
+          type: string
+          format: uuid4
+        name: calibration_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalibrationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - calibration
+      summary: Calibration Delete
+      operationId: calibration_delete_api_calibration__calibration_id__delete
+      parameters:
+      - required: true
+        schema:
+          title: Calibration Id
+          type: string
+          format: uuid4
+        name: calibration_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalibrationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - calibration
+      summary: Calibration Rename
+      operationId: calibration_rename_api_calibration__calibration_id__patch
+      parameters:
+      - required: true
+        schema:
+          title: Calibration Id
+          type: string
+          format: uuid4
+        name: calibration_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalibrationRename'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalibrationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/calibration/{calibration_id}/enable:
+    put:
+      tags:
+      - calibration
+      summary: Calibration Enable
+      operationId: calibration_enable_api_calibration__calibration_id__enable_put
+      parameters:
+      - required: true
+        schema:
+          title: Calibration Id
+          type: string
+          format: uuid4
+        name: calibration_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalibrationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/credits:
+    get:
+      tags:
+      - credits
+      summary: Get Credits
+      operationId: get_credits_api_credits_get
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/models:
+    get:
+      tags:
+      - models
+      summary: Model List
+      operationId: model_list_api_models_get
+      parameters:
+      - required: false
+        schema:
+          title: Limit
+          maximum: 100.0
+          minimum: 0.0
+          type: integer
+          default: 0
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: Offset
+          minimum: 0.0
+          type: integer
+          default: 0
+        name: offset
+        in: query
+      - required: false
+        schema:
+          title: Search
+          type: string
+        name: search
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/ModelSortFields'
+          default: date_created
+        name: sort
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Direction'
+          default: desc
+        name: direction
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/projects:
+    get:
+      tags:
+      - projects
+      summary: Project List
+      operationId: project_list_api_projects_get
+      parameters:
+      - required: false
+        schema:
+          title: Limit
+          maximum: 100.0
+          minimum: 0.0
+          type: integer
+          default: 50
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: Offset
+          minimum: 0.0
+          type: integer
+          default: 0
+        name: offset
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/ProjectSortFields'
+          default: created_at
+        name: sort
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Direction'
+          default: desc
+        name: direction
+        in: query
+      - required: false
+        schema:
+          title: Owner
+          type: string
+          format: uuid
+        name: owner
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - projects
+      summary: Project Create
+      operationId: project_create_api_projects_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/projects/by-url:
+    get:
+      tags:
+      - projects
+      summary: Project Get By Url
+      description: Get project by url
+      operationId: project_get_by_url_api_projects_by_url_get
+      parameters:
+      - required: true
+        schema:
+          title: Project Url
+          type: string
+        name: project_url
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/projects/{project_id}:
+    put:
+      tags:
+      - projects
+      summary: Project Update
+      operationId: project_update_api_projects__project_id__put
+      parameters:
+      - required: true
+        schema:
+          title: Project Id
+          type: string
+          format: uuid4
+        name: project_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - projects
+      summary: Project Delete
+      operationId: project_delete_api_projects__project_id__delete
+      parameters:
+      - required: true
+        schema:
+          title: Project Id
+          type: string
+          format: uuid4
+        name: project_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDeleteResp'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - projects
+      summary: Project Rename
+      operationId: project_rename_api_projects__project_id__patch
+      parameters:
+      - required: true
+        schema:
+          title: Project Id
+          type: string
+          format: uuid4
+        name: project_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectRename'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/projects/{project_id}/export:
+    get:
+      tags:
+      - projects
+      summary: Project Export
+      description: Export project recordings into .zip archive
+      operationId: project_export_api_projects__project_id__export_get
+      parameters:
+      - required: true
+        schema:
+          title: Project Id
+          type: string
+          format: uuid4
+        name: project_id
+        in: path
+      - required: false
+        schema:
+          title: Starred Only
+          type: boolean
+          default: false
+        name: starred_only
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/folders:
+    get:
+      tags:
+      - folders
+      summary: Folder List
+      description: This is my super cool description
+      operationId: folder_list_api_folders_get
+      parameters:
+      - required: true
+        schema:
+          title: Project Id
+          type: string
+          format: uuid4
+        name: project_id
+        in: query
+      - required: false
+        schema:
+          title: Limit
+          maximum: 200.0
+          minimum: 0.0
+          type: integer
+          default: 50
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: Offset
+          minimum: 0.0
+          type: integer
+          default: 0
+        name: offset
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Direction'
+          default: desc
+        name: direction
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FolderListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - folders
+      summary: Folder Create
+      operationId: folder_create_api_folders_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FolderResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/folders/{folder_id}:
+    get:
+      tags:
+      - folders
+      summary: Folder Get
+      operationId: folder_get_api_folders__folder_id__get
+      parameters:
+      - required: true
+        schema:
+          title: Folder Id
+          type: string
+          format: uuid4
+        name: folder_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FolderResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - folders
+      summary: Folder Delete
+      operationId: folder_delete_api_folders__folder_id__delete
+      parameters:
+      - required: true
+        schema:
+          title: Folder Id
+          type: string
+          format: uuid4
+        name: folder_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Folder Delete Api Folders  Folder Id  Delete
+                type: array
+                items:
+                  type: string
+                  format: uuid4
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - folders
+      summary: Folder Rename
+      operationId: folder_rename_api_folders__folder_id__patch
+      parameters:
+      - required: true
+        schema:
+          title: Folder Id
+          type: string
+          format: uuid4
+        name: folder_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FolderResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/recordings:
+    get:
+      tags:
+      - recordings
+      summary: Recording List
+      operationId: recording_list_api_recordings_get
+      parameters:
+      - required: false
+        schema:
+          title: Project Id
+          type: string
+          format: uuid4
+        name: project_id
+        in: query
+      - required: false
+        schema:
+          title: Folder Id
+          type: string
+          format: uuid4
+        name: folder_id
+        in: query
+      - required: false
+        schema:
+          title: Limit
+          maximum: 200.0
+          minimum: 0.0
+          type: integer
+          default: 50
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: Offset
+          minimum: 0.0
+          type: integer
+          default: 0
+        name: offset
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Direction'
+          default: desc
+        name: direction
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - recordings
+      summary: Recording Create
+      operationId: recording_create_api_recordings_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_recording_create_api_recordings_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '413':
+          description: Request Entity Too Large
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/recordings/originals:
+    get:
+      tags:
+      - recordings
+      summary: Recording List Originals
+      operationId: recording_list_originals_api_recordings_originals_get
+      parameters:
+      - required: true
+        schema:
+          title: Folder Id
+          type: string
+          format: uuid4
+        name: folder_id
+        in: query
+      - required: false
+        schema:
+          title: Limit
+          maximum: 200.0
+          minimum: 0.0
+          type: integer
+          default: 50
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: Offset
+          minimum: 0.0
+          type: integer
+          default: 0
+        name: offset
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Direction'
+          default: desc
+        name: direction
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/recordings/{recording_id}:
+    get:
+      tags:
+      - recordings
+      summary: Recording Get
+      operationId: recording_get_api_recordings__recording_id__get
+      parameters:
+      - required: true
+        schema:
+          title: Recording Id
+          type: string
+          format: uuid4
+        name: recording_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - recordings
+      summary: Recording Put
+      operationId: recording_put_api_recordings__recording_id__put
+      parameters:
+      - required: true
+        schema:
+          title: Recording Id
+          type: string
+          format: uuid4
+        name: recording_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordingPutUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - recordings
+      summary: Recording Delete
+      operationId: recording_delete_api_recordings__recording_id__delete
+      parameters:
+      - required: true
+        schema:
+          title: Recording Id
+          type: string
+          format: uuid4
+        name: recording_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Recording Delete Api Recordings  Recording Id  Delete
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecordingDeleteResp'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - recordings
+      summary: Recording Patch
+      operationId: recording_patch_api_recordings__recording_id__patch
+      parameters:
+      - required: true
+        schema:
+          title: Recording Id
+          type: string
+          format: uuid4
+        name: recording_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordingUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/recordings/conversions:
+    get:
+      tags:
+      - recordings
+      summary: Recording List Conversions
+      operationId: recording_list_conversions_api_recordings_conversions_get
+      parameters:
+      - required: true
+        schema:
+          title: Original Id
+          type: string
+          format: uuid4
+        name: original_id
+        in: query
+      - required: false
+        schema:
+          title: Limit
+          maximum: 200.0
+          minimum: 0.0
+          type: integer
+          default: 50
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: Offset
+          minimum: 0.0
+          type: integer
+          default: 0
+        name: offset
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Direction'
+          default: desc
+        name: direction
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/recordings/tts:
+    post:
+      tags:
+      - recordings
+      summary: Recording Create Tts
+      operationId: recording_create_tts_api_recordings_tts_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordingCreateTTS'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/recordings/conversion-order:
+    post:
+      tags:
+      - recordings
+      summary: Recording Conversion Order
+      operationId: recording_conversion_order_api_recordings_conversion_order_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConversionRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Recording Conversion Order Api Recordings Conversion Order Post
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecordingResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/recordings/conversion-redo/{recording_id}:
+    post:
+      tags:
+      - recordings
+      summary: Recording Conversion Redo
+      operationId: recording_conversion_redo_api_recordings_conversion_redo__recording_id__post
+      parameters:
+      - required: true
+        schema:
+          title: Recording Id
+          type: string
+          format: uuid4
+        name: recording_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/recordings/export:
+    get:
+      tags:
+      - recordings
+      summary: Take Export
+      description: Export take recordings into .zip archive
+      operationId: take_export_api_recordings_export_get
+      parameters:
+      - required: true
+        schema:
+          title: Original Id
+          type: string
+          format: uuid4
+        name: original_id
+        in: query
+      - required: false
+        schema:
+          title: Starred Only
+          type: boolean
+          default: false
+        name: starred_only
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/tts-voices:
+    get:
+      tags:
+      - tts
+      summary: Tts Voice List
+      operationId: tts_voice_list_api_tts_voices_get
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Tts Voice List Api Tts Voices Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/TTSVoicePublic'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/notes:
+    get:
+      tags:
+      - notes
+      summary: Note List
+      operationId: note_list_api_notes_get
+      parameters:
+      - required: true
+        schema:
+          title: Folder Id
+          type: string
+          format: uuid4
+        name: folder_id
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Note List Api Notes Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/NoteResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - notes
+      summary: Note Update
+      operationId: note_update_api_notes_put
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoteUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoteResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - notes
+      summary: Note Create
+      operationId: note_create_api_notes_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoteCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoteResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - notes
+      summary: Note Delete
+      operationId: note_delete_api_notes_delete
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoteDelete'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoteResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/stats:
+    get:
+      tags:
+      - stats
+      summary: Get Stats
+      operationId: get_stats_api_stats_get
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatsUserResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/stats/projects:
+    post:
+      tags:
+      - stats
+      summary: Get Project Stats
+      operationId: get_project_stats_api_stats_projects_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StatsProjectRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Project Stats Api Stats Projects Post
+                type: array
+                items:
+                  $ref: '#/components/schemas/StatsProjectResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/stats/folders:
+    post:
+      tags:
+      - stats
+      summary: Get Folder Stats
+      operationId: get_folder_stats_api_stats_folders_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StatsFolderRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Folder Stats Api Stats Folders Post
+                type: array
+                items:
+                  $ref: '#/components/schemas/FolderStats'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/{file_url}:
+    get:
+      tags:
+      - storage
+      summary: Get File
+      operationId: get_file_api__file_url__get
+      parameters:
+      - required: true
+        schema:
+          title: File Url
+          type: string
+        name: file_url
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v2/recordings/tts:
+    post:
+      tags:
+      - recordings
+      summary: Recording Create Tts V2
+      operationId: recording_create_tts_v2_api_v2_recordings_tts_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordingCreateTTSV2'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordingResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v2/orders:
+    post:
+      tags:
+      - orders
+      summary: Conversion Order Create
+      operationId: conversion_order_create_api_v2_orders_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Conversion Order Create Api V2 Orders Post
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v2/orders/retry/{recording_id}:
+    post:
+      tags:
+      - orders
+      summary: Conversion Order Retry
+      operationId: conversion_order_retry_api_v2_orders_retry__recording_id__post
+      parameters:
+      - required: true
+        schema:
+          title: Recording Id
+          type: string
+          format: uuid4
+        name: recording_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v2/voices:
+    get:
+      tags:
+      - voices
+      summary: Voice List
+      operationId: voice_list_api_v2_voices_get
+      parameters:
+      - required: false
+        schema:
+          title: Limit
+          maximum: 100.0
+          minimum: 0.0
+          type: integer
+          default: 25
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: Offset
+          minimum: 0.0
+          type: integer
+          default: 0
+        name: offset
+        in: query
+      - required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/VisibilityLevel'
+        name: visibility
+        in: query
+      - required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Species'
+        name: species
+        in: query
+      - required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Gender'
+        name: gender
+        in: query
+      - required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgeGroup'
+        name: age_group
+        in: query
+      - required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/PitchGroup'
+        name: pitch_group
+        in: query
+      - required: false
+        schema:
+          title: Nationality
+          type: array
+          items:
+            type: string
+        name: nationality
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/VoiceSortField'
+          default: default
+        name: sort
+        in: query
+      - required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Direction'
+          default: desc
+        name: direction
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v2/voices/search:
+    get:
+      tags:
+      - voices
+      summary: Voice Search
+      operationId: voice_search_api_v2_voices_search_get
+      parameters:
+      - required: true
+        schema:
+          title: Name
+          minLength: 2
+          type: string
+        name: name
+        in: query
+      - required: false
+        schema:
+          title: Limit
+          maximum: 10.0
+          minimum: 0.0
+          type: integer
+          default: 5
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Voice Search Api V2 Voices Search Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/VoicePublic'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v2/voices/favorite/{voice_id}:
+    post:
+      tags:
+      - voices
+      summary: Voice Favorite
+      operationId: voice_favorite_api_v2_voices_favorite__voice_id__post
+      parameters:
+      - required: true
+        schema:
+          title: Voice Id
+          type: string
+          format: uuid4
+        name: voice_id
+        in: path
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FavoriteUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoicePublic'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v2/voices/settings:
+    post:
+      tags:
+      - voices
+      summary: Voice Settings
+      operationId: voice_settings_api_v2_voices_settings_post
+      parameters:
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoiceSettingsUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoicePublic'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v2/accents/samples:
+    get:
+      tags:
+      - accents
+      summary: Accent Get Samples
+      operationId: accent_get_samples_api_v2_accents_samples_get
+      parameters:
+      - required: true
+        schema:
+          title: Accent Id
+          type: string
+          format: uuid4
+        name: accent_id
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccentSamples'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v2/narration-styles/samples:
+    get:
+      tags:
+      - narration-styles
+      summary: Narration Style Get Samples
+      operationId: narration_style_get_samples_api_v2_narration_styles_samples_get
+      parameters:
+      - required: true
+        schema:
+          title: Narration Style Id
+          type: string
+          format: uuid4
+        name: narration_style_id
+        in: query
+      - required: false
+        schema:
+          title: X-Csrf-Token
+          type: string
+        name: x-csrf-token
+        in: header
+      - required: false
+        schema:
+          title: Api-Key
+          type: string
+        name: api-key
+        in: header
+      - required: false
+        schema:
+          title: Session Id
+          type: string
+        name: session_id
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NarrationStyleSamples'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AccentInfoCore:
+      title: AccentInfoCore
+      required:
+      - name
+      - short_name
+      - locale
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+        short_name:
+          title: Short Name
+          type: string
+        locale:
+          title: Locale
+          type: string
+    AccentPublic:
+      title: AccentPublic
+      required:
+      - id
+      - is_default
+      - native
+      - info
+      - tiers
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        is_default:
+          title: Is Default
+          type: boolean
+        native:
+          title: Native
+          type: boolean
+        info:
+          $ref: '#/components/schemas/AccentInfoCore'
+        tiers:
+          title: Tiers
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionTierCore'
+        available:
+          title: Available
+          type: boolean
+          default: false
+        settings:
+          $ref: '#/components/schemas/AccentSettingsPublic'
+    AccentSamples:
+      title: AccentSamples
+      type: object
+      properties:
+        samples:
+          title: Samples
+          type: object
+    AccentSettingsPublic:
+      title: AccentSettingsPublic
+      type: object
+      properties:
+        favorite:
+          title: Favorite
+          type: boolean
+          default: false
+        semitones_correction:
+          title: Semitones Correction
+          type: number
+          default: 0
+    AdvancedSettings:
+      title: AdvancedSettings
+      type: object
+      properties:
+        normalize:
+          title: Normalize
+          type: boolean
+        denormalize:
+          title: Denormalize
+          type: boolean
+        denoise:
+          title: Denoise
+          type: boolean
+        hft:
+          title: Hft
+          type: boolean
+        pipeline:
+          $ref: '#/components/schemas/PipelineType'
+        emotional_scale:
+          title: Emotional Scale
+          maximum: 2.0
+          minimum: 0.0
+          type: number
+    AgeGroup:
+      title: AgeGroup
+      enum:
+      - child
+      - young
+      - adult
+      - senior
+      type: string
+      description: An enumeration.
+    Body_calibrate_api_calibration_post:
+      title: Body_calibrate_api_calibration_post
+      required:
+      - name
+      - data
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          pattern: ^[a-zA-Z0-9 -]+$
+          type: string
+        data:
+          title: Data
+          type: string
+          format: binary
+    Body_recording_create_api_recordings_post:
+      title: Body_recording_create_api_recordings_post
+      required:
+      - data
+      - parent_folder_id
+      - microphone
+      type: object
+      properties:
+        data:
+          title: Data
+          type: string
+          format: binary
+        parent_folder_id:
+          title: Parent Folder Id
+          type: string
+          format: uuid4
+        microphone:
+          title: Microphone
+          type: string
+        label:
+          title: Label
+          maxLength: 40
+          pattern: ^[a-zA-Z0-9 -]+$
+          type: string
+    CalibrationListResponse:
+      title: CalibrationListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/CalibrationResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    CalibrationRename:
+      title: CalibrationRename
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+    CalibrationResponse:
+      title: CalibrationResponse
+      required:
+      - id
+      - name
+      - user_id
+      - bucket
+      - key
+      - state
+      - created_at
+      - enabled
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+        name:
+          title: Name
+          type: string
+        user_id:
+          title: User Id
+          type: string
+          format: uuid4
+        f0:
+          title: F0
+          type: number
+        algorithm:
+          title: Algorithm
+          type: string
+        bucket:
+          title: Bucket
+          type: string
+        key:
+          title: Key
+          type: string
+        state:
+          $ref: '#/components/schemas/CalibrationStates'
+        error:
+          title: Error
+          type: string
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        calibrated_at:
+          title: Calibrated At
+          type: string
+          format: date-time
+        enabled:
+          title: Enabled
+          type: boolean
+    CalibrationStates:
+      title: CalibrationStates
+      enum:
+      - processing
+      - calibrated
+      - error
+      type: string
+      description: An enumeration.
+    CalibrationUserData:
+      title: CalibrationUserData
+      required:
+      - calibration_id
+      - f0
+      type: object
+      properties:
+        calibration_id:
+          title: Calibration Id
+          type: string
+          format: uuid4
+        f0:
+          title: F0
+          type: number
+    ConversionRequest:
+      title: ConversionRequest
+      required:
+      - original_id
+      - models
+      type: object
+      properties:
+        original_id:
+          title: Original Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        models:
+          title: Models
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+        calibration_id:
+          title: Calibration Id
+          type: string
+          format: uuid4
+    ConversionStats:
+      title: ConversionStats
+      required:
+      - total
+      - completed
+      - in_progress
+      - failed
+      type: object
+      properties:
+        total:
+          title: Total
+          type: integer
+        completed:
+          title: Completed
+          type: integer
+        in_progress:
+          title: In Progress
+          type: integer
+        failed:
+          title: Failed
+          type: integer
+    CreditsResponse:
+      title: CreditsResponse
+      required:
+      - credits
+      - initial_credits
+      type: object
+      properties:
+        credits:
+          title: Credits
+          type: number
+        initial_credits:
+          title: Initial Credits
+          type: number
+    DefaultSuccessResponse:
+      title: DefaultSuccessResponse
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
+          default: OK
+    DemoWizard:
+      title: DemoWizard
+      required:
+      - show
+      type: object
+      properties:
+        show:
+          title: Show
+          type: boolean
+        skipped:
+          title: Skipped
+          type: boolean
+          default: false
+        completed:
+          title: Completed
+          type: boolean
+          default: false
+        converting:
+          title: Converting
+          type: boolean
+          default: false
+        project_id:
+          title: Project Id
+          type: string
+          format: uuid4
+        folder_id:
+          title: Folder Id
+          type: string
+          format: uuid4
+        original_id:
+          title: Original Id
+          type: string
+          format: uuid4
+    Direction:
+      title: Direction
+      enum:
+      - asc
+      - desc
+      type: string
+      description: An enumeration.
+    DropdownWidget:
+      title: DropdownWidget
+      required:
+      - type
+      - options
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ParamWidgetTypes'
+        options:
+          title: Options
+          type: array
+          items:
+            type: string
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
+    FavoriteUpdate:
+      title: FavoriteUpdate
+      required:
+      - favorite
+      type: object
+      properties:
+        favorite:
+          title: Favorite
+          type: boolean
+    FolderCreate:
+      title: FolderCreate
+      required:
+      - name
+      - project_id
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+        project_id:
+          title: Project Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+    FolderListResponse:
+      title: FolderListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/FolderResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    FolderResponse:
+      title: FolderResponse
+      required:
+      - name
+      - project_id
+      - id
+      - active
+      - created_at
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+        project_id:
+          title: Project Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        parent_id:
+          title: Parent Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        active:
+          title: Active
+          type: boolean
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+    FolderStats:
+      title: FolderStats
+      required:
+      - folder_id
+      - stats
+      type: object
+      properties:
+        folder_id:
+          title: Folder Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        stats:
+          $ref: '#/components/schemas/ConversionStats'
+    FolderUpdate:
+      title: FolderUpdate
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+    Gender:
+      title: Gender
+      enum:
+      - male
+      - female
+      type: string
+      description: An enumeration.
+    Group:
+      title: Group
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        name:
+          title: Name
+          type: string
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    IdentityProvider:
+      title: IdentityProvider
+      enum:
+      - google
+      - facebook
+      - apple
+      - linkedin
+      type: string
+      description: An enumeration.
+    LoginCreds:
+      title: LoginCreds
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          title: Email
+          type: string
+          format: email
+        password:
+          title: Password
+          type: string
+        session_duration:
+          title: Session Duration
+          type: integer
+    LoginResponse:
+      title: LoginResponse
+      required:
+      - user
+      - csrf_token
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        csrf_token:
+          title: Csrf Token
+          type: string
+    MarketingInfo:
+      title: MarketingInfo
+      type: object
+      properties:
+        google_id:
+          title: Google Id
+          type: string
+    Model:
+      title: Model
+      required:
+      - id
+      - name
+      - params
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        name:
+          title: Name
+          type: string
+        params:
+          title: Params
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelParam'
+    ModelListResponse:
+      title: ModelListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelUserResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    ModelParam:
+      title: ModelParam
+      required:
+      - id
+      - name
+      - value
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        name:
+          title: Name
+          type: string
+        value:
+          title: Value
+          type: string
+    ModelParamResponse:
+      title: ModelParamResponse
+      required:
+      - id
+      - alias
+      - type
+      - widget
+      - default
+      - worker_id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        alias:
+          title: Alias
+          type: string
+        locked:
+          title: Locked
+          type: string
+        type:
+          title: Type
+          type: string
+        widget:
+          title: Widget
+          anyOf:
+          - $ref: '#/components/schemas/DropdownWidget'
+          - $ref: '#/components/schemas/SliderWidget'
+        default:
+          title: Default
+          anyOf:
+          - type: string
+          - type: number
+        worker_id:
+          title: Worker Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+    ModelSortFields:
+      title: ModelSortFields
+      enum:
+      - name
+      - owner
+      - date_created
+      type: string
+      description: An enumeration.
+    ModelStats:
+      title: ModelStats
+      required:
+      - id
+      - name
+      - conversions_count
+      - converted_time
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+        name:
+          title: Name
+          type: string
+        conversions_count:
+          title: Conversions Count
+          type: integer
+        converted_time:
+          title: Converted Time
+          type: number
+    ModelUserResponse:
+      title: ModelUserResponse
+      required:
+      - id
+      - name
+      - owner
+      - visibility
+      - m2o
+      - default_model
+      - pipeline
+      - user_can_use_model
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        name:
+          title: Name
+          type: string
+        owner:
+          title: Owner
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        visibility:
+          $ref: '#/components/schemas/ModelVisibilityLevels'
+        m2o:
+          title: M2O
+          type: boolean
+        default_model:
+          title: Default Model
+          type: boolean
+        date_created:
+          title: Date Created
+          type: string
+          format: date-time
+        pipeline:
+          title: Pipeline
+          type: array
+          items:
+            type: string
+            format: uuid4
+          example:
+          - 00000000-0000-0000-0000-000000000001
+          - 00000000-0000-0000-0000-000000000001
+        params:
+          title: Params
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelParamResponse'
+        user_can_use_model:
+          title: User Can Use Model
+          type: boolean
+    ModelVisibilityLevels:
+      title: ModelVisibilityLevels
+      enum:
+      - public
+      - private
+      type: string
+      description: An enumeration.
+    NarrationStyleInfoCore:
+      title: NarrationStyleInfoCore
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+    NarrationStylePublic:
+      title: NarrationStylePublic
+      required:
+      - id
+      - is_default
+      - info
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        is_default:
+          title: Is Default
+          type: boolean
+        info:
+          $ref: '#/components/schemas/NarrationStyleInfoCore'
+        settings:
+          $ref: '#/components/schemas/NarrationStyleSettingPublic'
+    NarrationStyleSamples:
+      title: NarrationStyleSamples
+      type: object
+      properties:
+        samples:
+          title: Samples
+          type: object
+    NarrationStyleSettingPublic:
+      title: NarrationStyleSettingPublic
+      type: object
+      properties:
+        favorite:
+          title: Favorite
+          type: boolean
+          default: false
+    NoteCreate:
+      title: NoteCreate
+      required:
+      - recording_id
+      - text
+      type: object
+      properties:
+        recording_id:
+          title: Recording Id
+          type: string
+          format: uuid4
+        text:
+          title: Text
+          maxLength: 2000
+          type: string
+    NoteDelete:
+      title: NoteDelete
+      required:
+      - recording_id
+      type: object
+      properties:
+        recording_id:
+          title: Recording Id
+          type: string
+          format: uuid4
+    NoteRecording:
+      title: NoteRecording
+      required:
+      - id
+      - text
+      - active
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+        text:
+          title: Text
+          maxLength: 2000
+          type: string
+        active:
+          title: Active
+          type: boolean
+    NoteResponse:
+      title: NoteResponse
+      required:
+      - recording_id
+      - text
+      - id
+      - active
+      type: object
+      properties:
+        recording_id:
+          title: Recording Id
+          type: string
+          format: uuid4
+        text:
+          title: Text
+          maxLength: 2000
+          type: string
+        id:
+          title: Id
+          type: string
+          format: uuid4
+        active:
+          title: Active
+          type: boolean
+    NoteUpdate:
+      title: NoteUpdate
+      required:
+      - recording_id
+      - text
+      type: object
+      properties:
+        recording_id:
+          title: Recording Id
+          type: string
+          format: uuid4
+        text:
+          title: Text
+          maxLength: 2000
+          type: string
+    OK:
+      title: OK
+      type: object
+      properties:
+        state:
+          title: State
+          type: string
+          default: OK
+    OpenIDInfo:
+      title: OpenIDInfo
+      required:
+      - sub
+      - provider
+      type: object
+      properties:
+        sub:
+          title: Sub
+          type: string
+        provider:
+          $ref: '#/components/schemas/IdentityProvider'
+    OrderConversionRequest:
+      title: OrderConversionRequest
+      required:
+      - voice_id
+      type: object
+      properties:
+        voice_id:
+          title: Voice Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        accent_id:
+          title: Accent Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        semitones_correction:
+          title: Semitones Correction
+          type: number
+    OrderRequest:
+      title: OrderRequest
+      required:
+      - original_id
+      - conversions
+      type: object
+      properties:
+        original_id:
+          title: Original Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        conversions:
+          title: Conversions
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderConversionRequest'
+        calibration_id:
+          title: Calibration Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        use_calibration:
+          title: Use Calibration
+          type: boolean
+          default: false
+    OrderResponse:
+      title: OrderResponse
+      required:
+      - id
+      - user_id
+      - original_id
+      - conversion_id
+      - tracking_id
+      - state
+      - created_at
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        user_id:
+          title: User Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        original_id:
+          title: Original Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        conversion_id:
+          title: Conversion Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        transaction_id:
+          title: Transaction Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        moderation_id:
+          title: Moderation Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        calibration_id:
+          title: Calibration Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        tracking_id:
+          title: Tracking Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        f0:
+          title: F0
+          type: number
+        state:
+          $ref: '#/components/schemas/OrderStates'
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        closed_at:
+          title: Closed At
+          type: string
+          format: date-time
+        error:
+          title: Error
+          type: string
+    OrderStates:
+      title: OrderStates
+      enum:
+      - new
+      - pre_processing
+      - post_processing
+      - processing
+      - done
+      - error
+      type: string
+      description: An enumeration.
+    Pagination:
+      title: Pagination
+      required:
+      - count
+      - limit
+      - offset
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        offset:
+          title: Offset
+          type: integer
+    ParamWidgetTypes:
+      title: ParamWidgetTypes
+      enum:
+      - slider
+      - dropdown
+      type: string
+      description: An enumeration.
+    PipelineType:
+      title: PipelineType
+      enum:
+      - fast
+      - slow
+      type: string
+      description: An enumeration.
+    PitchGroup:
+      title: PitchGroup
+      enum:
+      - low
+      - mid
+      - high
+      type: string
+      description: An enumeration.
+    PreviousMonthDurationStat:
+      title: PreviousMonthDurationStat
+      required:
+      - month
+      - duration
+      type: object
+      properties:
+        month:
+          title: Month
+          type: string
+          format: date
+        duration:
+          title: Duration
+          type: number
+    ProjectCreate:
+      title: ProjectCreate
+      required:
+      - name
+      - owner
+      - models
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+        owner:
+          title: Owner
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        models:
+          title: Models
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+          example:
+            model_id-1:
+              param_id-1: param_value-1
+            model_id-2:
+              param_id-2: param_value-2
+              param_id-3: param_value-3
+            00000000-0000-0000-0000-000000000001:
+              00000000-0000-0000-0000-000000000001: param_value-example
+    ProjectDeleteResp:
+      title: ProjectDeleteResp
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+    ProjectListResponse:
+      title: ProjectListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    ProjectRename:
+      title: ProjectRename
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+    ProjectResponse:
+      title: ProjectResponse
+      required:
+      - name
+      - slug
+      - owner
+      - url
+      - models
+      - id
+      - active
+      - created_at
+      - last_recording_at
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+        slug:
+          title: Slug
+          maxLength: 60
+          type: string
+        owner:
+          title: Owner
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        url:
+          title: Url
+          maxLength: 200
+          type: string
+        models:
+          title: Models
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+          example:
+            model_id-1:
+              param_id-1: param_value-1
+            model_id-2:
+              param_id-2: param_value-2
+              param_id-3: param_value-3
+            00000000-0000-0000-0000-000000000001:
+              00000000-0000-0000-0000-000000000001: param_value-example
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        active:
+          title: Active
+          type: boolean
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        last_recording_at:
+          title: Last Recording At
+          type: string
+          format: date-time
+    ProjectSortFields:
+      title: ProjectSortFields
+      enum:
+      - name
+      - created_at
+      - last_recording_at
+      type: string
+      description: An enumeration.
+    ProjectUpdate:
+      title: ProjectUpdate
+      required:
+      - models
+      type: object
+      properties:
+        models:
+          title: Models
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+          example:
+            model_id-1:
+              param_id-1: param_value-1
+            model_id-2:
+              param_id-2: param_value-2
+              param_id-3: param_value-3
+            00000000-0000-0000-0000-000000000001:
+              00000000-0000-0000-0000-000000000001: param_value-example
+    PromoData:
+      title: PromoData
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        extended_trial:
+          title: Extended Trial
+          type: boolean
+        no_credit:
+          title: No Credit
+          type: boolean
+        stripe_promo_code:
+          title: Stripe Promo Code
+          type: string
+        stripe_promo_codes_used:
+          title: Stripe Promo Codes Used
+          type: object
+          additionalProperties:
+            type: string
+        default_coupon_used:
+          title: Default Coupon Used
+          type: boolean
+          default: false
+    RateLimit:
+      title: RateLimit
+      required:
+      - times
+      - seconds
+      type: object
+      properties:
+        times:
+          title: Times
+          type: integer
+        seconds:
+          title: Seconds
+          type: integer
+    RecordingCreateTTS:
+      title: RecordingCreateTTS
+      required:
+      - parent_folder_id
+      - text
+      - voice_id
+      type: object
+      properties:
+        parent_folder_id:
+          title: Parent Folder Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        text:
+          title: Text
+          maxLength: 1000
+          minLength: 1
+          type: string
+        voice_id:
+          title: Voice Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        label:
+          title: Label
+          maxLength: 40
+          type: string
+    RecordingCreateTTSV2:
+      title: RecordingCreateTTSV2
+      required:
+      - parent_folder_id
+      - text
+      type: object
+      properties:
+        parent_folder_id:
+          title: Parent Folder Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        text:
+          title: Text
+          maxLength: 1000
+          minLength: 1
+          type: string
+        tts_voice_id:
+          title: Tts Voice Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        label:
+          title: Label
+          maxLength: 40
+          type: string
+    RecordingDeleteResp:
+      title: RecordingDeleteResp
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+    RecordingListResponse:
+      title: RecordingListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/RecordingResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    RecordingPutUpdate:
+      title: RecordingPutUpdate
+      required:
+      - label
+      - starred
+      type: object
+      properties:
+        label:
+          title: Label
+          maxLength: 40
+          type: string
+        starred:
+          title: Starred
+          type: boolean
+    RecordingResponse:
+      title: RecordingResponse
+      required:
+      - id
+      - project_id
+      - type
+      - state
+      - duration
+      - tts
+      - params
+      - active
+      - created_at
+      - listen_count
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        project_id:
+          title: Project Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        parent_folder_id:
+          title: Parent Folder Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        type:
+          $ref: '#/components/schemas/RecordingTypes'
+        url:
+          title: Url
+          type: string
+        waveform_url:
+          title: Waveform Url
+          type: string
+        file_name:
+          title: File Name
+          type: string
+        label:
+          title: Label
+          maxLength: 40
+          type: string
+        state:
+          $ref: '#/components/schemas/RecordingStates'
+        original_id:
+          title: Original Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        model_id:
+          title: Model Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        model_name:
+          title: Model Name
+          type: string
+        calibration_id:
+          title: Calibration Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        calibration_value:
+          title: Calibration Value
+          type: number
+        calibration_name:
+          title: Calibration Name
+          type: string
+        microphone:
+          title: Microphone
+          type: string
+        size:
+          title: Size
+          type: integer
+        duration:
+          title: Duration
+          type: number
+        starred:
+          title: Starred
+          type: boolean
+          default: false
+        tts:
+          title: Tts
+          type: boolean
+        tts_voice:
+          title: Tts Voice
+          type: string
+        tts_voice_id:
+          title: Tts Voice Id
+          type: string
+          format: uuid4
+        text:
+          title: Text
+          type: string
+        params:
+          title: Params
+          anyOf:
+          - type: object
+          - type: array
+            items:
+              $ref: '#/components/schemas/ModelParam'
+        error:
+          title: Error
+          type: string
+        active:
+          title: Active
+          type: boolean
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        converted_at:
+          title: Converted At
+          type: string
+          format: date-time
+        listen_count:
+          title: Listen Count
+          type: integer
+        process_stage:
+          title: Process Stage
+          type: string
+        note:
+          $ref: '#/components/schemas/NoteRecording'
+    RecordingStates:
+      title: RecordingStates
+      enum:
+      - done
+      - processing
+      - error
+      type: string
+      description: An enumeration.
+    RecordingTypes:
+      title: RecordingTypes
+      enum:
+      - original
+      - converted
+      type: string
+      description: An enumeration.
+    RecordingUpdate:
+      title: RecordingUpdate
+      type: object
+      properties:
+        label:
+          title: Label
+          maxLength: 40
+          type: string
+        starred:
+          title: Starred
+          type: boolean
+    Role:
+      title: Role
+      enum:
+      - admin
+      - prepaid
+      - reviewer
+      - user
+      - techsmith
+      type: string
+      description: An enumeration.
+    SliderWidget:
+      title: SliderWidget
+      required:
+      - type
+      - min
+      - max
+      - step
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ParamWidgetTypes'
+        min:
+          title: Min
+          type: number
+        max:
+          title: Max
+          type: number
+        step:
+          title: Step
+          type: number
+    Species:
+      title: Species
+      enum:
+      - human
+      - animal
+      - other
+      type: string
+      description: An enumeration.
+    StatsDuration:
+      title: StatsDuration
+      required:
+      - total
+      - current_month
+      type: object
+      properties:
+        total:
+          title: Total
+          type: integer
+        current_month:
+          title: Current Month
+          type: integer
+    StatsDurationPreviousMonthes:
+      title: StatsDurationPreviousMonthes
+      required:
+      - total
+      - current_month
+      - previous_monthes
+      type: object
+      properties:
+        total:
+          title: Total
+          type: integer
+        current_month:
+          title: Current Month
+          type: integer
+        previous_monthes:
+          title: Previous Monthes
+          type: array
+          items:
+            $ref: '#/components/schemas/PreviousMonthDurationStat'
+    StatsFolderRequest:
+      title: StatsFolderRequest
+      required:
+      - folder_ids
+      type: object
+      properties:
+        folder_ids:
+          title: Folder Ids
+          maxItems: 200
+          minItems: 0
+          type: array
+          items:
+            type: string
+            format: uuid4
+    StatsProjectRequest:
+      title: StatsProjectRequest
+      required:
+      - project_ids
+      type: object
+      properties:
+        project_ids:
+          title: Project Ids
+          maxItems: 200
+          minItems: 0
+          type: array
+          items:
+            type: string
+            format: uuid4
+    StatsProjectResponse:
+      title: StatsProjectResponse
+      required:
+      - project_id
+      - time_converted
+      - conversions
+      type: object
+      properties:
+        project_id:
+          title: Project Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        time_converted:
+          $ref: '#/components/schemas/StatsDuration'
+        conversions:
+          $ref: '#/components/schemas/ConversionStats'
+    StatsUserResponse:
+      title: StatsUserResponse
+      required:
+      - time_converted
+      - conversions
+      - models
+      type: object
+      properties:
+        time_converted:
+          $ref: '#/components/schemas/StatsDurationPreviousMonthes'
+        conversions:
+          $ref: '#/components/schemas/ConversionStats'
+        models:
+          title: Models
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelStats'
+    StripeInfo:
+      title: StripeInfo
+      type: object
+      properties:
+        customer_id:
+          title: Customer Id
+          type: string
+        price_id:
+          title: Price Id
+          type: string
+        subscription_status:
+          $ref: '#/components/schemas/SubscriptionStatuses'
+        subscription_interval:
+          $ref: '#/components/schemas/SubscriptionInterval'
+        subscription_active:
+          title: Subscription Active
+          type: boolean
+        trial:
+          title: Trial
+          type: boolean
+        trial_used:
+          title: Trial Used
+          type: boolean
+        subscription_id:
+          title: Subscription Id
+          type: string
+        trial_subscription_id:
+          title: Trial Subscription Id
+          type: string
+        current_period_end:
+          title: Current Period End
+          type: integer
+        payed_once:
+          title: Payed Once
+          type: boolean
+    SubscriptionInterval:
+      title: SubscriptionInterval
+      enum:
+      - month
+      - year
+      type: string
+      description: An enumeration.
+    SubscriptionStatuses:
+      title: SubscriptionStatuses
+      enum:
+      - 'null'
+      - trialing
+      - incomplete
+      - active
+      - unpaid
+      type: string
+      description: An enumeration.
+    SubscriptionTierCore:
+      title: SubscriptionTierCore
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+    TTSVoicePublic:
+      title: TTSVoicePublic
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        visibility:
+          $ref: '#/components/schemas/TTSVoiceVisibility'
+        name:
+          title: Name
+          maxLength: 100
+          type: string
+        f0:
+          title: F0
+          type: number
+        is_default:
+          title: Is Default
+          type: boolean
+    TTSVoiceVisibility:
+      title: TTSVoiceVisibility
+      enum:
+      - public
+      - private
+      type: string
+      description: An enumeration.
+    TrustLevel:
+      title: TrustLevel
+      enum:
+      - gray
+      - red
+      - orange
+      - green
+      type: string
+      description: An enumeration.
+    User:
+      title: User
+      required:
+      - id
+      - email
+      - verified
+      - username
+      - roles
+      - groups
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        email:
+          title: Email
+          type: string
+          format: email
+        verified:
+          title: Verified
+          type: boolean
+        username:
+          title: Username
+          type: string
+        first_name:
+          title: First Name
+          type: string
+        last_name:
+          title: Last Name
+          type: string
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        groups:
+          title: Groups
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        data:
+          $ref: '#/components/schemas/UserData'
+    UserData:
+      title: UserData
+      type: object
+      properties:
+        stripe:
+          title: Stripe
+          allOf:
+          - $ref: '#/components/schemas/StripeInfo'
+          default: {}
+        calibration:
+          $ref: '#/components/schemas/CalibrationUserData'
+        bucket:
+          title: Bucket
+          type: string
+        promo:
+          title: Promo
+          allOf:
+          - $ref: '#/components/schemas/PromoData'
+          default:
+            default_coupon_used: false
+        t_level:
+          allOf:
+          - $ref: '#/components/schemas/TrustLevel'
+          default: gray
+        domain_info:
+          $ref: '#/components/schemas/UserDomainInfo'
+        model_scope:
+          title: Model Scope
+          type: object
+          additionalProperties:
+            type: boolean
+        credit_limit:
+          title: Credit Limit
+          type: boolean
+          default: false
+        moderate_originals:
+          title: Moderate Originals
+          type: boolean
+          default: true
+        run_moderation_in_parallel:
+          title: Run Moderation In Parallel
+          type: boolean
+          default: false
+        rate_limits:
+          $ref: '#/components/schemas/UserRateLimits'
+        permissions:
+          title: Permissions
+          allOf:
+          - $ref: '#/components/schemas/UserPermissions'
+          default:
+            long_conversions: false
+            download: false
+            can_read: true
+            can_write: false
+        open_id:
+          $ref: '#/components/schemas/OpenIDInfo'
+        local_storage:
+          title: Local Storage
+          type: object
+          default: {}
+        demo_wizard:
+          $ref: '#/components/schemas/DemoWizard'
+        experimental:
+          title: Experimental
+          type: boolean
+          default: false
+        marketing:
+          $ref: '#/components/schemas/MarketingInfo'
+        advanced_settings:
+          $ref: '#/components/schemas/AdvancedSettings'
+    UserDomainInfo:
+      title: UserDomainInfo
+      required:
+      - profession
+      - industry
+      type: object
+      properties:
+        profession:
+          title: Profession
+          type: string
+        industry:
+          title: Industry
+          type: string
+    UserPermissions:
+      title: UserPermissions
+      type: object
+      properties:
+        long_conversions:
+          title: Long Conversions
+          type: boolean
+          default: false
+        download:
+          title: Download
+          type: boolean
+          default: false
+        can_read:
+          title: Can Read
+          type: boolean
+          default: true
+        can_write:
+          title: Can Write
+          type: boolean
+          default: false
+        access_level:
+          title: Access Level
+          type: string
+    UserRateLimits:
+      title: UserRateLimits
+      required:
+      - fast
+      - slow
+      type: object
+      properties:
+        fast:
+          $ref: '#/components/schemas/RateLimit'
+        slow:
+          $ref: '#/components/schemas/RateLimit'
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    VisibilityLevel:
+      title: VisibilityLevel
+      enum:
+      - public
+      - paid
+      - private
+      - kids
+      type: string
+      description: An enumeration.
+    VoiceListResponse:
+      title: VoiceListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/VoicePublic'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    VoicePublic:
+      title: VoicePublic
+      required:
+      - id
+      - owner_id
+      - name
+      - slug
+      - visibility
+      - rating
+      - active
+      - created_at
+      - accents
+      - narration_styles
+      - tiers
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        owner_id:
+          title: Owner Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        name:
+          title: Name
+          type: string
+        slug:
+          title: Slug
+          type: string
+        visibility:
+          $ref: '#/components/schemas/VisibilityLevel'
+        species:
+          $ref: '#/components/schemas/Species'
+        artist:
+          title: Artist
+          type: string
+        verified_artist:
+          title: Verified Artist
+          type: boolean
+        gender:
+          $ref: '#/components/schemas/Gender'
+        pitch:
+          title: Pitch
+          type: number
+        age_group:
+          $ref: '#/components/schemas/AgeGroup'
+        pitch_group:
+          $ref: '#/components/schemas/PitchGroup'
+        nationality:
+          title: Nationality
+          type: string
+        image_url:
+          title: Image Url
+          type: string
+        thumbnail_url:
+          title: Thumbnail Url
+          type: string
+        description:
+          title: Description
+          maxLength: 2048
+          type: string
+        rating:
+          title: Rating
+          maximum: 100.0
+          minimum: 0.0
+          type: integer
+        active:
+          title: Active
+          type: boolean
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        favorite:
+          title: Favorite
+          type: boolean
+          default: false
+        available:
+          title: Available
+          type: boolean
+          default: false
+        accents:
+          title: Accents
+          type: array
+          items:
+            $ref: '#/components/schemas/AccentPublic'
+        narration_styles:
+          title: Narration Styles
+          type: array
+          items:
+            $ref: '#/components/schemas/NarrationStylePublic'
+        tiers:
+          title: Tiers
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionTierCore'
+    VoiceSettingsUpdate:
+      title: VoiceSettingsUpdate
+      required:
+      - voice_id
+      type: object
+      properties:
+        voice_id:
+          title: Voice Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        accent_id:
+          title: Accent Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        semitones_correction:
+          title: Semitones Correction
+          type: number
+          example: 0.0
+        narration_style_id:
+          title: Narration Style Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+    VoiceSortField:
+      title: VoiceSortField
+      enum:
+      - default
+      - name
+      - pitch
+      - rating
+      - created_at
+      type: string
+      description: An enumeration.
+servers:
+- url: https://gateway.respeecher.com
+  description: Respeecher Voice Marketplace API gateway
