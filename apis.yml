@@ -38,7 +38,7 @@ tags:
 - Media and Entertainment
 created: '2026-07-11'
 modified: '2026-07-11'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: respeecher:respeecher-space-realtime-tts-api
   name: Respeecher Space Real-Time TTS API
