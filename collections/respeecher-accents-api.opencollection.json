@@ -1,0 +1,46 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Voice Markertplace accents API",
+    "version": "0.6.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "accents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Accent Get Samples",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.respeecher.com/api/v2/accents/samples",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "accent_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Accent Get Samples"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

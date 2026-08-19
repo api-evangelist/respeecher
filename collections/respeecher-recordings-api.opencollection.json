@@ -1,0 +1,433 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Voice Markertplace accents recordings API",
+    "version": "0.6.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "recordings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Recording List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.respeecher.com/api/recordings",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "folder_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Recording List"
+        },
+        {
+          "info": {
+            "name": "Recording Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.respeecher.com/api/recordings",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Recording Create"
+        },
+        {
+          "info": {
+            "name": "Recording List Originals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.respeecher.com/api/recordings/originals",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "folder_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Recording List Originals"
+        },
+        {
+          "info": {
+            "name": "Recording Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.respeecher.com/api/recordings/:recording_id",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "recording_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Recording Get"
+        },
+        {
+          "info": {
+            "name": "Recording Put",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.respeecher.com/api/recordings/:recording_id",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "recording_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Recording Put"
+        },
+        {
+          "info": {
+            "name": "Recording Patch",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.respeecher.com/api/recordings/:recording_id",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "recording_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Recording Patch"
+        },
+        {
+          "info": {
+            "name": "Recording Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.respeecher.com/api/recordings/:recording_id",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "recording_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Recording Delete"
+        },
+        {
+          "info": {
+            "name": "Recording List Conversions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.respeecher.com/api/recordings/conversions",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "original_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Recording List Conversions"
+        },
+        {
+          "info": {
+            "name": "Recording Create Tts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.respeecher.com/api/recordings/tts",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Recording Create Tts"
+        },
+        {
+          "info": {
+            "name": "Recording Conversion Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.respeecher.com/api/recordings/conversion-order",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Recording Conversion Order"
+        },
+        {
+          "info": {
+            "name": "Recording Conversion Redo",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.respeecher.com/api/recordings/conversion-redo/:recording_id",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "recording_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Recording Conversion Redo"
+        },
+        {
+          "info": {
+            "name": "Take Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.respeecher.com/api/recordings/export",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "original_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "starred_only",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Export take recordings into .zip archive"
+        },
+        {
+          "info": {
+            "name": "Recording Create Tts V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.respeecher.com/api/v2/recordings/tts",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Recording Create Tts V2"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

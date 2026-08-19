@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Voice Markertplace accents stats API",
+    "version": "0.6.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "stats",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.respeecher.com/api/stats",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get Stats"
+        },
+        {
+          "info": {
+            "name": "Get Project Stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.respeecher.com/api/stats/projects",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get Project Stats"
+        },
+        {
+          "info": {
+            "name": "Get Folder Stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.respeecher.com/api/stats/folders",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get Folder Stats"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

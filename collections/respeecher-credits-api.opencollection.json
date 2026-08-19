@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Voice Markertplace accents credits API",
+    "version": "0.6.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "credits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Credits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.respeecher.com/api/credits",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get Credits"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

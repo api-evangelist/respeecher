@@ -1,0 +1,244 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Voice Markertplace accents projects API",
+    "version": "0.6.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Project List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.respeecher.com/api/projects",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Project List"
+        },
+        {
+          "info": {
+            "name": "Project Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.respeecher.com/api/projects",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Project Create"
+        },
+        {
+          "info": {
+            "name": "Project Get By Url",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.respeecher.com/api/projects/by-url",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "project_url",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get project by url"
+        },
+        {
+          "info": {
+            "name": "Project Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.respeecher.com/api/projects/:project_id",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Project Update"
+        },
+        {
+          "info": {
+            "name": "Project Rename",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.respeecher.com/api/projects/:project_id",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Project Rename"
+        },
+        {
+          "info": {
+            "name": "Project Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.respeecher.com/api/projects/:project_id",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Project Delete"
+        },
+        {
+          "info": {
+            "name": "Project Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.respeecher.com/api/projects/:project_id/export",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "starred_only",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Export project recordings into .zip archive"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Voice Markertplace accents healtz API",
+    "version": "0.6.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "healtz",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Healtz",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.respeecher.com/api/healtz"
+          },
+          "docs": "Healtz"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

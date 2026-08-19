@@ -1,0 +1,628 @@
+{
+  "item": [
+    {
+      "id": "21391db6-f125-48ae-937b-6347e9823c80",
+      "name": "auth",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c20bbe5d-b877-4e34-aa69-416b19390389",
+          "name": "Login",
+          "request": {
+            "name": "Login",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\",\n  \"session_duration\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2d8e20cd-7193-4060-8527-2bfb0e9d8aab",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\",\n  \"session_duration\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"user\": {\n    \"id\": \"00000000-0000-0000-0000-000000000001\",\n    \"email\": \"B-i7@iEkp.yfle\",\n    \"verified\": false,\n    \"username\": \"string\",\n    \"roles\": [\n      \"prepaid\",\n      \"reviewer\"\n    ],\n    \"groups\": [\n      {\n        \"id\": \"00000000-0000-0000-0000-000000000001\",\n        \"name\": \"string\"\n      },\n      {\n        \"id\": \"00000000-0000-0000-0000-000000000001\",\n        \"name\": \"string\"\n      }\n    ],\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"data\": {\n      \"stripe\": {},\n      \"calibration\": {\n        \"calibration_id\": \"string\",\n        \"f0\": 5981.730495464803\n      },\n      \"bucket\": \"string\",\n      \"promo\": {\n        \"default_coupon_used\": false\n      },\n      \"t_level\": \"gray\",\n      \"domain_info\": {\n        \"profession\": \"string\",\n        \"industry\": \"string\"\n      },\n      \"model_scope\": {\n        \"key_0\": true,\n        \"key_1\": true,\n        \"key_2\": true\n      },\n      \"credit_limit\": false,\n      \"moderate_originals\": true,\n      \"run_moderation_in_parallel\": false,\n      \"rate_limits\": {\n        \"fast\": {\n          \"times\": 9820,\n          \"seconds\": 2725\n        },\n        \"slow\": {\n          \"times\": 546,\n          \"seconds\": 4485\n        }\n      },\n      \"permissions\": {\n        \"long_conversions\": false,\n        \"download\": false,\n        \"can_read\": true,\n        \"can_write\": false\n      },\n      \"open_id\": {\n        \"sub\": \"string\",\n        \"provider\": \"linkedin\"\n      },\n      \"local_storage\": {},\n      \"demo_wizard\": {\n        \"show\": false,\n        \"skipped\": false,\n        \"completed\": false,\n        \"converting\": false,\n        \"project_id\": \"string\",\n        \"folder_id\": \"string\",\n        \"original_id\": \"string\"\n      },\n      \"experimental\": false,\n      \"marketing\": {\n        \"google_id\": \"string\"\n      },\n      \"advanced_settings\": {\n        \"normalize\": true,\n        \"denormalize\": false,\n        \"denoise\": false,\n        \"hft\": false,\n        \"pipeline\": \"fast\",\n        \"emotional_scale\": 0.13862141144967888\n      }\n    }\n  },\n  \"csrf_token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93d0a4eb-53c9-4cbd-9f98-32377b7c02ff",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\",\n  \"session_duration\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5229bb2a-b37d-4364-aee4-cc75eb939ddf",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\",\n  \"session_duration\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6838897e-49e5-46eb-896b-d9b6163185fe",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\",\n  \"session_duration\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbafce5e-5813-4def-875e-e337c9569518",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\",\n  \"session_duration\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a13a3d3-1159-4e71-bede-f8af90450dd7",
+          "name": "Logout",
+          "request": {
+            "name": "Logout",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "logout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "x-csrf-token",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "113ec328-f11e-4231-a587-7c1a690060b7",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "logout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"OK\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26df068c-80e3-4b97-a22a-5ac3954eee03",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "logout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91d75b05-8f6a-4fab-9ae0-50a6ba5c7bfe",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "logout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2feec3b-20bf-4c6f-a936-8d9f5326dcae",
+          "name": "Authenticate",
+          "request": {
+            "name": "Authenticate",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "auth"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6adfc0d3-e847-48a1-85f6-832ad19a29be",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"00000000-0000-0000-0000-000000000001\",\n  \"email\": \"EapJW2T@ZoqwVBtmsz.uwwx\",\n  \"verified\": true,\n  \"username\": \"string\",\n  \"roles\": [\n    \"techsmith\",\n    \"techsmith\"\n  ],\n  \"groups\": [\n    {\n      \"id\": \"00000000-0000-0000-0000-000000000001\",\n      \"name\": \"string\"\n    },\n    {\n      \"id\": \"00000000-0000-0000-0000-000000000001\",\n      \"name\": \"string\"\n    }\n  ],\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"data\": {\n    \"stripe\": {},\n    \"calibration\": {\n      \"calibration_id\": \"string\",\n      \"f0\": 4266.566843008512\n    },\n    \"bucket\": \"string\",\n    \"promo\": {\n      \"default_coupon_used\": false\n    },\n    \"t_level\": \"gray\",\n    \"domain_info\": {\n      \"profession\": \"string\",\n      \"industry\": \"string\"\n    },\n    \"model_scope\": {\n      \"key_0\": true\n    },\n    \"credit_limit\": false,\n    \"moderate_originals\": true,\n    \"run_moderation_in_parallel\": false,\n    \"rate_limits\": {\n      \"fast\": {\n        \"times\": 1849,\n        \"seconds\": 1590\n      },\n      \"slow\": {\n        \"times\": 9255,\n        \"seconds\": 1929\n      }\n    },\n    \"permissions\": {\n      \"long_conversions\": false,\n      \"download\": false,\n      \"can_read\": true,\n      \"can_write\": false\n    },\n    \"open_id\": {\n      \"sub\": \"string\",\n      \"provider\": \"google\"\n    },\n    \"local_storage\": {},\n    \"demo_wizard\": {\n      \"show\": false,\n      \"skipped\": false,\n      \"completed\": false,\n      \"converting\": false,\n      \"project_id\": \"string\",\n      \"folder_id\": \"string\",\n      \"original_id\": \"string\"\n    },\n    \"experimental\": false,\n    \"marketing\": {\n      \"google_id\": \"string\"\n    },\n    \"advanced_settings\": {\n      \"normalize\": false,\n      \"denormalize\": false,\n      \"denoise\": false,\n      \"hft\": false,\n      \"pipeline\": \"slow\",\n      \"emotional_scale\": 1.6165188097770158\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d47a58aa-f82e-4516-a499-7e4e8aacb5aa",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "396d97cd-19f3-41dc-ac96-e33173112ad7",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.respeecher.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f8e651f5-a8c1-431e-ba6f-c5b851c92e49",
+    "name": "Voice Markertplace accents auth API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

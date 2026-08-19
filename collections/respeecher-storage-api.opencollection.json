@@ -1,0 +1,46 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Voice Markertplace accents storage API",
+    "version": "0.6.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "storage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.respeecher.com/api/:file_url",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "file_url",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get File"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

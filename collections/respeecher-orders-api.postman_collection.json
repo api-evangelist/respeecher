@@ -1,0 +1,727 @@
+{
+  "item": [
+    {
+      "id": "1f09fb8d-9092-41d3-ad60-9165c9562e42",
+      "name": "orders",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "90c78d9d-d939-4011-a317-17f2f3b16b28",
+          "name": "Conversion Order Create",
+          "request": {
+            "name": "Conversion Order Create",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "x-csrf-token",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"original_id\": \"<uuid4>\",\n  \"conversions\": [\n    {\n      \"voice_id\": \"<uuid4>\",\n      \"accent_id\": \"<uuid4>\",\n      \"semitones_correction\": \"<number>\"\n    },\n    {\n      \"voice_id\": \"<uuid4>\",\n      \"accent_id\": \"<uuid4>\",\n      \"semitones_correction\": \"<number>\"\n    }\n  ],\n  \"calibration_id\": \"<uuid4>\",\n  \"use_calibration\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5f293a51-6edb-4f6a-b90c-af2204f8736e",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"original_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"conversions\": [\n    {\n      \"voice_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"accent_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"semitones_correction\": \"<number>\"\n    },\n    {\n      \"voice_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"accent_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"semitones_correction\": \"<number>\"\n    }\n  ],\n  \"calibration_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"use_calibration\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"00000000-0000-0000-0000-000000000001\",\n    \"user_id\": \"00000000-0000-0000-0000-000000000001\",\n    \"original_id\": \"00000000-0000-0000-0000-000000000001\",\n    \"conversion_id\": \"00000000-0000-0000-0000-000000000001\",\n    \"tracking_id\": \"00000000-0000-0000-0000-000000000001\",\n    \"state\": \"error\",\n    \"created_at\": \"2020-10-08T05:59:26.901Z\",\n    \"transaction_id\": \"00000000-0000-0000-0000-000000000001\",\n    \"moderation_id\": \"00000000-0000-0000-0000-000000000001\",\n    \"calibration_id\": \"00000000-0000-0000-0000-000000000001\",\n    \"f0\": 6000.375778627071,\n    \"closed_at\": \"1972-07-12T22:17:34.279Z\",\n    \"error\": \"string\"\n  },\n  {\n    \"id\": \"00000000-0000-0000-0000-000000000001\",\n    \"user_id\": \"00000000-0000-0000-0000-000000000001\",\n    \"original_id\": \"00000000-0000-0000-0000-000000000001\",\n    \"conversion_id\": \"00000000-0000-0000-0000-000000000001\",\n    \"tracking_id\": \"00000000-0000-0000-0000-000000000001\",\n    \"state\": \"error\",\n    \"created_at\": \"1978-07-14T18:50:36.119Z\",\n    \"transaction_id\": \"00000000-0000-0000-0000-000000000001\",\n    \"moderation_id\": \"00000000-0000-0000-0000-000000000001\",\n    \"calibration_id\": \"00000000-0000-0000-0000-000000000001\",\n    \"f0\": 121.91961591205059,\n    \"closed_at\": \"1950-02-07T20:31:42.497Z\",\n    \"error\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28c28d7b-3ade-46c9-9385-54c233617002",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"original_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"conversions\": [\n    {\n      \"voice_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"accent_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"semitones_correction\": \"<number>\"\n    },\n    {\n      \"voice_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"accent_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"semitones_correction\": \"<number>\"\n    }\n  ],\n  \"calibration_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"use_calibration\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bd38ec7-25af-45d3-82ca-a994f808bdbe",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"original_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"conversions\": [\n    {\n      \"voice_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"accent_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"semitones_correction\": \"<number>\"\n    },\n    {\n      \"voice_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"accent_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"semitones_correction\": \"<number>\"\n    }\n  ],\n  \"calibration_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"use_calibration\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e61960f-dcb9-4a29-b6a6-c313b43d7a54",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"original_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"conversions\": [\n    {\n      \"voice_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"accent_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"semitones_correction\": \"<number>\"\n    },\n    {\n      \"voice_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"accent_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"semitones_correction\": \"<number>\"\n    }\n  ],\n  \"calibration_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"use_calibration\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d400ee4-0de2-49a3-8845-be62a8657abc",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"original_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"conversions\": [\n    {\n      \"voice_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"accent_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"semitones_correction\": \"<number>\"\n    },\n    {\n      \"voice_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"accent_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"semitones_correction\": \"<number>\"\n    }\n  ],\n  \"calibration_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"use_calibration\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0471b108-1e9a-4284-a613-1a60f1224f9c",
+          "name": "Conversion Order Retry",
+          "request": {
+            "name": "Conversion Order Retry",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "orders",
+                "retry",
+                ":recording_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid4>",
+                  "key": "recording_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "x-csrf-token",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aa771962-b1a0-4835-ae7d-836404b07459",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders",
+                    "retry",
+                    ":recording_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "recording_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"00000000-0000-0000-0000-000000000001\",\n  \"user_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"original_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"conversion_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"tracking_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"state\": \"processing\",\n  \"created_at\": \"2003-06-23T14:15:22.288Z\",\n  \"transaction_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"moderation_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"calibration_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"f0\": 2488.3764018091124,\n  \"closed_at\": \"2008-03-27T10:04:27.222Z\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab0cab45-f819-42ae-8e7c-484c1a9b5cc1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders",
+                    "retry",
+                    ":recording_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "recording_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eeefa6fc-88f7-48bc-b59d-fe1d9fbd93b9",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders",
+                    "retry",
+                    ":recording_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "recording_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc51a822-edc3-4d6f-b710-f0bf7a5126f2",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders",
+                    "retry",
+                    ":recording_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "recording_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7c258e1-2dda-40d8-b812-8f88d7c6a9a4",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders",
+                    "retry",
+                    ":recording_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "recording_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.respeecher.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8fc2e7d9-2f97-4c91-9653-1b03028db370",
+    "name": "Voice Markertplace accents orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

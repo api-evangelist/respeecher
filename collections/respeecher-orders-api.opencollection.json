@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Voice Markertplace accents orders API",
+    "version": "0.6.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Conversion Order Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.respeecher.com/api/v2/orders",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Conversion Order Create"
+        },
+        {
+          "info": {
+            "name": "Conversion Order Retry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.respeecher.com/api/v2/orders/retry/:recording_id",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "recording_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Conversion Order Retry"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1491 @@
+{
+  "item": [
+    {
+      "id": "94d6f554-787a-4a09-ad99-37d7fa8cedbe",
+      "name": "voices",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "03f686db-596f-4d50-bbcc-2aaec85d4205",
+          "name": "Voice List",
+          "request": {
+            "name": "Voice List",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "voices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "visibility",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "visibility",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "species",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "species",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "gender",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "gender",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "age_group",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "age_group",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pitch_group",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pitch_group",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "nationality",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "nationality",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "default"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "desc"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "x-csrf-token",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c244b566-fbbb-4d4f-8cd3-5eeab8a77a2b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "voices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "visibility",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "visibility",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "species",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "species",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "age_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "age_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pitch_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pitch_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nationality",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nationality",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "default"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"list\": [\n    {\n      \"id\": \"00000000-0000-0000-0000-000000000001\",\n      \"owner_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"visibility\": \"<string>\",\n      \"rating\": 65,\n      \"active\": false,\n      \"created_at\": \"1973-01-11T03:40:50.247Z\",\n      \"accents\": [\n        {\n          \"id\": \"00000000-0000-0000-0000-000000000001\",\n          \"is_default\": true,\n          \"native\": false,\n          \"info\": {\n            \"name\": \"string\",\n            \"short_name\": \"string\",\n            \"locale\": \"string\"\n          },\n          \"tiers\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"available\": false,\n          \"settings\": {\n            \"favorite\": false,\n            \"semitones_correction\": 0\n          }\n        },\n        {\n          \"id\": \"00000000-0000-0000-0000-000000000001\",\n          \"is_default\": false,\n          \"native\": true,\n          \"info\": {\n            \"name\": \"string\",\n            \"short_name\": \"string\",\n            \"locale\": \"string\"\n          },\n          \"tiers\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"available\": false,\n          \"settings\": {\n            \"favorite\": false,\n            \"semitones_correction\": 0\n          }\n        }\n      ],\n      \"narration_styles\": [\n        {\n          \"id\": \"00000000-0000-0000-0000-000000000001\",\n          \"is_default\": true,\n          \"info\": {\n            \"name\": \"string\"\n          },\n          \"settings\": {\n            \"favorite\": false\n          }\n        },\n        {\n          \"id\": \"00000000-0000-0000-0000-000000000001\",\n          \"is_default\": false,\n          \"info\": {\n            \"name\": \"string\"\n          },\n          \"settings\": {\n            \"favorite\": false\n          }\n        }\n      ],\n      \"tiers\": [\n        {\n          \"name\": \"string\"\n        },\n        {\n          \"name\": \"string\"\n        }\n      ],\n      \"species\": \"<string>\",\n      \"artist\": \"string\",\n      \"verified_artist\": false,\n      \"gender\": \"<string>\",\n      \"pitch\": 959.4980299066502,\n      \"age_group\": \"<string>\",\n      \"pitch_group\": \"<string>\",\n      \"nationality\": \"string\",\n      \"image_url\": \"string\",\n      \"thumbnail_url\": \"string\",\n      \"description\": \"string\",\n      \"favorite\": false,\n      \"available\": false\n    },\n    {\n      \"id\": \"00000000-0000-0000-0000-000000000001\",\n      \"owner_id\": \"00000000-0000-0000-0000-000000000001\",\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"visibility\": \"<string>\",\n      \"rating\": 15,\n      \"active\": true,\n      \"created_at\": \"2019-07-26T18:06:50.009Z\",\n      \"accents\": [\n        {\n          \"id\": \"00000000-0000-0000-0000-000000000001\",\n          \"is_default\": false,\n          \"native\": true,\n          \"info\": {\n            \"name\": \"string\",\n            \"short_name\": \"string\",\n            \"locale\": \"string\"\n          },\n          \"tiers\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"available\": false,\n          \"settings\": {\n            \"favorite\": false,\n            \"semitones_correction\": 0\n          }\n        },\n        {\n          \"id\": \"00000000-0000-0000-0000-000000000001\",\n          \"is_default\": false,\n          \"native\": false,\n          \"info\": {\n            \"name\": \"string\",\n            \"short_name\": \"string\",\n            \"locale\": \"string\"\n          },\n          \"tiers\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"available\": false,\n          \"settings\": {\n            \"favorite\": false,\n            \"semitones_correction\": 0\n          }\n        }\n      ],\n      \"narration_styles\": [\n        {\n          \"id\": \"00000000-0000-0000-0000-000000000001\",\n          \"is_default\": true,\n          \"info\": {\n            \"name\": \"string\"\n          },\n          \"settings\": {\n            \"favorite\": false\n          }\n        },\n        {\n          \"id\": \"00000000-0000-0000-0000-000000000001\",\n          \"is_default\": false,\n          \"info\": {\n            \"name\": \"string\"\n          },\n          \"settings\": {\n            \"favorite\": false\n          }\n        }\n      ],\n      \"tiers\": [\n        {\n          \"name\": \"string\"\n        },\n        {\n          \"name\": \"string\"\n        }\n      ],\n      \"species\": \"<string>\",\n      \"artist\": \"string\",\n      \"verified_artist\": false,\n      \"gender\": \"<string>\",\n      \"pitch\": 2028.5342873168854,\n      \"age_group\": \"<string>\",\n      \"pitch_group\": \"<string>\",\n      \"nationality\": \"string\",\n      \"image_url\": \"string\",\n      \"thumbnail_url\": \"string\",\n      \"description\": \"string\",\n      \"favorite\": false,\n      \"available\": false\n    }\n  ],\n  \"pagination\": {\n    \"count\": 7603,\n    \"limit\": 7856,\n    \"offset\": 4377\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc4a57b8-f6b9-4123-933d-28c627b7ed6d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "voices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "visibility",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "visibility",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "species",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "species",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "age_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "age_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pitch_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pitch_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nationality",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nationality",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "default"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e7bbe91-79e5-40d1-8c1d-647a1c3e6db5",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "voices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "visibility",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "visibility",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "species",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "species",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "age_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "age_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pitch_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pitch_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nationality",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nationality",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "default"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb35ecdf-e4e0-4722-be2b-ed4c4567dedc",
+          "name": "Voice Search",
+          "request": {
+            "name": "Voice Search",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "voices",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "5"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "x-csrf-token",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c518a205-04b7-4cd3-bbf3-7eb4fb78a280",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "voices",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"00000000-0000-0000-0000-000000000001\",\n    \"owner_id\": \"00000000-0000-0000-0000-000000000001\",\n    \"name\": \"string\",\n    \"slug\": \"string\",\n    \"visibility\": \"<string>\",\n    \"rating\": 59,\n    \"active\": true,\n    \"created_at\": \"1985-11-15T10:08:22.864Z\",\n    \"accents\": [\n      {\n        \"id\": \"00000000-0000-0000-0000-000000000001\",\n        \"is_default\": true,\n        \"native\": true,\n        \"info\": {\n          \"name\": \"string\",\n          \"short_name\": \"string\",\n          \"locale\": \"string\"\n        },\n        \"tiers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"available\": false,\n        \"settings\": {\n          \"favorite\": false,\n          \"semitones_correction\": 0\n        }\n      },\n      {\n        \"id\": \"00000000-0000-0000-0000-000000000001\",\n        \"is_default\": false,\n        \"native\": false,\n        \"info\": {\n          \"name\": \"string\",\n          \"short_name\": \"string\",\n          \"locale\": \"string\"\n        },\n        \"tiers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"available\": false,\n        \"settings\": {\n          \"favorite\": false,\n          \"semitones_correction\": 0\n        }\n      }\n    ],\n    \"narration_styles\": [\n      {\n        \"id\": \"00000000-0000-0000-0000-000000000001\",\n        \"is_default\": false,\n        \"info\": {\n          \"name\": \"string\"\n        },\n        \"settings\": {\n          \"favorite\": false\n        }\n      },\n      {\n        \"id\": \"00000000-0000-0000-0000-000000000001\",\n        \"is_default\": false,\n        \"info\": {\n          \"name\": \"string\"\n        },\n        \"settings\": {\n          \"favorite\": false\n        }\n      }\n    ],\n    \"tiers\": [\n      {\n        \"name\": \"string\"\n      },\n      {\n        \"name\": \"string\"\n      }\n    ],\n    \"species\": \"<string>\",\n    \"artist\": \"string\",\n    \"verified_artist\": false,\n    \"gender\": \"<string>\",\n    \"pitch\": 8032.44433589599,\n    \"age_group\": \"<string>\",\n    \"pitch_group\": \"<string>\",\n    \"nationality\": \"string\",\n    \"image_url\": \"string\",\n    \"thumbnail_url\": \"string\",\n    \"description\": \"string\",\n    \"favorite\": false,\n    \"available\": false\n  },\n  {\n    \"id\": \"00000000-0000-0000-0000-000000000001\",\n    \"owner_id\": \"00000000-0000-0000-0000-000000000001\",\n    \"name\": \"string\",\n    \"slug\": \"string\",\n    \"visibility\": \"<string>\",\n    \"rating\": 14,\n    \"active\": true,\n    \"created_at\": \"1970-12-30T02:19:56.674Z\",\n    \"accents\": [\n      {\n        \"id\": \"00000000-0000-0000-0000-000000000001\",\n        \"is_default\": false,\n        \"native\": true,\n        \"info\": {\n          \"name\": \"string\",\n          \"short_name\": \"string\",\n          \"locale\": \"string\"\n        },\n        \"tiers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"available\": false,\n        \"settings\": {\n          \"favorite\": false,\n          \"semitones_correction\": 0\n        }\n      },\n      {\n        \"id\": \"00000000-0000-0000-0000-000000000001\",\n        \"is_default\": true,\n        \"native\": false,\n        \"info\": {\n          \"name\": \"string\",\n          \"short_name\": \"string\",\n          \"locale\": \"string\"\n        },\n        \"tiers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"available\": false,\n        \"settings\": {\n          \"favorite\": false,\n          \"semitones_correction\": 0\n        }\n      }\n    ],\n    \"narration_styles\": [\n      {\n        \"id\": \"00000000-0000-0000-0000-000000000001\",\n        \"is_default\": true,\n        \"info\": {\n          \"name\": \"string\"\n        },\n        \"settings\": {\n          \"favorite\": false\n        }\n      },\n      {\n        \"id\": \"00000000-0000-0000-0000-000000000001\",\n        \"is_default\": true,\n        \"info\": {\n          \"name\": \"string\"\n        },\n        \"settings\": {\n          \"favorite\": false\n        }\n      }\n    ],\n    \"tiers\": [\n      {\n        \"name\": \"string\"\n      },\n      {\n        \"name\": \"string\"\n      }\n    ],\n    \"species\": \"<string>\",\n    \"artist\": \"string\",\n    \"verified_artist\": true,\n    \"gender\": \"<string>\",\n    \"pitch\": 9915.270167970897,\n    \"age_group\": \"<string>\",\n    \"pitch_group\": \"<string>\",\n    \"nationality\": \"string\",\n    \"image_url\": \"string\",\n    \"thumbnail_url\": \"string\",\n    \"description\": \"string\",\n    \"favorite\": false,\n    \"available\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50995552-c741-4cba-8999-01413c66d17a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "voices",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60289ce8-de95-49be-a03e-8581d87f2d57",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "voices",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "afd83d0f-71ab-4ce3-9883-2639dd04ea42",
+          "name": "Voice Favorite",
+          "request": {
+            "name": "Voice Favorite",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "voices",
+                "favorite",
+                ":voice_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid4>",
+                  "key": "voice_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "x-csrf-token",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"favorite\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d93ddbbe-b650-4a1e-ad1e-026a1dcfd1b1",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "voices",
+                    "favorite",
+                    ":voice_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "voice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"favorite\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"00000000-0000-0000-0000-000000000001\",\n  \"owner_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"visibility\": \"<string>\",\n  \"rating\": 89,\n  \"active\": false,\n  \"created_at\": \"1996-09-07T16:46:48.664Z\",\n  \"accents\": [\n    {\n      \"id\": \"00000000-0000-0000-0000-000000000001\",\n      \"is_default\": true,\n      \"native\": false,\n      \"info\": {\n        \"name\": \"string\",\n        \"short_name\": \"string\",\n        \"locale\": \"string\"\n      },\n      \"tiers\": [\n        {\n          \"name\": \"string\"\n        },\n        {\n          \"name\": \"string\"\n        }\n      ],\n      \"available\": false,\n      \"settings\": {\n        \"favorite\": false,\n        \"semitones_correction\": 0\n      }\n    },\n    {\n      \"id\": \"00000000-0000-0000-0000-000000000001\",\n      \"is_default\": false,\n      \"native\": true,\n      \"info\": {\n        \"name\": \"string\",\n        \"short_name\": \"string\",\n        \"locale\": \"string\"\n      },\n      \"tiers\": [\n        {\n          \"name\": \"string\"\n        },\n        {\n          \"name\": \"string\"\n        }\n      ],\n      \"available\": false,\n      \"settings\": {\n        \"favorite\": false,\n        \"semitones_correction\": 0\n      }\n    }\n  ],\n  \"narration_styles\": [\n    {\n      \"id\": \"00000000-0000-0000-0000-000000000001\",\n      \"is_default\": false,\n      \"info\": {\n        \"name\": \"string\"\n      },\n      \"settings\": {\n        \"favorite\": false\n      }\n    },\n    {\n      \"id\": \"00000000-0000-0000-0000-000000000001\",\n      \"is_default\": false,\n      \"info\": {\n        \"name\": \"string\"\n      },\n      \"settings\": {\n        \"favorite\": false\n      }\n    }\n  ],\n  \"tiers\": [\n    {\n      \"name\": \"string\"\n    },\n    {\n      \"name\": \"string\"\n    }\n  ],\n  \"species\": \"<string>\",\n  \"artist\": \"string\",\n  \"verified_artist\": false,\n  \"gender\": \"<string>\",\n  \"pitch\": 2700.6273281904837,\n  \"age_group\": \"<string>\",\n  \"pitch_group\": \"<string>\",\n  \"nationality\": \"string\",\n  \"image_url\": \"string\",\n  \"thumbnail_url\": \"string\",\n  \"description\": \"string\",\n  \"favorite\": false,\n  \"available\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5eb07e5c-258d-4d65-b0c9-be124b43c181",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "voices",
+                    "favorite",
+                    ":voice_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "voice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"favorite\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c968b116-fa77-4d54-83d3-75263e3ed6ec",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "voices",
+                    "favorite",
+                    ":voice_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "voice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"favorite\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a5e35e2-d97d-4758-b692-b436ddecd3bb",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "voices",
+                    "favorite",
+                    ":voice_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "voice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"favorite\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "316afe82-cb0e-43c3-a1a9-5916614425d5",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "voices",
+                    "favorite",
+                    ":voice_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "voice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"favorite\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3253ec1-d780-483a-a9c8-e9ed8cccb730",
+          "name": "Voice Settings",
+          "request": {
+            "name": "Voice Settings",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "voices",
+                "settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "x-csrf-token",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "api-key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"voice_id\": \"<uuid4>\",\n  \"accent_id\": \"<uuid4>\",\n  \"semitones_correction\": \"<number>\",\n  \"narration_style_id\": \"<uuid4>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ef996587-eabc-4830-9538-331209c200f6",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "voices",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"voice_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"accent_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"semitones_correction\": 0,\n  \"narration_style_id\": \"00000000-0000-0000-0000-000000000001\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"00000000-0000-0000-0000-000000000001\",\n  \"owner_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"visibility\": \"<string>\",\n  \"rating\": 89,\n  \"active\": false,\n  \"created_at\": \"1996-09-07T16:46:48.664Z\",\n  \"accents\": [\n    {\n      \"id\": \"00000000-0000-0000-0000-000000000001\",\n      \"is_default\": true,\n      \"native\": false,\n      \"info\": {\n        \"name\": \"string\",\n        \"short_name\": \"string\",\n        \"locale\": \"string\"\n      },\n      \"tiers\": [\n        {\n          \"name\": \"string\"\n        },\n        {\n          \"name\": \"string\"\n        }\n      ],\n      \"available\": false,\n      \"settings\": {\n        \"favorite\": false,\n        \"semitones_correction\": 0\n      }\n    },\n    {\n      \"id\": \"00000000-0000-0000-0000-000000000001\",\n      \"is_default\": false,\n      \"native\": true,\n      \"info\": {\n        \"name\": \"string\",\n        \"short_name\": \"string\",\n        \"locale\": \"string\"\n      },\n      \"tiers\": [\n        {\n          \"name\": \"string\"\n        },\n        {\n          \"name\": \"string\"\n        }\n      ],\n      \"available\": false,\n      \"settings\": {\n        \"favorite\": false,\n        \"semitones_correction\": 0\n      }\n    }\n  ],\n  \"narration_styles\": [\n    {\n      \"id\": \"00000000-0000-0000-0000-000000000001\",\n      \"is_default\": false,\n      \"info\": {\n        \"name\": \"string\"\n      },\n      \"settings\": {\n        \"favorite\": false\n      }\n    },\n    {\n      \"id\": \"00000000-0000-0000-0000-000000000001\",\n      \"is_default\": false,\n      \"info\": {\n        \"name\": \"string\"\n      },\n      \"settings\": {\n        \"favorite\": false\n      }\n    }\n  ],\n  \"tiers\": [\n    {\n      \"name\": \"string\"\n    },\n    {\n      \"name\": \"string\"\n    }\n  ],\n  \"species\": \"<string>\",\n  \"artist\": \"string\",\n  \"verified_artist\": false,\n  \"gender\": \"<string>\",\n  \"pitch\": 2700.6273281904837,\n  \"age_group\": \"<string>\",\n  \"pitch_group\": \"<string>\",\n  \"nationality\": \"string\",\n  \"image_url\": \"string\",\n  \"thumbnail_url\": \"string\",\n  \"description\": \"string\",\n  \"favorite\": false,\n  \"available\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "618468db-3859-47ed-826b-aeab75d0022f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "voices",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"voice_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"accent_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"semitones_correction\": 0,\n  \"narration_style_id\": \"00000000-0000-0000-0000-000000000001\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c4072e2-7468-4b5d-98f8-81934c7a54d5",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "voices",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"voice_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"accent_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"semitones_correction\": 0,\n  \"narration_style_id\": \"00000000-0000-0000-0000-000000000001\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4517872d-b165-4764-ae73-19f85fc0f1e6",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "voices",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"voice_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"accent_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"semitones_correction\": 0,\n  \"narration_style_id\": \"00000000-0000-0000-0000-000000000001\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acb36e45-7d35-4479-b4f0-48a84c88c3e9",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "voices",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "x-csrf-token",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "api-key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"voice_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"accent_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"semitones_correction\": 0,\n  \"narration_style_id\": \"00000000-0000-0000-0000-000000000001\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.respeecher.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0244a9be-75ee-4ea9-bf55-1f8204b14494",
+    "name": "Voice Markertplace accents voices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

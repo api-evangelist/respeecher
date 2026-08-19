@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Voice Markertplace accents tts API",
+    "version": "0.6.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "tts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Tts Voice List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.respeecher.com/api/tts-voices",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Tts Voice List"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

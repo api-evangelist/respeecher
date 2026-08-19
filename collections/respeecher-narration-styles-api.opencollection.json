@@ -1,0 +1,46 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Voice Markertplace accents narration-styles API",
+    "version": "0.6.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "narration-styles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Narration Style Get Samples",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.respeecher.com/api/v2/narration-styles/samples",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "narration_style_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Narration Style Get Samples"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

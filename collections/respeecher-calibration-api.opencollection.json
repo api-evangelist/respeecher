@@ -1,0 +1,197 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Voice Markertplace accents calibration API",
+    "version": "0.6.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "calibration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Calibration List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.respeecher.com/api/calibration",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Calibration List"
+        },
+        {
+          "info": {
+            "name": "Calibrate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.respeecher.com/api/calibration",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Calibrate"
+        },
+        {
+          "info": {
+            "name": "Calibration Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.respeecher.com/api/calibration/:calibration_id",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "calibration_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Calibration Get"
+        },
+        {
+          "info": {
+            "name": "Calibration Rename",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.respeecher.com/api/calibration/:calibration_id",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "calibration_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Calibration Rename"
+        },
+        {
+          "info": {
+            "name": "Calibration Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.respeecher.com/api/calibration/:calibration_id",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "calibration_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Calibration Delete"
+        },
+        {
+          "info": {
+            "name": "Calibration Enable",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.respeecher.com/api/calibration/:calibration_id/enable",
+            "headers": [
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "calibration_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Calibration Enable"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
