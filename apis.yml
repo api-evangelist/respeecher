@@ -15,6 +15,18 @@ description: >-
   Python and TypeScript SDKs, and LiveKit, Pipecat, Ultravox, and VAPI
   integrations. Bespoke, high-touch voice cloning for studios is delivered
   through the enterprise AI Voice Lab.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: unknown
