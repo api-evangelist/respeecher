@@ -44,7 +44,7 @@ tags:
 - Voice AI
 - Voice Cloning
 - Speech to Speech
-- Text-to-Speech
+- Text to Speech
 - Voice Conversion
 - Real-Time
 - Media and Entertainment
@@ -66,7 +66,7 @@ apis:
   - Real-Time
   - Streaming
   - WebSocket
-  - Text-to-Speech
+  - Text to Speech
   tags_raw:
   - Real Time
   - Streaming
@@ -135,7 +135,7 @@ apis:
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
   tags:
-  - Calibration
+  - calibration
   tags_raw:
   - calibration
   properties:
@@ -175,7 +175,7 @@ apis:
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
   tags:
-  - Folders
+  - folders
   tags_raw:
   - folders
   properties:
@@ -311,7 +311,7 @@ apis:
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
   tags:
-  - Recordings
+  - recordings
   tags_raw:
   - recordings
   properties:
@@ -371,7 +371,7 @@ apis:
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
   tags:
-  - TTS
+  - tts
   tags_raw:
   - tts
   properties:
@@ -391,7 +391,7 @@ apis:
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
   tags:
-  - Voices
+  - voices
   tags_raw:
   - voices
   properties:
