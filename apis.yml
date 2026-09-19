@@ -155,7 +155,7 @@ apis:
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
   tags:
-  - Credits
+  - Credit
   tags_raw:
   - credits
   properties:
@@ -311,7 +311,7 @@ apis:
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
   tags:
-  - Recordings
+  - Recording
   tags_raw:
   - recordings
   properties:
@@ -391,7 +391,7 @@ apis:
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
   tags:
-  - Voices
+  - Voice
   tags_raw:
   - voices
   properties:
