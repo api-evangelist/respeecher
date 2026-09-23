@@ -1,17 +1,17 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Voice Markertplace accents notes API
+  title: Voice Markertplace Notes API
   version: 0.6.0
 servers:
 - url: https://gateway.respeecher.com
   description: Respeecher Voice Marketplace API gateway
 tags:
-- name: notes
+- name: Notes
 paths:
   /api/notes:
     get:
       tags:
-      - notes
+      - Notes
       summary: Note List
       operationId: note_list_api_notes_get
       parameters:
@@ -70,7 +70,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     put:
       tags:
-      - notes
+      - Notes
       summary: Note Update
       operationId: note_update_api_notes_put
       parameters:
@@ -131,7 +131,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       tags:
-      - notes
+      - Notes
       summary: Note Create
       operationId: note_create_api_notes_post
       parameters:
@@ -192,7 +192,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-      - notes
+      - Notes
       summary: Note Delete
       operationId: note_delete_api_notes_delete
       parameters:
@@ -253,16 +253,30 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    NoteDelete:
-      title: NoteDelete
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    NoteCreate:
+      title: NoteCreate
       required:
       - recording_id
+      - text
       type: object
       properties:
         recording_id:
           title: Recording Id
           type: string
           format: uuid4
+        text:
+          title: Text
+          maxLength: 2000
+          type: string
     ValidationError:
       title: ValidationError
       required:
@@ -284,15 +298,21 @@ components:
         type:
           title: Error Type
           type: string
-    HTTPValidationError:
-      title: HTTPValidationError
+    NoteUpdate:
+      title: NoteUpdate
+      required:
+      - recording_id
+      - text
       type: object
       properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
+        recording_id:
+          title: Recording Id
+          type: string
+          format: uuid4
+        text:
+          title: Text
+          maxLength: 2000
+          type: string
     NoteResponse:
       title: NoteResponse
       required:
@@ -326,33 +346,13 @@ components:
         detail:
           title: Detail
           type: string
-    NoteUpdate:
-      title: NoteUpdate
+    NoteDelete:
+      title: NoteDelete
       required:
       - recording_id
-      - text
       type: object
       properties:
         recording_id:
           title: Recording Id
           type: string
           format: uuid4
-        text:
-          title: Text
-          maxLength: 2000
-          type: string
-    NoteCreate:
-      title: NoteCreate
-      required:
-      - recording_id
-      - text
-      type: object
-      properties:
-        recording_id:
-          title: Recording Id
-          type: string
-          format: uuid4
-        text:
-          title: Text
-          maxLength: 2000
-          type: string

@@ -1,6 +1,6 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Voice Markertplace accents calibration API
+  title: Voice Markertplace Calibration API
   version: 0.6.0
 servers:
 - url: https://gateway.respeecher.com
@@ -426,6 +426,42 @@ components:
             $ref: '#/components/schemas/CalibrationResponse'
         pagination:
           $ref: '#/components/schemas/Pagination'
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    CalibrationRename:
+      title: CalibrationRename
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+    Pagination:
+      title: Pagination
+      required:
+      - count
+      - limit
+      - offset
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        offset:
+          title: Offset
+          type: integer
     ValidationError:
       title: ValidationError
       required:
@@ -447,15 +483,6 @@ components:
         type:
           title: Error Type
           type: string
-    HTTPValidationError:
-      title: HTTPValidationError
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
     Body_calibrate_api_calibration_post:
       title: Body_calibrate_api_calibration_post
       required:
@@ -472,6 +499,14 @@ components:
           title: Data
           type: string
           format: binary
+    CalibrationStates:
+      title: CalibrationStates
+      enum:
+      - processing
+      - calibrated
+      - error
+      type: string
+      description: An enumeration.
     ErrorResponse:
       title: ErrorResponse
       required:
@@ -480,16 +515,6 @@ components:
       properties:
         detail:
           title: Detail
-          type: string
-    CalibrationRename:
-      title: CalibrationRename
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          title: Name
-          maxLength: 40
           type: string
     CalibrationResponse:
       title: CalibrationResponse
@@ -543,28 +568,3 @@ components:
         enabled:
           title: Enabled
           type: boolean
-    Pagination:
-      title: Pagination
-      required:
-      - count
-      - limit
-      - offset
-      type: object
-      properties:
-        count:
-          title: Count
-          type: integer
-        limit:
-          title: Limit
-          type: integer
-        offset:
-          title: Offset
-          type: integer
-    CalibrationStates:
-      title: CalibrationStates
-      enum:
-      - processing
-      - calibrated
-      - error
-      type: string
-      description: An enumeration.

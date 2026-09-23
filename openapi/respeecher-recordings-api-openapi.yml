@@ -1,17 +1,17 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Voice Markertplace accents recordings API
+  title: Voice Markertplace Recordings API
   version: 0.6.0
 servers:
 - url: https://gateway.respeecher.com
   description: Respeecher Voice Marketplace API gateway
 tags:
-- name: recordings
+- name: Recordings
 paths:
   /api/recordings:
     get:
       tags:
-      - recordings
+      - Recordings
       summary: Recording List
       operationId: recording_list_api_recordings_get
       parameters:
@@ -98,7 +98,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       tags:
-      - recordings
+      - Recordings
       summary: Recording Create
       operationId: recording_create_api_recordings_post
       parameters:
@@ -172,7 +172,7 @@ paths:
   /api/recordings/originals:
     get:
       tags:
-      - recordings
+      - Recordings
       summary: Recording List Originals
       operationId: recording_list_originals_api_recordings_originals_get
       parameters:
@@ -253,7 +253,7 @@ paths:
   /api/recordings/{recording_id}:
     get:
       tags:
-      - recordings
+      - Recordings
       summary: Recording Get
       operationId: recording_get_api_recordings__recording_id__get
       parameters:
@@ -315,7 +315,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     put:
       tags:
-      - recordings
+      - Recordings
       summary: Recording Put
       operationId: recording_put_api_recordings__recording_id__put
       parameters:
@@ -383,7 +383,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-      - recordings
+      - Recordings
       summary: Recording Delete
       operationId: recording_delete_api_recordings__recording_id__delete
       parameters:
@@ -454,7 +454,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     patch:
       tags:
-      - recordings
+      - Recordings
       summary: Recording Patch
       operationId: recording_patch_api_recordings__recording_id__patch
       parameters:
@@ -523,7 +523,7 @@ paths:
   /api/recordings/conversions:
     get:
       tags:
-      - recordings
+      - Recordings
       summary: Recording List Conversions
       operationId: recording_list_conversions_api_recordings_conversions_get
       parameters:
@@ -604,7 +604,7 @@ paths:
   /api/recordings/tts:
     post:
       tags:
-      - recordings
+      - Recordings
       summary: Recording Create Tts
       operationId: recording_create_tts_api_recordings_tts_post
       parameters:
@@ -672,7 +672,7 @@ paths:
   /api/recordings/conversion-order:
     post:
       tags:
-      - recordings
+      - Recordings
       summary: Recording Conversion Order
       operationId: recording_conversion_order_api_recordings_conversion_order_post
       parameters:
@@ -737,7 +737,7 @@ paths:
   /api/recordings/conversion-redo/{recording_id}:
     post:
       tags:
-      - recordings
+      - Recordings
       summary: Recording Conversion Redo
       operationId: recording_conversion_redo_api_recordings_conversion_redo__recording_id__post
       parameters:
@@ -800,7 +800,7 @@ paths:
   /api/recordings/export:
     get:
       tags:
-      - recordings
+      - Recordings
       summary: Take Export
       description: Export take recordings into .zip archive
       operationId: take_export_api_recordings_export_get
@@ -870,7 +870,7 @@ paths:
   /api/v2/recordings/tts:
     post:
       tags:
-      - recordings
+      - Recordings
       summary: Recording Create Tts V2
       operationId: recording_create_tts_v2_api_v2_recordings_tts_post
       parameters:
@@ -937,43 +937,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    RecordingDeleteResp:
-      title: RecordingDeleteResp
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-    ModelParam:
-      title: ModelParam
-      required:
-      - id
-      - name
-      - value
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        name:
-          title: Name
-          type: string
-        value:
-          title: Value
-          type: string
-    RecordingTypes:
-      title: RecordingTypes
-      enum:
-      - original
-      - converted
-      type: string
-      description: An enumeration.
     ConversionRequest:
       title: ConversionRequest
       required:
@@ -995,55 +958,36 @@ components:
           title: Calibration Id
           type: string
           format: uuid4
-    RecordingCreateTTSV2:
-      title: RecordingCreateTTSV2
-      required:
-      - parent_folder_id
-      - text
-      type: object
-      properties:
-        parent_folder_id:
-          title: Parent Folder Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        text:
-          title: Text
-          maxLength: 1000
-          minLength: 1
-          type: string
-        tts_voice_id:
-          title: Tts Voice Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        label:
-          title: Label
-          maxLength: 40
-          type: string
-    ErrorResponse:
-      title: ErrorResponse
-      required:
-      - detail
+    HTTPValidationError:
+      title: HTTPValidationError
       type: object
       properties:
         detail:
           title: Detail
-          type: string
-    RecordingPutUpdate:
-      title: RecordingPutUpdate
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    Model:
+      title: Model
       required:
-      - label
-      - starred
+      - id
+      - name
+      - params
       type: object
       properties:
-        label:
-          title: Label
-          maxLength: 40
+        id:
+          title: Id
           type: string
-        starred:
-          title: Starred
-          type: boolean
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        name:
+          title: Name
+          type: string
+        params:
+          title: Params
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelParam'
     RecordingCreateTTS:
       title: RecordingCreateTTS
       required:
@@ -1071,34 +1015,15 @@ components:
           title: Label
           maxLength: 40
           type: string
-    Direction:
-      title: Direction
-      enum:
-      - asc
-      - desc
-      type: string
-      description: An enumeration.
-    Model:
-      title: Model
+    ErrorResponse:
+      title: ErrorResponse
       required:
-      - id
-      - name
-      - params
+      - detail
       type: object
       properties:
-        id:
-          title: Id
+        detail:
+          title: Detail
           type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        name:
-          title: Name
-          type: string
-        params:
-          title: Params
-          type: array
-          items:
-            $ref: '#/components/schemas/ModelParam'
     NoteRecording:
       title: NoteRecording
       required:
@@ -1118,93 +1043,6 @@ components:
         active:
           title: Active
           type: boolean
-    RecordingUpdate:
-      title: RecordingUpdate
-      type: object
-      properties:
-        label:
-          title: Label
-          maxLength: 40
-          type: string
-        starred:
-          title: Starred
-          type: boolean
-    RecordingStates:
-      title: RecordingStates
-      enum:
-      - done
-      - processing
-      - error
-      type: string
-      description: An enumeration.
-    Body_recording_create_api_recordings_post:
-      title: Body_recording_create_api_recordings_post
-      required:
-      - data
-      - parent_folder_id
-      - microphone
-      type: object
-      properties:
-        data:
-          title: Data
-          type: string
-          format: binary
-        parent_folder_id:
-          title: Parent Folder Id
-          type: string
-          format: uuid4
-        microphone:
-          title: Microphone
-          type: string
-        label:
-          title: Label
-          maxLength: 40
-          pattern: ^[a-zA-Z0-9 -]+$
-          type: string
-    ValidationError:
-      title: ValidationError
-      required:
-      - loc
-      - msg
-      - type
-      type: object
-      properties:
-        loc:
-          title: Location
-          type: array
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-        msg:
-          title: Message
-          type: string
-        type:
-          title: Error Type
-          type: string
-    RecordingListResponse:
-      title: RecordingListResponse
-      required:
-      - list
-      - pagination
-      type: object
-      properties:
-        list:
-          title: List
-          type: array
-          items:
-            $ref: '#/components/schemas/RecordingResponse'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-    HTTPValidationError:
-      title: HTTPValidationError
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
     RecordingResponse:
       title: RecordingResponse
       required:
@@ -1331,6 +1169,109 @@ components:
           type: string
         note:
           $ref: '#/components/schemas/NoteRecording'
+    ModelParam:
+      title: ModelParam
+      required:
+      - id
+      - name
+      - value
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        name:
+          title: Name
+          type: string
+        value:
+          title: Value
+          type: string
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    Direction:
+      title: Direction
+      enum:
+      - asc
+      - desc
+      type: string
+      description: An enumeration.
+    RecordingDeleteResp:
+      title: RecordingDeleteResp
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+    RecordingPutUpdate:
+      title: RecordingPutUpdate
+      required:
+      - label
+      - starred
+      type: object
+      properties:
+        label:
+          title: Label
+          maxLength: 40
+          type: string
+        starred:
+          title: Starred
+          type: boolean
+    RecordingTypes:
+      title: RecordingTypes
+      enum:
+      - original
+      - converted
+      type: string
+      description: An enumeration.
+    Body_recording_create_api_recordings_post:
+      title: Body_recording_create_api_recordings_post
+      required:
+      - data
+      - parent_folder_id
+      - microphone
+      type: object
+      properties:
+        data:
+          title: Data
+          type: string
+          format: binary
+        parent_folder_id:
+          title: Parent Folder Id
+          type: string
+          format: uuid4
+        microphone:
+          title: Microphone
+          type: string
+        label:
+          title: Label
+          maxLength: 40
+          pattern: ^[a-zA-Z0-9 -]+$
+          type: string
     Pagination:
       title: Pagination
       required:
@@ -1348,3 +1289,62 @@ components:
         offset:
           title: Offset
           type: integer
+    RecordingListResponse:
+      title: RecordingListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/RecordingResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    RecordingUpdate:
+      title: RecordingUpdate
+      type: object
+      properties:
+        label:
+          title: Label
+          maxLength: 40
+          type: string
+        starred:
+          title: Starred
+          type: boolean
+    RecordingCreateTTSV2:
+      title: RecordingCreateTTSV2
+      required:
+      - parent_folder_id
+      - text
+      type: object
+      properties:
+        parent_folder_id:
+          title: Parent Folder Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        text:
+          title: Text
+          maxLength: 1000
+          minLength: 1
+          type: string
+        tts_voice_id:
+          title: Tts Voice Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        label:
+          title: Label
+          maxLength: 40
+          type: string
+    RecordingStates:
+      title: RecordingStates
+      enum:
+      - done
+      - processing
+      - error
+      type: string
+      description: An enumeration.

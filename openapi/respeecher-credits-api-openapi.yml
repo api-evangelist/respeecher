@@ -1,17 +1,17 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Voice Markertplace accents credits API
+  title: Voice Markertplace Credits API
   version: 0.6.0
 servers:
 - url: https://gateway.respeecher.com
   description: Respeecher Voice Marketplace API gateway
 tags:
-- name: credits
+- name: Credits
 paths:
   /api/credits:
     get:
       tags:
-      - credits
+      - Credits
       summary: Get Credits
       operationId: get_credits_api_credits_get
       parameters:
@@ -48,15 +48,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      title: HTTPValidationError
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
     ValidationError:
       title: ValidationError
       required:
@@ -91,3 +82,12 @@ components:
         initial_credits:
           title: Initial Credits
           type: number
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'

@@ -1,17 +1,17 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Voice Markertplace accents storage API
+  title: Voice Markertplace Storage API
   version: 0.6.0
 servers:
 - url: https://gateway.respeecher.com
   description: Respeecher Voice Marketplace API gateway
 tags:
-- name: storage
+- name: Storage
 paths:
   /api/{file_url}:
     get:
       tags:
-      - storage
+      - Storage
       summary: Get File
       operationId: get_file_api__file_url__get
       parameters:
@@ -71,15 +71,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      title: HTTPValidationError
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
     ValidationError:
       title: ValidationError
       required:
@@ -110,3 +101,12 @@ components:
         detail:
           title: Detail
           type: string
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'

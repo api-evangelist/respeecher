@@ -1,17 +1,17 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Voice Markertplace accents folders API
+  title: Voice Markertplace Folders API
   version: 0.6.0
 servers:
 - url: https://gateway.respeecher.com
   description: Respeecher Voice Marketplace API gateway
 tags:
-- name: folders
+- name: Folders
 paths:
   /api/folders:
     get:
       tags:
-      - folders
+      - Folders
       summary: Folder List
       description: This is my super cool description
       operationId: folder_list_api_folders_get
@@ -92,7 +92,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       tags:
-      - folders
+      - Folders
       summary: Folder Create
       operationId: folder_create_api_folders_post
       parameters:
@@ -154,7 +154,7 @@ paths:
   /api/folders/{folder_id}:
     get:
       tags:
-      - folders
+      - Folders
       summary: Folder Get
       operationId: folder_get_api_folders__folder_id__get
       parameters:
@@ -210,7 +210,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-      - folders
+      - Folders
       summary: Folder Delete
       operationId: folder_delete_api_folders__folder_id__delete
       parameters:
@@ -282,7 +282,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     patch:
       tags:
-      - folders
+      - Folders
       summary: Folder Rename
       operationId: folder_rename_api_folders__folder_id__patch
       parameters:
@@ -344,6 +344,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
     FolderUpdate:
       title: FolderUpdate
       type: object
@@ -352,6 +361,23 @@ components:
           title: Name
           maxLength: 40
           type: string
+    Pagination:
+      title: Pagination
+      required:
+      - count
+      - limit
+      - offset
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        offset:
+          title: Offset
+          type: integer
     FolderCreate:
       title: FolderCreate
       required:
@@ -368,6 +394,43 @@ components:
           type: string
           format: uuid4
           example: 00000000-0000-0000-0000-000000000001
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    Direction:
+      title: Direction
+      enum:
+      - asc
+      - desc
+      type: string
+      description: An enumeration.
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
     FolderResponse:
       title: FolderResponse
       required:
@@ -404,36 +467,6 @@ components:
           title: Created At
           type: string
           format: date-time
-    ValidationError:
-      title: ValidationError
-      required:
-      - loc
-      - msg
-      - type
-      type: object
-      properties:
-        loc:
-          title: Location
-          type: array
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-        msg:
-          title: Message
-          type: string
-        type:
-          title: Error Type
-          type: string
-    HTTPValidationError:
-      title: HTTPValidationError
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
     FolderListResponse:
       title: FolderListResponse
       required:
@@ -448,36 +481,3 @@ components:
             $ref: '#/components/schemas/FolderResponse'
         pagination:
           $ref: '#/components/schemas/Pagination'
-    ErrorResponse:
-      title: ErrorResponse
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: string
-    Direction:
-      title: Direction
-      enum:
-      - asc
-      - desc
-      type: string
-      description: An enumeration.
-    Pagination:
-      title: Pagination
-      required:
-      - count
-      - limit
-      - offset
-      type: object
-      properties:
-        count:
-          title: Count
-          type: integer
-        limit:
-          title: Limit
-          type: integer
-        offset:
-          title: Offset
-          type: integer

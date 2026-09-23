@@ -1,17 +1,17 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Voice Markertplace accents projects API
+  title: Voice Markertplace Projects API
   version: 0.6.0
 servers:
 - url: https://gateway.respeecher.com
   description: Respeecher Voice Marketplace API gateway
 tags:
-- name: projects
+- name: Projects
 paths:
   /api/projects:
     get:
       tags:
-      - projects
+      - Projects
       summary: Project List
       operationId: project_list_api_projects_get
       parameters:
@@ -92,7 +92,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       tags:
-      - projects
+      - Projects
       summary: Project Create
       operationId: project_create_api_projects_post
       parameters:
@@ -154,7 +154,7 @@ paths:
   /api/projects/by-url:
     get:
       tags:
-      - projects
+      - Projects
       summary: Project Get By Url
       description: Get project by url
       operationId: project_get_by_url_api_projects_by_url_get
@@ -217,7 +217,7 @@ paths:
   /api/projects/{project_id}:
     put:
       tags:
-      - projects
+      - Projects
       summary: Project Update
       operationId: project_update_api_projects__project_id__put
       parameters:
@@ -285,7 +285,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-      - projects
+      - Projects
       summary: Project Delete
       operationId: project_delete_api_projects__project_id__delete
       parameters:
@@ -353,7 +353,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     patch:
       tags:
-      - projects
+      - Projects
       summary: Project Rename
       operationId: project_rename_api_projects__project_id__patch
       parameters:
@@ -422,7 +422,7 @@ paths:
   /api/projects/{project_id}/export:
     get:
       tags:
-      - projects
+      - Projects
       summary: Project Export
       description: Export project recordings into .zip archive
       operationId: project_export_api_projects__project_id__export_get
@@ -491,111 +491,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ProjectDeleteResp:
-      title: ProjectDeleteResp
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-    ProjectListResponse:
-      title: ProjectListResponse
-      required:
-      - list
-      - pagination
-      type: object
-      properties:
-        list:
-          title: List
-          type: array
-          items:
-            $ref: '#/components/schemas/ProjectResponse'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-    ProjectRename:
-      title: ProjectRename
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          title: Name
-          maxLength: 40
-          type: string
-    ProjectCreate:
-      title: ProjectCreate
-      required:
-      - name
-      - owner
-      - models
-      type: object
-      properties:
-        name:
-          title: Name
-          maxLength: 40
-          type: string
-        owner:
-          title: Owner
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        models:
-          title: Models
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: string
-          example:
-            model_id-1:
-              param_id-1: param_value-1
-            model_id-2:
-              param_id-2: param_value-2
-              param_id-3: param_value-3
-            00000000-0000-0000-0000-000000000001:
-              00000000-0000-0000-0000-000000000001: param_value-example
-    ValidationError:
-      title: ValidationError
-      required:
-      - loc
-      - msg
-      - type
-      type: object
-      properties:
-        loc:
-          title: Location
-          type: array
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-        msg:
-          title: Message
-          type: string
-        type:
-          title: Error Type
-          type: string
-    Pagination:
-      title: Pagination
-      required:
-      - count
-      - limit
-      - offset
-      type: object
-      properties:
-        count:
-          title: Count
-          type: integer
-        limit:
-          title: Limit
-          type: integer
-        offset:
-          title: Offset
-          type: integer
     HTTPValidationError:
       title: HTTPValidationError
       type: object
@@ -605,51 +500,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ValidationError'
-    ErrorResponse:
-      title: ErrorResponse
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: string
-    Direction:
-      title: Direction
-      enum:
-      - asc
-      - desc
-      type: string
-      description: An enumeration.
-    ProjectUpdate:
-      title: ProjectUpdate
-      required:
-      - models
-      type: object
-      properties:
-        models:
-          title: Models
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: string
-          example:
-            model_id-1:
-              param_id-1: param_value-1
-            model_id-2:
-              param_id-2: param_value-2
-              param_id-3: param_value-3
-            00000000-0000-0000-0000-000000000001:
-              00000000-0000-0000-0000-000000000001: param_value-example
-    ProjectSortFields:
-      title: ProjectSortFields
-      enum:
-      - name
-      - created_at
-      - last_recording_at
-      type: string
-      description: An enumeration.
     ProjectResponse:
       title: ProjectResponse
       required:
@@ -712,3 +562,153 @@ components:
           title: Last Recording At
           type: string
           format: date-time
+    Pagination:
+      title: Pagination
+      required:
+      - count
+      - limit
+      - offset
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        offset:
+          title: Offset
+          type: integer
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    Direction:
+      title: Direction
+      enum:
+      - asc
+      - desc
+      type: string
+      description: An enumeration.
+    ProjectCreate:
+      title: ProjectCreate
+      required:
+      - name
+      - owner
+      - models
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+        owner:
+          title: Owner
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        models:
+          title: Models
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+          example:
+            model_id-1:
+              param_id-1: param_value-1
+            model_id-2:
+              param_id-2: param_value-2
+              param_id-3: param_value-3
+            00000000-0000-0000-0000-000000000001:
+              00000000-0000-0000-0000-000000000001: param_value-example
+    ProjectRename:
+      title: ProjectRename
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+    ProjectListResponse:
+      title: ProjectListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
+    ProjectDeleteResp:
+      title: ProjectDeleteResp
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+    ProjectUpdate:
+      title: ProjectUpdate
+      required:
+      - models
+      type: object
+      properties:
+        models:
+          title: Models
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+          example:
+            model_id-1:
+              param_id-1: param_value-1
+            model_id-2:
+              param_id-2: param_value-2
+              param_id-3: param_value-3
+            00000000-0000-0000-0000-000000000001:
+              00000000-0000-0000-0000-000000000001: param_value-example
+    ProjectSortFields:
+      title: ProjectSortFields
+      enum:
+      - name
+      - created_at
+      - last_recording_at
+      type: string
+      description: An enumeration.

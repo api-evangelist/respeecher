@@ -1,17 +1,17 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Voice Markertplace accents orders API
+  title: Voice Markertplace Orders API
   version: 0.6.0
 servers:
 - url: https://gateway.respeecher.com
   description: Respeecher Voice Marketplace API gateway
 tags:
-- name: orders
+- name: Orders
 paths:
   /api/v2/orders:
     post:
       tags:
-      - orders
+      - Orders
       summary: Conversion Order Create
       operationId: conversion_order_create_api_v2_orders_post
       parameters:
@@ -76,7 +76,7 @@ paths:
   /api/v2/orders/retry/{recording_id}:
     post:
       tags:
-      - orders
+      - Orders
       summary: Conversion Order Retry
       operationId: conversion_order_retry_api_v2_orders_retry__recording_id__post
       parameters:
@@ -138,46 +138,41 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    OrderConversionRequest:
-      title: OrderConversionRequest
-      required:
-      - voice_id
+    HTTPValidationError:
+      title: HTTPValidationError
       type: object
       properties:
-        voice_id:
-          title: Voice Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        accent_id:
-          title: Accent Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        semitones_correction:
-          title: Semitones Correction
-          type: number
-    ValidationError:
-      title: ValidationError
-      required:
-      - loc
-      - msg
-      - type
-      type: object
-      properties:
-        loc:
-          title: Location
+        detail:
+          title: Detail
           type: array
           items:
-            anyOf:
-            - type: string
-            - type: integer
-        msg:
-          title: Message
+            $ref: '#/components/schemas/ValidationError'
+    OrderRequest:
+      title: OrderRequest
+      required:
+      - original_id
+      - conversions
+      type: object
+      properties:
+        original_id:
+          title: Original Id
           type: string
-        type:
-          title: Error Type
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        conversions:
+          title: Conversions
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderConversionRequest'
+        calibration_id:
+          title: Calibration Id
           type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        use_calibration:
+          title: Use Calibration
+          type: boolean
+          default: false
     OrderResponse:
       title: OrderResponse
       required:
@@ -246,50 +241,46 @@ components:
         error:
           title: Error
           type: string
-    HTTPValidationError:
-      title: HTTPValidationError
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
       type: object
       properties:
-        detail:
-          title: Detail
+        loc:
+          title: Location
           type: array
           items:
-            $ref: '#/components/schemas/ValidationError'
-    ErrorResponse:
-      title: ErrorResponse
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          title: Detail
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
           type: string
-    OrderRequest:
-      title: OrderRequest
+        type:
+          title: Error Type
+          type: string
+    OrderConversionRequest:
+      title: OrderConversionRequest
       required:
-      - original_id
-      - conversions
+      - voice_id
       type: object
       properties:
-        original_id:
-          title: Original Id
+        voice_id:
+          title: Voice Id
           type: string
           format: uuid4
           example: 00000000-0000-0000-0000-000000000001
-        conversions:
-          title: Conversions
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderConversionRequest'
-        calibration_id:
-          title: Calibration Id
+        accent_id:
+          title: Accent Id
           type: string
           format: uuid4
           example: 00000000-0000-0000-0000-000000000001
-        use_calibration:
-          title: Use Calibration
-          type: boolean
-          default: false
+        semitones_correction:
+          title: Semitones Correction
+          type: number
     OrderStates:
       title: OrderStates
       enum:
@@ -301,3 +292,12 @@ components:
       - error
       type: string
       description: An enumeration.
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string

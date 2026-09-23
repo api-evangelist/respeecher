@@ -1,17 +1,17 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Voice Markertplace accents tts API
+  title: Voice Markertplace Tts API
   version: 0.6.0
 servers:
 - url: https://gateway.respeecher.com
   description: Respeecher Voice Marketplace API gateway
 tags:
-- name: tts
+- name: TTS
 paths:
   /api/tts-voices:
     get:
       tags:
-      - tts
+      - TTS
       summary: Tts Voice List
       operationId: tts_voice_list_api_tts_voices_get
       parameters:
@@ -57,6 +57,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
     ValidationError:
       title: ValidationError
       required:
@@ -78,31 +87,6 @@ components:
         type:
           title: Error Type
           type: string
-    HTTPValidationError:
-      title: HTTPValidationError
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
-    ErrorResponse:
-      title: ErrorResponse
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: string
-    TTSVoiceVisibility:
-      title: TTSVoiceVisibility
-      enum:
-      - public
-      - private
-      type: string
-      description: An enumeration.
     TTSVoicePublic:
       title: TTSVoicePublic
       required:
@@ -126,3 +110,19 @@ components:
         is_default:
           title: Is Default
           type: boolean
+    TTSVoiceVisibility:
+      title: TTSVoiceVisibility
+      enum:
+      - public
+      - private
+      type: string
+      description: An enumeration.
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string

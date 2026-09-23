@@ -1,22 +1,7 @@
 {
   "provider": "respeecher",
   "sources": [
-    "respeecher-accents-api-openapi.yml",
-    "respeecher-auth-api-openapi.yml",
-    "respeecher-calibration-api-openapi.yml",
-    "respeecher-credits-api-openapi.yml",
-    "respeecher-folders-api-openapi.yml",
-    "respeecher-healtz-api-openapi.yml",
-    "respeecher-models-api-openapi.yml",
-    "respeecher-narration-styles-api-openapi.yml",
-    "respeecher-notes-api-openapi.yml",
-    "respeecher-orders-api-openapi.yml",
-    "respeecher-projects-api-openapi.yml",
-    "respeecher-recordings-api-openapi.yml",
-    "respeecher-stats-api-openapi.yml",
-    "respeecher-storage-api-openapi.yml",
-    "respeecher-tts-api-openapi.yml",
-    "respeecher-voices-api-openapi.yml"
+    "_original/respeecher-openapi.yml"
   ],
   "outputs": [
     "respeecher-accents-api-openapi.yml",
@@ -39,6 +24,43 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "respeecher-openapi.yml: upgraded openapi 3.0.2 -> OpenAPI 3.2.0",
+    "respeecher-openapi.yml: declared missing tag: accents",
+    "respeecher-openapi.yml: declared missing tag: auth",
+    "respeecher-openapi.yml: declared missing tag: calibration",
+    "respeecher-openapi.yml: declared missing tag: credits",
+    "respeecher-openapi.yml: declared missing tag: folders",
+    "respeecher-openapi.yml: declared missing tag: healtz",
+    "respeecher-openapi.yml: declared missing tag: models",
+    "respeecher-openapi.yml: declared missing tag: narration-styles",
+    "respeecher-openapi.yml: declared missing tag: notes",
+    "respeecher-openapi.yml: declared missing tag: orders",
+    "respeecher-openapi.yml: declared missing tag: projects",
+    "respeecher-openapi.yml: declared missing tag: recordings",
+    "respeecher-openapi.yml: declared missing tag: stats",
+    "respeecher-openapi.yml: declared missing tag: storage",
+    "respeecher-openapi.yml: declared missing tag: tts",
+    "respeecher-openapi.yml: declared missing tag: voices",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "respeecher-accents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respeecher-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respeecher-calibration-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respeecher-credits-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respeecher-folders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respeecher-healtz-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respeecher-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respeecher-narration-styles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respeecher-notes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respeecher-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respeecher-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respeecher-recordings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respeecher-stats-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respeecher-storage-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respeecher-tts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respeecher-voices-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

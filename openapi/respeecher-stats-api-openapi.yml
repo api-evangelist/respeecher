@@ -1,17 +1,17 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Voice Markertplace accents stats API
+  title: Voice Markertplace Stats API
   version: 0.6.0
 servers:
 - url: https://gateway.respeecher.com
   description: Respeecher Voice Marketplace API gateway
 tags:
-- name: stats
+- name: Stats
 paths:
   /api/stats:
     get:
       tags:
-      - stats
+      - Stats
       summary: Get Stats
       operationId: get_stats_api_stats_get
       parameters:
@@ -49,7 +49,7 @@ paths:
   /api/stats/projects:
     post:
       tags:
-      - stats
+      - Stats
       summary: Get Project Stats
       operationId: get_project_stats_api_stats_projects_post
       parameters:
@@ -96,7 +96,7 @@ paths:
   /api/stats/folders:
     post:
       tags:
-      - stats
+      - Stats
       summary: Get Folder Stats
       operationId: get_folder_stats_api_stats_folders_post
       parameters:
@@ -142,91 +142,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    StatsProjectRequest:
-      title: StatsProjectRequest
-      required:
-      - project_ids
-      type: object
-      properties:
-        project_ids:
-          title: Project Ids
-          maxItems: 200
-          minItems: 0
-          type: array
-          items:
-            type: string
-            format: uuid4
-    StatsFolderRequest:
-      title: StatsFolderRequest
-      required:
-      - folder_ids
-      type: object
-      properties:
-        folder_ids:
-          title: Folder Ids
-          maxItems: 200
-          minItems: 0
-          type: array
-          items:
-            type: string
-            format: uuid4
-    ValidationError:
-      title: ValidationError
-      required:
-      - loc
-      - msg
-      - type
-      type: object
-      properties:
-        loc:
-          title: Location
-          type: array
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-        msg:
-          title: Message
-          type: string
-        type:
-          title: Error Type
-          type: string
-    FolderStats:
-      title: FolderStats
-      required:
-      - folder_id
-      - stats
-      type: object
-      properties:
-        folder_id:
-          title: Folder Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        stats:
-          $ref: '#/components/schemas/ConversionStats'
-    ModelStats:
-      title: ModelStats
-      required:
-      - id
-      - name
-      - conversions_count
-      - converted_time
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid4
-        name:
-          title: Name
-          type: string
-        conversions_count:
-          title: Conversions Count
-          type: integer
-        converted_time:
-          title: Converted Time
-          type: number
     StatsDurationPreviousMonthes:
       title: StatsDurationPreviousMonthes
       required:
@@ -276,6 +191,125 @@ components:
         failed:
           title: Failed
           type: integer
+    StatsProjectRequest:
+      title: StatsProjectRequest
+      required:
+      - project_ids
+      type: object
+      properties:
+        project_ids:
+          title: Project Ids
+          maxItems: 200
+          minItems: 0
+          type: array
+          items:
+            type: string
+            format: uuid4
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    ModelStats:
+      title: ModelStats
+      required:
+      - id
+      - name
+      - conversions_count
+      - converted_time
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+        name:
+          title: Name
+          type: string
+        conversions_count:
+          title: Conversions Count
+          type: integer
+        converted_time:
+          title: Converted Time
+          type: number
+    StatsFolderRequest:
+      title: StatsFolderRequest
+      required:
+      - folder_ids
+      type: object
+      properties:
+        folder_ids:
+          title: Folder Ids
+          maxItems: 200
+          minItems: 0
+          type: array
+          items:
+            type: string
+            format: uuid4
+    FolderStats:
+      title: FolderStats
+      required:
+      - folder_id
+      - stats
+      type: object
+      properties:
+        folder_id:
+          title: Folder Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        stats:
+          $ref: '#/components/schemas/ConversionStats'
+    StatsProjectResponse:
+      title: StatsProjectResponse
+      required:
+      - project_id
+      - time_converted
+      - conversions
+      type: object
+      properties:
+        project_id:
+          title: Project Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        time_converted:
+          $ref: '#/components/schemas/StatsDuration'
+        conversions:
+          $ref: '#/components/schemas/ConversionStats'
+    StatsUserResponse:
+      title: StatsUserResponse
+      required:
+      - time_converted
+      - conversions
+      - models
+      type: object
+      properties:
+        time_converted:
+          $ref: '#/components/schemas/StatsDurationPreviousMonthes'
+        conversions:
+          $ref: '#/components/schemas/ConversionStats'
+        models:
+          title: Models
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelStats'
     StatsDuration:
       title: StatsDuration
       required:
@@ -303,37 +337,3 @@ components:
         duration:
           title: Duration
           type: number
-    StatsUserResponse:
-      title: StatsUserResponse
-      required:
-      - time_converted
-      - conversions
-      - models
-      type: object
-      properties:
-        time_converted:
-          $ref: '#/components/schemas/StatsDurationPreviousMonthes'
-        conversions:
-          $ref: '#/components/schemas/ConversionStats'
-        models:
-          title: Models
-          type: array
-          items:
-            $ref: '#/components/schemas/ModelStats'
-    StatsProjectResponse:
-      title: StatsProjectResponse
-      required:
-      - project_id
-      - time_converted
-      - conversions
-      type: object
-      properties:
-        project_id:
-          title: Project Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        time_converted:
-          $ref: '#/components/schemas/StatsDuration'
-        conversions:
-          $ref: '#/components/schemas/ConversionStats'
