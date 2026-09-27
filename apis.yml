@@ -92,7 +92,7 @@ apis:
     models, X-API-Key auth, official Python and TypeScript SDKs, and LiveKit, Pipecat, Ultravox, and VAPI
     integrations.
 - aid: respeecher:respeecher-accents-api
-  name: Respeecher accents API
+  name: Respeecher Accents API
   description: The accents API from Respeecher — 1 operation(s) for accents.
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
@@ -110,7 +110,7 @@ apis:
   - type: Documentation
     url: https://www.respeecher.com/api
 - aid: respeecher:respeecher-auth-api
-  name: Respeecher auth API
+  name: Respeecher Auth API
   description: The auth API from Respeecher — 3 operation(s) for auth.
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
@@ -130,7 +130,7 @@ apis:
   - type: Documentation
     url: https://www.respeecher.com/api
 - aid: respeecher:respeecher-calibration-api
-  name: Respeecher calibration API
+  name: Respeecher Calibration API
   description: The calibration API from Respeecher — 3 operation(s) for calibration.
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
@@ -150,7 +150,7 @@ apis:
   - type: Documentation
     url: https://www.respeecher.com/api
 - aid: respeecher:respeecher-credits-api
-  name: Respeecher credits API
+  name: Respeecher Credits API
   description: The credits API from Respeecher — 1 operation(s) for credits.
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
@@ -170,7 +170,7 @@ apis:
   - type: Documentation
     url: https://www.respeecher.com/api
 - aid: respeecher:respeecher-folders-api
-  name: Respeecher folders API
+  name: Respeecher Folders API
   description: The folders API from Respeecher — 2 operation(s) for folders.
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
@@ -190,7 +190,7 @@ apis:
   - type: Documentation
     url: https://www.respeecher.com/api
 - aid: respeecher:respeecher-healtz-api
-  name: Respeecher healtz API
+  name: Respeecher Healtz API
   description: The healtz API from Respeecher — 1 operation(s) for healtz.
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
@@ -208,7 +208,7 @@ apis:
   - type: Documentation
     url: https://www.respeecher.com/api
 - aid: respeecher:respeecher-models-api
-  name: Respeecher models API
+  name: Respeecher Models API
   description: The models API from Respeecher — 1 operation(s) for models.
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
@@ -228,7 +228,7 @@ apis:
   - type: Documentation
     url: https://www.respeecher.com/api
 - aid: respeecher:respeecher-narration-styles-api
-  name: Respeecher narration-styles API
+  name: Respeecher Narration Styles API
   description: The narration-styles API from Respeecher — 1 operation(s) for narration-styles.
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
@@ -246,7 +246,7 @@ apis:
   - type: Documentation
     url: https://www.respeecher.com/api
 - aid: respeecher:respeecher-notes-api
-  name: Respeecher notes API
+  name: Respeecher Notes API
   description: The notes API from Respeecher — 1 operation(s) for notes.
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
@@ -266,7 +266,7 @@ apis:
   - type: Documentation
     url: https://www.respeecher.com/api
 - aid: respeecher:respeecher-orders-api
-  name: Respeecher orders API
+  name: Respeecher Orders API
   description: The orders API from Respeecher — 2 operation(s) for orders.
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
@@ -286,7 +286,7 @@ apis:
   - type: Documentation
     url: https://www.respeecher.com/api
 - aid: respeecher:respeecher-projects-api
-  name: Respeecher projects API
+  name: Respeecher Projects API
   description: The projects API from Respeecher — 4 operation(s) for projects.
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
@@ -306,7 +306,7 @@ apis:
   - type: Documentation
     url: https://www.respeecher.com/api
 - aid: respeecher:respeecher-recordings-api
-  name: Respeecher recordings API
+  name: Respeecher Recordings API
   description: The recordings API from Respeecher — 9 operation(s) for recordings.
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
@@ -326,7 +326,7 @@ apis:
   - type: Documentation
     url: https://www.respeecher.com/api
 - aid: respeecher:respeecher-stats-api
-  name: Respeecher stats API
+  name: Respeecher Stats API
   description: The stats API from Respeecher — 3 operation(s) for stats.
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
@@ -346,7 +346,7 @@ apis:
   - type: Documentation
     url: https://www.respeecher.com/api
 - aid: respeecher:respeecher-storage-api
-  name: Respeecher storage API
+  name: Respeecher Storage API
   description: The storage API from Respeecher — 1 operation(s) for storage.
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
@@ -366,7 +366,7 @@ apis:
   - type: Documentation
     url: https://www.respeecher.com/api
 - aid: respeecher:respeecher-tts-api
-  name: Respeecher tts API
+  name: Respeecher Tts API
   description: The tts API from Respeecher — 1 operation(s) for tts.
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com
@@ -386,7 +386,7 @@ apis:
   - type: Documentation
     url: https://www.respeecher.com/api
 - aid: respeecher:respeecher-voices-api
-  name: Respeecher voices API
+  name: Respeecher Voices API
   description: The voices API from Respeecher — 4 operation(s) for voices.
   humanURL: https://docs.respeecher.com/endpoints-reference/
   baseURL: https://gateway.respeecher.com

@@ -48,6 +48,19 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    CreditsResponse:
+      title: CreditsResponse
+      required:
+      - credits
+      - initial_credits
+      type: object
+      properties:
+        credits:
+          title: Credits
+          type: number
+        initial_credits:
+          title: Initial Credits
+          type: number
     ValidationError:
       title: ValidationError
       required:
@@ -69,19 +82,6 @@ components:
         type:
           title: Error Type
           type: string
-    CreditsResponse:
-      title: CreditsResponse
-      required:
-      - credits
-      - initial_credits
-      type: object
-      properties:
-        credits:
-          title: Credits
-          type: number
-        initial_credits:
-          title: Initial Credits
-          type: number
     HTTPValidationError:
       title: HTTPValidationError
       type: object

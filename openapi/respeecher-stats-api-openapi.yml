@@ -142,90 +142,23 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    StatsDurationPreviousMonthes:
-      title: StatsDurationPreviousMonthes
+    StatsUserResponse:
+      title: StatsUserResponse
       required:
-      - total
-      - current_month
-      - previous_monthes
+      - time_converted
+      - conversions
+      - models
       type: object
       properties:
-        total:
-          title: Total
-          type: integer
-        current_month:
-          title: Current Month
-          type: integer
-        previous_monthes:
-          title: Previous Monthes
+        time_converted:
+          $ref: '#/components/schemas/StatsDurationPreviousMonthes'
+        conversions:
+          $ref: '#/components/schemas/ConversionStats'
+        models:
+          title: Models
           type: array
           items:
-            $ref: '#/components/schemas/PreviousMonthDurationStat'
-    HTTPValidationError:
-      title: HTTPValidationError
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
-    ConversionStats:
-      title: ConversionStats
-      required:
-      - total
-      - completed
-      - in_progress
-      - failed
-      type: object
-      properties:
-        total:
-          title: Total
-          type: integer
-        completed:
-          title: Completed
-          type: integer
-        in_progress:
-          title: In Progress
-          type: integer
-        failed:
-          title: Failed
-          type: integer
-    StatsProjectRequest:
-      title: StatsProjectRequest
-      required:
-      - project_ids
-      type: object
-      properties:
-        project_ids:
-          title: Project Ids
-          maxItems: 200
-          minItems: 0
-          type: array
-          items:
-            type: string
-            format: uuid4
-    ValidationError:
-      title: ValidationError
-      required:
-      - loc
-      - msg
-      - type
-      type: object
-      properties:
-        loc:
-          title: Location
-          type: array
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-        msg:
-          title: Message
-          type: string
-        type:
-          title: Error Type
-          type: string
+            $ref: '#/components/schemas/ModelStats'
     ModelStats:
       title: ModelStats
       required:
@@ -248,6 +181,80 @@ components:
         converted_time:
           title: Converted Time
           type: number
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    StatsDuration:
+      title: StatsDuration
+      required:
+      - total
+      - current_month
+      type: object
+      properties:
+        total:
+          title: Total
+          type: integer
+        current_month:
+          title: Current Month
+          type: integer
+    StatsDurationPreviousMonthes:
+      title: StatsDurationPreviousMonthes
+      required:
+      - total
+      - current_month
+      - previous_monthes
+      type: object
+      properties:
+        total:
+          title: Total
+          type: integer
+        current_month:
+          title: Current Month
+          type: integer
+        previous_monthes:
+          title: Previous Monthes
+          type: array
+          items:
+            $ref: '#/components/schemas/PreviousMonthDurationStat'
+    ConversionStats:
+      title: ConversionStats
+      required:
+      - total
+      - completed
+      - in_progress
+      - failed
+      type: object
+      properties:
+        total:
+          title: Total
+          type: integer
+        completed:
+          title: Completed
+          type: integer
+        in_progress:
+          title: In Progress
+          type: integer
+        failed:
+          title: Failed
+          type: integer
     StatsFolderRequest:
       title: StatsFolderRequest
       required:
@@ -276,6 +283,15 @@ components:
           example: 00000000-0000-0000-0000-000000000001
         stats:
           $ref: '#/components/schemas/ConversionStats'
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
     StatsProjectResponse:
       title: StatsProjectResponse
       required:
@@ -293,36 +309,20 @@ components:
           $ref: '#/components/schemas/StatsDuration'
         conversions:
           $ref: '#/components/schemas/ConversionStats'
-    StatsUserResponse:
-      title: StatsUserResponse
+    StatsProjectRequest:
+      title: StatsProjectRequest
       required:
-      - time_converted
-      - conversions
-      - models
+      - project_ids
       type: object
       properties:
-        time_converted:
-          $ref: '#/components/schemas/StatsDurationPreviousMonthes'
-        conversions:
-          $ref: '#/components/schemas/ConversionStats'
-        models:
-          title: Models
+        project_ids:
+          title: Project Ids
+          maxItems: 200
+          minItems: 0
           type: array
           items:
-            $ref: '#/components/schemas/ModelStats'
-    StatsDuration:
-      title: StatsDuration
-      required:
-      - total
-      - current_month
-      type: object
-      properties:
-        total:
-          title: Total
-          type: integer
-        current_month:
-          title: Current Month
-          type: integer
+            type: string
+            format: uuid4
     PreviousMonthDurationStat:
       title: PreviousMonthDurationStat
       required:

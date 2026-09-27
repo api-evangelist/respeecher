@@ -71,6 +71,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
     ValidationError:
       title: ValidationError
       required:
@@ -91,15 +100,6 @@ components:
           type: string
         type:
           title: Error Type
-          type: string
-    ErrorResponse:
-      title: ErrorResponse
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          title: Detail
           type: string
     HTTPValidationError:
       title: HTTPValidationError
