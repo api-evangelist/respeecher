@@ -491,87 +491,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ErrorResponse:
-      title: ErrorResponse
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: string
-    ValidationError:
-      title: ValidationError
-      required:
-      - loc
-      - msg
-      - type
-      type: object
-      properties:
-        loc:
-          title: Location
-          type: array
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-        msg:
-          title: Message
-          type: string
-        type:
-          title: Error Type
-          type: string
-    ProjectSortFields:
-      title: ProjectSortFields
-      enum:
-      - name
-      - created_at
-      - last_recording_at
-      type: string
-      description: An enumeration.
-    ProjectCreate:
-      title: ProjectCreate
-      required:
-      - name
-      - owner
-      - models
-      type: object
-      properties:
-        name:
-          title: Name
-          maxLength: 40
-          type: string
-        owner:
-          title: Owner
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        models:
-          title: Models
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: string
-          example:
-            model_id-1:
-              param_id-1: param_value-1
-            model_id-2:
-              param_id-2: param_value-2
-              param_id-3: param_value-3
-            00000000-0000-0000-0000-000000000001:
-              00000000-0000-0000-0000-000000000001: param_value-example
-    ProjectDeleteResp:
-      title: ProjectDeleteResp
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
     ProjectResponse:
       title: ProjectResponse
       required:
@@ -634,22 +553,6 @@ components:
           title: Last Recording At
           type: string
           format: date-time
-    HTTPValidationError:
-      title: HTTPValidationError
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
-    Direction:
-      title: Direction
-      enum:
-      - asc
-      - desc
-      type: string
-      description: An enumeration.
     ProjectRename:
       title: ProjectRename
       required:
@@ -660,20 +563,96 @@ components:
           title: Name
           maxLength: 40
           type: string
-    ProjectListResponse:
-      title: ProjectListResponse
+    ProjectDeleteResp:
+      title: ProjectDeleteResp
       required:
-      - list
-      - pagination
+      - id
       type: object
       properties:
-        list:
-          title: List
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+    Pagination:
+      title: Pagination
+      required:
+      - count
+      - limit
+      - offset
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        offset:
+          title: Offset
+          type: integer
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
+    ProjectCreate:
+      title: ProjectCreate
+      required:
+      - name
+      - owner
+      - models
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+        owner:
+          title: Owner
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        models:
+          title: Models
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+          example:
+            model_id-1:
+              param_id-1: param_value-1
+            model_id-2:
+              param_id-2: param_value-2
+              param_id-3: param_value-3
+            00000000-0000-0000-0000-000000000001:
+              00000000-0000-0000-0000-000000000001: param_value-example
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
           type: array
           items:
-            $ref: '#/components/schemas/ProjectResponse'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
     ProjectUpdate:
       title: ProjectUpdate
       required:
@@ -695,20 +674,41 @@ components:
               param_id-3: param_value-3
             00000000-0000-0000-0000-000000000001:
               00000000-0000-0000-0000-000000000001: param_value-example
-    Pagination:
-      title: Pagination
+    Direction:
+      title: Direction
+      enum:
+      - asc
+      - desc
+      type: string
+      description: An enumeration.
+    ProjectSortFields:
+      title: ProjectSortFields
+      enum:
+      - name
+      - created_at
+      - last_recording_at
+      type: string
+      description: An enumeration.
+    ProjectListResponse:
+      title: ProjectListResponse
       required:
-      - count
-      - limit
-      - offset
+      - list
+      - pagination
       type: object
       properties:
-        count:
-          title: Count
-          type: integer
-        limit:
-          title: Limit
-          type: integer
-        offset:
-          title: Offset
-          type: integer
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'

@@ -82,6 +82,13 @@ components:
         detail:
           title: Detail
           type: string
+    NarrationStyleSamples:
+      title: NarrationStyleSamples
+      type: object
+      properties:
+        samples:
+          title: Samples
+          type: object
     ValidationError:
       title: ValidationError
       required:
@@ -112,10 +119,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ValidationError'
-    NarrationStyleSamples:
-      title: NarrationStyleSamples
-      type: object
-      properties:
-        samples:
-          title: Samples
-          type: object

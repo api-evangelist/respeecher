@@ -412,6 +412,47 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    Pagination:
+      title: Pagination
+      required:
+      - count
+      - limit
+      - offset
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        offset:
+          title: Offset
+          type: integer
+    CalibrationRename:
+      title: CalibrationRename
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+    CalibrationListResponse:
+      title: CalibrationListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/CalibrationResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     ErrorResponse:
       title: ErrorResponse
       required:
@@ -473,6 +514,22 @@ components:
         enabled:
           title: Enabled
           type: boolean
+    Body_calibrate_api_calibration_post:
+      title: Body_calibrate_api_calibration_post
+      required:
+      - name
+      - data
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          pattern: ^[a-zA-Z0-9 -]+$
+          type: string
+        data:
+          title: Data
+          type: string
+          format: binary
     ValidationError:
       title: ValidationError
       required:
@@ -502,30 +559,6 @@ components:
       - error
       type: string
       description: An enumeration.
-    CalibrationRename:
-      title: CalibrationRename
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          title: Name
-          maxLength: 40
-          type: string
-    CalibrationListResponse:
-      title: CalibrationListResponse
-      required:
-      - list
-      - pagination
-      type: object
-      properties:
-        list:
-          title: List
-          type: array
-          items:
-            $ref: '#/components/schemas/CalibrationResponse'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
     HTTPValidationError:
       title: HTTPValidationError
       type: object
@@ -535,36 +568,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ValidationError'
-    Body_calibrate_api_calibration_post:
-      title: Body_calibrate_api_calibration_post
-      required:
-      - name
-      - data
-      type: object
-      properties:
-        name:
-          title: Name
-          maxLength: 40
-          pattern: ^[a-zA-Z0-9 -]+$
-          type: string
-        data:
-          title: Data
-          type: string
-          format: binary
-    Pagination:
-      title: Pagination
-      required:
-      - count
-      - limit
-      - offset
-      type: object
-      properties:
-        count:
-          title: Count
-          type: integer
-        limit:
-          title: Limit
-          type: integer
-        offset:
-          title: Offset
-          type: integer

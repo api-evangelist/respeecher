@@ -322,6 +322,57 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
+    AccentPublic:
+      title: AccentPublic
+      required:
+      - id
+      - is_default
+      - native
+      - info
+      - tiers
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        is_default:
+          title: Is Default
+          type: boolean
+        native:
+          title: Native
+          type: boolean
+        info:
+          $ref: '#/components/schemas/AccentInfoCore'
+        tiers:
+          title: Tiers
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionTierCore'
+        available:
+          title: Available
+          type: boolean
+          default: false
+        settings:
+          $ref: '#/components/schemas/AccentSettingsPublic'
+    PitchGroup:
+      title: PitchGroup
+      enum:
+      - low
+      - mid
+      - high
+      type: string
+      description: An enumeration.
     VoiceSortField:
       title: VoiceSortField
       enum:
@@ -332,20 +383,78 @@ components:
       - created_at
       type: string
       description: An enumeration.
-    AgeGroup:
-      title: AgeGroup
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    VoiceSettingsUpdate:
+      title: VoiceSettingsUpdate
+      required:
+      - voice_id
+      type: object
+      properties:
+        voice_id:
+          title: Voice Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        accent_id:
+          title: Accent Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        semitones_correction:
+          title: Semitones Correction
+          type: number
+          example: 0.0
+        narration_style_id:
+          title: Narration Style Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+    AccentSettingsPublic:
+      title: AccentSettingsPublic
+      type: object
+      properties:
+        favorite:
+          title: Favorite
+          type: boolean
+          default: false
+        semitones_correction:
+          title: Semitones Correction
+          type: number
+          default: 0
+    SubscriptionTierCore:
+      title: SubscriptionTierCore
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+    Gender:
+      title: Gender
       enum:
-      - child
-      - young
-      - adult
-      - senior
-      type: string
-      description: An enumeration.
-    Direction:
-      title: Direction
-      enum:
-      - asc
-      - desc
+      - male
+      - female
       type: string
       description: An enumeration.
     NarrationStyleInfoCore:
@@ -357,6 +466,44 @@ components:
         name:
           title: Name
           type: string
+    VisibilityLevel:
+      title: VisibilityLevel
+      enum:
+      - public
+      - paid
+      - private
+      - kids
+      type: string
+      description: An enumeration.
+    Direction:
+      title: Direction
+      enum:
+      - asc
+      - desc
+      type: string
+      description: An enumeration.
+    VoiceListResponse:
+      title: VoiceListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/VoicePublic'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    Species:
+      title: Species
+      enum:
+      - human
+      - animal
+      - other
+      type: string
+      description: An enumeration.
     Pagination:
       title: Pagination
       required:
@@ -374,31 +521,6 @@ components:
         offset:
           title: Offset
           type: integer
-    VisibilityLevel:
-      title: VisibilityLevel
-      enum:
-      - public
-      - paid
-      - private
-      - kids
-      type: string
-      description: An enumeration.
-    NarrationStyleSettingPublic:
-      title: NarrationStyleSettingPublic
-      type: object
-      properties:
-        favorite:
-          title: Favorite
-          type: boolean
-          default: false
-    PitchGroup:
-      title: PitchGroup
-      enum:
-      - low
-      - mid
-      - high
-      type: string
-      description: An enumeration.
     VoicePublic:
       title: VoicePublic
       required:
@@ -498,79 +620,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SubscriptionTierCore'
-    AccentInfoCore:
-      title: AccentInfoCore
-      required:
-      - name
-      - short_name
-      - locale
+    HTTPValidationError:
+      title: HTTPValidationError
       type: object
       properties:
-        name:
-          title: Name
-          type: string
-        short_name:
-          title: Short Name
-          type: string
-        locale:
-          title: Locale
-          type: string
-    SubscriptionTierCore:
-      title: SubscriptionTierCore
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          title: Name
-          type: string
-    ValidationError:
-      title: ValidationError
-      required:
-      - loc
-      - msg
-      - type
-      type: object
-      properties:
-        loc:
-          title: Location
+        detail:
+          title: Detail
           type: array
           items:
-            anyOf:
-            - type: string
-            - type: integer
-        msg:
-          title: Message
-          type: string
-        type:
-          title: Error Type
-          type: string
-    VoiceListResponse:
-      title: VoiceListResponse
-      required:
-      - list
-      - pagination
-      type: object
-      properties:
-        list:
-          title: List
-          type: array
-          items:
-            $ref: '#/components/schemas/VoicePublic'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-    AccentSettingsPublic:
-      title: AccentSettingsPublic
-      type: object
-      properties:
-        favorite:
-          title: Favorite
-          type: boolean
-          default: false
-        semitones_correction:
-          title: Semitones Correction
-          type: number
-          default: 0
+            $ref: '#/components/schemas/ValidationError'
     NarrationStylePublic:
       title: NarrationStylePublic
       required:
@@ -591,81 +649,40 @@ components:
           $ref: '#/components/schemas/NarrationStyleInfoCore'
         settings:
           $ref: '#/components/schemas/NarrationStyleSettingPublic'
-    VoiceSettingsUpdate:
-      title: VoiceSettingsUpdate
-      required:
-      - voice_id
-      type: object
-      properties:
-        voice_id:
-          title: Voice Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        accent_id:
-          title: Accent Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        semitones_correction:
-          title: Semitones Correction
-          type: number
-          example: 0.0
-        narration_style_id:
-          title: Narration Style Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-    ErrorResponse:
-      title: ErrorResponse
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: string
-    AccentPublic:
-      title: AccentPublic
-      required:
-      - id
-      - is_default
-      - native
-      - info
-      - tiers
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        is_default:
-          title: Is Default
-          type: boolean
-        native:
-          title: Native
-          type: boolean
-        info:
-          $ref: '#/components/schemas/AccentInfoCore'
-        tiers:
-          title: Tiers
-          type: array
-          items:
-            $ref: '#/components/schemas/SubscriptionTierCore'
-        available:
-          title: Available
-          type: boolean
-          default: false
-        settings:
-          $ref: '#/components/schemas/AccentSettingsPublic'
-    Gender:
-      title: Gender
+    AgeGroup:
+      title: AgeGroup
       enum:
-      - male
-      - female
+      - child
+      - young
+      - adult
+      - senior
       type: string
       description: An enumeration.
+    AccentInfoCore:
+      title: AccentInfoCore
+      required:
+      - name
+      - short_name
+      - locale
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+        short_name:
+          title: Short Name
+          type: string
+        locale:
+          title: Locale
+          type: string
+    NarrationStyleSettingPublic:
+      title: NarrationStyleSettingPublic
+      type: object
+      properties:
+        favorite:
+          title: Favorite
+          type: boolean
+          default: false
     FavoriteUpdate:
       title: FavoriteUpdate
       required:
@@ -675,20 +692,3 @@ components:
         favorite:
           title: Favorite
           type: boolean
-    HTTPValidationError:
-      title: HTTPValidationError
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
-    Species:
-      title: Species
-      enum:
-      - human
-      - animal
-      - other
-      type: string
-      description: An enumeration.

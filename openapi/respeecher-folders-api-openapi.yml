@@ -344,6 +344,23 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    Pagination:
+      title: Pagination
+      required:
+      - count
+      - limit
+      - offset
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        offset:
+          title: Offset
+          type: integer
     ErrorResponse:
       title: ErrorResponse
       required:
@@ -352,6 +369,28 @@ components:
       properties:
         detail:
           title: Detail
+          type: string
+    FolderListResponse:
+      title: FolderListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/FolderResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    FolderUpdate:
+      title: FolderUpdate
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
           type: string
     ValidationError:
       title: ValidationError
@@ -374,6 +413,22 @@ components:
         type:
           title: Error Type
           type: string
+    FolderCreate:
+      title: FolderCreate
+      required:
+      - name
+      - project_id
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+        project_id:
+          title: Project Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
     FolderResponse:
       title: FolderResponse
       required:
@@ -410,22 +465,13 @@ components:
           title: Created At
           type: string
           format: date-time
-    FolderCreate:
-      title: FolderCreate
-      required:
-      - name
-      - project_id
-      type: object
-      properties:
-        name:
-          title: Name
-          maxLength: 40
-          type: string
-        project_id:
-          title: Project Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
+    Direction:
+      title: Direction
+      enum:
+      - asc
+      - desc
+      type: string
+      description: An enumeration.
     HTTPValidationError:
       title: HTTPValidationError
       type: object
@@ -435,49 +481,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ValidationError'
-    Direction:
-      title: Direction
-      enum:
-      - asc
-      - desc
-      type: string
-      description: An enumeration.
-    FolderUpdate:
-      title: FolderUpdate
-      type: object
-      properties:
-        name:
-          title: Name
-          maxLength: 40
-          type: string
-    FolderListResponse:
-      title: FolderListResponse
-      required:
-      - list
-      - pagination
-      type: object
-      properties:
-        list:
-          title: List
-          type: array
-          items:
-            $ref: '#/components/schemas/FolderResponse'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-    Pagination:
-      title: Pagination
-      required:
-      - count
-      - limit
-      - offset
-      type: object
-      properties:
-        count:
-          title: Count
-          type: integer
-        limit:
-          title: Limit
-          type: integer
-        offset:
-          title: Offset
-          type: integer

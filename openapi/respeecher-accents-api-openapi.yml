@@ -82,6 +82,13 @@ components:
         detail:
           title: Detail
           type: string
+    AccentSamples:
+      title: AccentSamples
+      type: object
+      properties:
+        samples:
+          title: Samples
+          type: object
     ValidationError:
       title: ValidationError
       required:
@@ -112,10 +119,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ValidationError'
-    AccentSamples:
-      title: AccentSamples
-      type: object
-      properties:
-        samples:
-          title: Samples
-          type: object
