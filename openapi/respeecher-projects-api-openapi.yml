@@ -491,6 +491,14 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ProjectSortFields:
+      title: ProjectSortFields
+      enum:
+      - name
+      - created_at
+      - last_recording_at
+      type: string
+      description: An enumeration.
     ProjectResponse:
       title: ProjectResponse
       required:
@@ -553,16 +561,36 @@ components:
           title: Last Recording At
           type: string
           format: date-time
-    ProjectRename:
-      title: ProjectRename
+    ProjectUpdate:
+      title: ProjectUpdate
       required:
-      - name
+      - models
       type: object
       properties:
-        name:
-          title: Name
-          maxLength: 40
-          type: string
+        models:
+          title: Models
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+          example:
+            model_id-1:
+              param_id-1: param_value-1
+            model_id-2:
+              param_id-2: param_value-2
+              param_id-3: param_value-3
+            00000000-0000-0000-0000-000000000001:
+              00000000-0000-0000-0000-000000000001: param_value-example
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
     ProjectDeleteResp:
       title: ProjectDeleteResp
       required:
@@ -574,6 +602,58 @@ components:
           type: string
           format: uuid4
           example: 00000000-0000-0000-0000-000000000001
+    Direction:
+      title: Direction
+      enum:
+      - asc
+      - desc
+      type: string
+      description: An enumeration.
+    ProjectRename:
+      title: ProjectRename
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 40
+          type: string
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    ProjectListResponse:
+      title: ProjectListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     Pagination:
       title: Pagination
       required:
@@ -632,83 +712,3 @@ components:
               param_id-3: param_value-3
             00000000-0000-0000-0000-000000000001:
               00000000-0000-0000-0000-000000000001: param_value-example
-    ValidationError:
-      title: ValidationError
-      required:
-      - loc
-      - msg
-      - type
-      type: object
-      properties:
-        loc:
-          title: Location
-          type: array
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-        msg:
-          title: Message
-          type: string
-        type:
-          title: Error Type
-          type: string
-    ProjectUpdate:
-      title: ProjectUpdate
-      required:
-      - models
-      type: object
-      properties:
-        models:
-          title: Models
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: string
-          example:
-            model_id-1:
-              param_id-1: param_value-1
-            model_id-2:
-              param_id-2: param_value-2
-              param_id-3: param_value-3
-            00000000-0000-0000-0000-000000000001:
-              00000000-0000-0000-0000-000000000001: param_value-example
-    Direction:
-      title: Direction
-      enum:
-      - asc
-      - desc
-      type: string
-      description: An enumeration.
-    ProjectSortFields:
-      title: ProjectSortFields
-      enum:
-      - name
-      - created_at
-      - last_recording_at
-      type: string
-      description: An enumeration.
-    ProjectListResponse:
-      title: ProjectListResponse
-      required:
-      - list
-      - pagination
-      type: object
-      properties:
-        list:
-          title: List
-          type: array
-          items:
-            $ref: '#/components/schemas/ProjectResponse'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-    HTTPValidationError:
-      title: HTTPValidationError
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'

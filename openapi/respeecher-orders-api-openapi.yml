@@ -138,6 +138,47 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    OrderStates:
+      title: OrderStates
+      enum:
+      - new
+      - pre_processing
+      - post_processing
+      - processing
+      - done
+      - error
+      type: string
+      description: An enumeration.
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
     OrderResponse:
       title: OrderResponse
       required:
@@ -215,46 +256,6 @@ components:
         detail:
           title: Detail
           type: string
-    ValidationError:
-      title: ValidationError
-      required:
-      - loc
-      - msg
-      - type
-      type: object
-      properties:
-        loc:
-          title: Location
-          type: array
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-        msg:
-          title: Message
-          type: string
-        type:
-          title: Error Type
-          type: string
-    OrderConversionRequest:
-      title: OrderConversionRequest
-      required:
-      - voice_id
-      type: object
-      properties:
-        voice_id:
-          title: Voice Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        accent_id:
-          title: Accent Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        semitones_correction:
-          title: Semitones Correction
-          type: number
     OrderRequest:
       title: OrderRequest
       required:
@@ -281,23 +282,22 @@ components:
           title: Use Calibration
           type: boolean
           default: false
-    OrderStates:
-      title: OrderStates
-      enum:
-      - new
-      - pre_processing
-      - post_processing
-      - processing
-      - done
-      - error
-      type: string
-      description: An enumeration.
-    HTTPValidationError:
-      title: HTTPValidationError
+    OrderConversionRequest:
+      title: OrderConversionRequest
+      required:
+      - voice_id
       type: object
       properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
+        voice_id:
+          title: Voice Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        accent_id:
+          title: Accent Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        semitones_correction:
+          title: Semitones Correction
+          type: number

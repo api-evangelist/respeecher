@@ -97,11 +97,138 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ParamWidgetTypes:
-      title: ParamWidgetTypes
+    SliderWidget:
+      title: SliderWidget
+      required:
+      - type
+      - min
+      - max
+      - step
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ParamWidgetTypes'
+        min:
+          title: Min
+          type: number
+        max:
+          title: Max
+          type: number
+        step:
+          title: Step
+          type: number
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    ModelUserResponse:
+      title: ModelUserResponse
+      required:
+      - id
+      - name
+      - owner
+      - visibility
+      - m2o
+      - default_model
+      - pipeline
+      - user_can_use_model
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        name:
+          title: Name
+          type: string
+        owner:
+          title: Owner
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        visibility:
+          $ref: '#/components/schemas/ModelVisibilityLevels'
+        m2o:
+          title: M2O
+          type: boolean
+        default_model:
+          title: Default Model
+          type: boolean
+        date_created:
+          title: Date Created
+          type: string
+          format: date-time
+        pipeline:
+          title: Pipeline
+          type: array
+          items:
+            type: string
+            format: uuid4
+          example:
+          - 00000000-0000-0000-0000-000000000001
+          - 00000000-0000-0000-0000-000000000001
+        params:
+          title: Params
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelParamResponse'
+        user_can_use_model:
+          title: User Can Use Model
+          type: boolean
+    Direction:
+      title: Direction
       enum:
-      - slider
-      - dropdown
+      - asc
+      - desc
+      type: string
+      description: An enumeration.
+    DropdownWidget:
+      title: DropdownWidget
+      required:
+      - type
+      - options
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ParamWidgetTypes'
+        options:
+          title: Options
+          type: array
+          items:
+            type: string
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    ModelSortFields:
+      title: ModelSortFields
+      enum:
+      - name
+      - owner
+      - date_created
       type: string
       description: An enumeration.
     ModelParamResponse:
@@ -161,50 +288,6 @@ components:
         offset:
           title: Offset
           type: integer
-    ErrorResponse:
-      title: ErrorResponse
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: string
-    DropdownWidget:
-      title: DropdownWidget
-      required:
-      - type
-      - options
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ParamWidgetTypes'
-        options:
-          title: Options
-          type: array
-          items:
-            type: string
-    ValidationError:
-      title: ValidationError
-      required:
-      - loc
-      - msg
-      - type
-      type: object
-      properties:
-        loc:
-          title: Location
-          type: array
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-        msg:
-          title: Message
-          type: string
-        type:
-          title: Error Type
-          type: string
     ModelListResponse:
       title: ModelListResponse
       required:
@@ -219,34 +302,22 @@ components:
             $ref: '#/components/schemas/ModelUserResponse'
         pagination:
           $ref: '#/components/schemas/Pagination'
-    ModelSortFields:
-      title: ModelSortFields
-      enum:
-      - name
-      - owner
-      - date_created
-      type: string
-      description: An enumeration.
-    SliderWidget:
-      title: SliderWidget
+    ErrorResponse:
+      title: ErrorResponse
       required:
-      - type
-      - min
-      - max
-      - step
+      - detail
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/ParamWidgetTypes'
-        min:
-          title: Min
-          type: number
-        max:
-          title: Max
-          type: number
-        step:
-          title: Step
-          type: number
+        detail:
+          title: Detail
+          type: string
+    ParamWidgetTypes:
+      title: ParamWidgetTypes
+      enum:
+      - slider
+      - dropdown
+      type: string
+      description: An enumeration.
     ModelVisibilityLevels:
       title: ModelVisibilityLevels
       enum:
@@ -254,74 +325,3 @@ components:
       - private
       type: string
       description: An enumeration.
-    Direction:
-      title: Direction
-      enum:
-      - asc
-      - desc
-      type: string
-      description: An enumeration.
-    ModelUserResponse:
-      title: ModelUserResponse
-      required:
-      - id
-      - name
-      - owner
-      - visibility
-      - m2o
-      - default_model
-      - pipeline
-      - user_can_use_model
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        name:
-          title: Name
-          type: string
-        owner:
-          title: Owner
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        visibility:
-          $ref: '#/components/schemas/ModelVisibilityLevels'
-        m2o:
-          title: M2O
-          type: boolean
-        default_model:
-          title: Default Model
-          type: boolean
-        date_created:
-          title: Date Created
-          type: string
-          format: date-time
-        pipeline:
-          title: Pipeline
-          type: array
-          items:
-            type: string
-            format: uuid4
-          example:
-          - 00000000-0000-0000-0000-000000000001
-          - 00000000-0000-0000-0000-000000000001
-        params:
-          title: Params
-          type: array
-          items:
-            $ref: '#/components/schemas/ModelParamResponse'
-        user_can_use_model:
-          title: User Can Use Model
-          type: boolean
-    HTTPValidationError:
-      title: HTTPValidationError
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'

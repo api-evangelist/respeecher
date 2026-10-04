@@ -937,6 +937,108 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    RecordingTypes:
+      title: RecordingTypes
+      enum:
+      - original
+      - converted
+      type: string
+      description: An enumeration.
+    RecordingDeleteResp:
+      title: RecordingDeleteResp
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+    Direction:
+      title: Direction
+      enum:
+      - asc
+      - desc
+      type: string
+      description: An enumeration.
+    Body_recording_create_api_recordings_post:
+      title: Body_recording_create_api_recordings_post
+      required:
+      - data
+      - parent_folder_id
+      - microphone
+      type: object
+      properties:
+        data:
+          title: Data
+          type: string
+          format: binary
+        parent_folder_id:
+          title: Parent Folder Id
+          type: string
+          format: uuid4
+        microphone:
+          title: Microphone
+          type: string
+        label:
+          title: Label
+          maxLength: 40
+          pattern: ^[a-zA-Z0-9 -]+$
+          type: string
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    RecordingUpdate:
+      title: RecordingUpdate
+      type: object
+      properties:
+        label:
+          title: Label
+          maxLength: 40
+          type: string
+        starred:
+          title: Starred
+          type: boolean
+    ConversionRequest:
+      title: ConversionRequest
+      required:
+      - original_id
+      - models
+      type: object
+      properties:
+        original_id:
+          title: Original Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        models:
+          title: Models
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+        calibration_id:
+          title: Calibration Id
+          type: string
+          format: uuid4
     RecordingCreateTTS:
       title: RecordingCreateTTS
       required:
@@ -964,6 +1066,32 @@ components:
           title: Label
           maxLength: 40
           type: string
+    RecordingCreateTTSV2:
+      title: RecordingCreateTTSV2
+      required:
+      - parent_folder_id
+      - text
+      type: object
+      properties:
+        parent_folder_id:
+          title: Parent Folder Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        text:
+          title: Text
+          maxLength: 1000
+          minLength: 1
+          type: string
+        tts_voice_id:
+          title: Tts Voice Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        label:
+          title: Label
+          maxLength: 40
+          type: string
     ErrorResponse:
       title: ErrorResponse
       required:
@@ -972,27 +1100,6 @@ components:
       properties:
         detail:
           title: Detail
-          type: string
-    ValidationError:
-      title: ValidationError
-      required:
-      - loc
-      - msg
-      - type
-      type: object
-      properties:
-        loc:
-          title: Location
-          type: array
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-        msg:
-          title: Message
-          type: string
-        type:
-          title: Error Type
           type: string
     RecordingPutUpdate:
       title: RecordingPutUpdate
@@ -1008,14 +1115,15 @@ components:
         starred:
           title: Starred
           type: boolean
-    RecordingStates:
-      title: RecordingStates
-      enum:
-      - done
-      - processing
-      - error
-      type: string
-      description: An enumeration.
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
     RecordingResponse:
       title: RecordingResponse
       required:
@@ -1142,13 +1250,64 @@ components:
           type: string
         note:
           $ref: '#/components/schemas/NoteRecording'
-    Direction:
-      title: Direction
+    NoteRecording:
+      title: NoteRecording
+      required:
+      - id
+      - text
+      - active
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+        text:
+          title: Text
+          maxLength: 2000
+          type: string
+        active:
+          title: Active
+          type: boolean
+    RecordingStates:
+      title: RecordingStates
       enum:
-      - asc
-      - desc
+      - done
+      - processing
+      - error
       type: string
       description: An enumeration.
+    RecordingListResponse:
+      title: RecordingListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
+          type: array
+          items:
+            $ref: '#/components/schemas/RecordingResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    Pagination:
+      title: Pagination
+      required:
+      - count
+      - limit
+      - offset
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        offset:
+          title: Offset
+          type: integer
     ModelParam:
       title: ModelParam
       required:
@@ -1168,23 +1327,6 @@ components:
         value:
           title: Value
           type: string
-    Pagination:
-      title: Pagination
-      required:
-      - count
-      - limit
-      - offset
-      type: object
-      properties:
-        count:
-          title: Count
-          type: integer
-        limit:
-          title: Limit
-          type: integer
-        offset:
-          title: Offset
-          type: integer
     Model:
       title: Model
       required:
@@ -1206,145 +1348,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ModelParam'
-    NoteRecording:
-      title: NoteRecording
-      required:
-      - id
-      - text
-      - active
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid4
-        text:
-          title: Text
-          maxLength: 2000
-          type: string
-        active:
-          title: Active
-          type: boolean
-    RecordingCreateTTSV2:
-      title: RecordingCreateTTSV2
-      required:
-      - parent_folder_id
-      - text
-      type: object
-      properties:
-        parent_folder_id:
-          title: Parent Folder Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        text:
-          title: Text
-          maxLength: 1000
-          minLength: 1
-          type: string
-        tts_voice_id:
-          title: Tts Voice Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        label:
-          title: Label
-          maxLength: 40
-          type: string
-    RecordingUpdate:
-      title: RecordingUpdate
-      type: object
-      properties:
-        label:
-          title: Label
-          maxLength: 40
-          type: string
-        starred:
-          title: Starred
-          type: boolean
-    HTTPValidationError:
-      title: HTTPValidationError
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
-    RecordingDeleteResp:
-      title: RecordingDeleteResp
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-    ConversionRequest:
-      title: ConversionRequest
-      required:
-      - original_id
-      - models
-      type: object
-      properties:
-        original_id:
-          title: Original Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        models:
-          title: Models
-          type: array
-          items:
-            $ref: '#/components/schemas/Model'
-        calibration_id:
-          title: Calibration Id
-          type: string
-          format: uuid4
-    RecordingTypes:
-      title: RecordingTypes
-      enum:
-      - original
-      - converted
-      type: string
-      description: An enumeration.
-    RecordingListResponse:
-      title: RecordingListResponse
-      required:
-      - list
-      - pagination
-      type: object
-      properties:
-        list:
-          title: List
-          type: array
-          items:
-            $ref: '#/components/schemas/RecordingResponse'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-    Body_recording_create_api_recordings_post:
-      title: Body_recording_create_api_recordings_post
-      required:
-      - data
-      - parent_folder_id
-      - microphone
-      type: object
-      properties:
-        data:
-          title: Data
-          type: string
-          format: binary
-        parent_folder_id:
-          title: Parent Folder Id
-          type: string
-          format: uuid4
-        microphone:
-          title: Microphone
-          type: string
-        label:
-          title: Label
-          maxLength: 40
-          pattern: ^[a-zA-Z0-9 -]+$
-          type: string

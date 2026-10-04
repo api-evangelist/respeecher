@@ -322,14 +322,14 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ErrorResponse:
-      title: ErrorResponse
+    NarrationStyleInfoCore:
+      title: NarrationStyleInfoCore
       required:
-      - detail
+      - name
       type: object
       properties:
-        detail:
-          title: Detail
+        name:
+          title: Name
           type: string
     AccentPublic:
       title: AccentPublic
@@ -365,22 +365,20 @@ components:
           default: false
         settings:
           $ref: '#/components/schemas/AccentSettingsPublic'
-    PitchGroup:
-      title: PitchGroup
+    VisibilityLevel:
+      title: VisibilityLevel
       enum:
-      - low
-      - mid
-      - high
+      - public
+      - paid
+      - private
+      - kids
       type: string
       description: An enumeration.
-    VoiceSortField:
-      title: VoiceSortField
+    Direction:
+      title: Direction
       enum:
-      - default
-      - name
-      - pitch
-      - rating
-      - created_at
+      - asc
+      - desc
       type: string
       description: An enumeration.
     ValidationError:
@@ -404,31 +402,31 @@ components:
         type:
           title: Error Type
           type: string
-    VoiceSettingsUpdate:
-      title: VoiceSettingsUpdate
-      required:
-      - voice_id
-      type: object
-      properties:
-        voice_id:
-          title: Voice Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        accent_id:
-          title: Accent Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        semitones_correction:
-          title: Semitones Correction
-          type: number
-          example: 0.0
-        narration_style_id:
-          title: Narration Style Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
+    VoiceSortField:
+      title: VoiceSortField
+      enum:
+      - default
+      - name
+      - pitch
+      - rating
+      - created_at
+      type: string
+      description: An enumeration.
+    Species:
+      title: Species
+      enum:
+      - human
+      - animal
+      - other
+      type: string
+      description: An enumeration.
+    Gender:
+      title: Gender
+      enum:
+      - male
+      - female
+      type: string
+      description: An enumeration.
     AccentSettingsPublic:
       title: AccentSettingsPublic
       type: object
@@ -441,47 +439,35 @@ components:
           title: Semitones Correction
           type: number
           default: 0
-    SubscriptionTierCore:
-      title: SubscriptionTierCore
+    ErrorResponse:
+      title: ErrorResponse
       required:
-      - name
+      - detail
       type: object
       properties:
-        name:
-          title: Name
+        detail:
+          title: Detail
           type: string
-    Gender:
-      title: Gender
-      enum:
-      - male
-      - female
-      type: string
-      description: An enumeration.
-    NarrationStyleInfoCore:
-      title: NarrationStyleInfoCore
+    NarrationStylePublic:
+      title: NarrationStylePublic
       required:
-      - name
+      - id
+      - is_default
+      - info
       type: object
       properties:
-        name:
-          title: Name
+        id:
+          title: Id
           type: string
-    VisibilityLevel:
-      title: VisibilityLevel
-      enum:
-      - public
-      - paid
-      - private
-      - kids
-      type: string
-      description: An enumeration.
-    Direction:
-      title: Direction
-      enum:
-      - asc
-      - desc
-      type: string
-      description: An enumeration.
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        is_default:
+          title: Is Default
+          type: boolean
+        info:
+          $ref: '#/components/schemas/NarrationStyleInfoCore'
+        settings:
+          $ref: '#/components/schemas/NarrationStyleSettingPublic'
     VoiceListResponse:
       title: VoiceListResponse
       required:
@@ -496,31 +482,32 @@ components:
             $ref: '#/components/schemas/VoicePublic'
         pagination:
           $ref: '#/components/schemas/Pagination'
-    Species:
-      title: Species
-      enum:
-      - human
-      - animal
-      - other
-      type: string
-      description: An enumeration.
-    Pagination:
-      title: Pagination
-      required:
-      - count
-      - limit
-      - offset
+    HTTPValidationError:
+      title: HTTPValidationError
       type: object
       properties:
-        count:
-          title: Count
-          type: integer
-        limit:
-          title: Limit
-          type: integer
-        offset:
-          title: Offset
-          type: integer
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    NarrationStyleSettingPublic:
+      title: NarrationStyleSettingPublic
+      type: object
+      properties:
+        favorite:
+          title: Favorite
+          type: boolean
+          default: false
+    SubscriptionTierCore:
+      title: SubscriptionTierCore
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
     VoicePublic:
       title: VoicePublic
       required:
@@ -620,35 +607,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SubscriptionTierCore'
-    HTTPValidationError:
-      title: HTTPValidationError
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
-    NarrationStylePublic:
-      title: NarrationStylePublic
-      required:
-      - id
-      - is_default
-      - info
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        is_default:
-          title: Is Default
-          type: boolean
-        info:
-          $ref: '#/components/schemas/NarrationStyleInfoCore'
-        settings:
-          $ref: '#/components/schemas/NarrationStyleSettingPublic'
     AgeGroup:
       title: AgeGroup
       enum:
@@ -675,14 +633,31 @@ components:
         locale:
           title: Locale
           type: string
-    NarrationStyleSettingPublic:
-      title: NarrationStyleSettingPublic
+    VoiceSettingsUpdate:
+      title: VoiceSettingsUpdate
+      required:
+      - voice_id
       type: object
       properties:
-        favorite:
-          title: Favorite
-          type: boolean
-          default: false
+        voice_id:
+          title: Voice Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        accent_id:
+          title: Accent Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        semitones_correction:
+          title: Semitones Correction
+          type: number
+          example: 0.0
+        narration_style_id:
+          title: Narration Style Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
     FavoriteUpdate:
       title: FavoriteUpdate
       required:
@@ -692,3 +667,28 @@ components:
         favorite:
           title: Favorite
           type: boolean
+    Pagination:
+      title: Pagination
+      required:
+      - count
+      - limit
+      - offset
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        offset:
+          title: Offset
+          type: integer
+    PitchGroup:
+      title: PitchGroup
+      enum:
+      - low
+      - mid
+      - high
+      type: string
+      description: An enumeration.

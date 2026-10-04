@@ -412,55 +412,59 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    Pagination:
-      title: Pagination
-      required:
-      - count
-      - limit
-      - offset
-      type: object
-      properties:
-        count:
-          title: Count
-          type: integer
-        limit:
-          title: Limit
-          type: integer
-        offset:
-          title: Offset
-          type: integer
-    CalibrationRename:
-      title: CalibrationRename
+    CalibrationStates:
+      title: CalibrationStates
+      enum:
+      - processing
+      - calibrated
+      - error
+      type: string
+      description: An enumeration.
+    Body_calibrate_api_calibration_post:
+      title: Body_calibrate_api_calibration_post
       required:
       - name
+      - data
       type: object
       properties:
         name:
           title: Name
           maxLength: 40
+          pattern: ^[a-zA-Z0-9 -]+$
           type: string
-    CalibrationListResponse:
-      title: CalibrationListResponse
-      required:
-      - list
-      - pagination
-      type: object
-      properties:
-        list:
-          title: List
-          type: array
-          items:
-            $ref: '#/components/schemas/CalibrationResponse'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-    ErrorResponse:
-      title: ErrorResponse
-      required:
-      - detail
+        data:
+          title: Data
+          type: string
+          format: binary
+    HTTPValidationError:
+      title: HTTPValidationError
       type: object
       properties:
         detail:
           title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
           type: string
     CalibrationResponse:
       title: CalibrationResponse
@@ -514,57 +518,53 @@ components:
         enabled:
           title: Enabled
           type: boolean
-    Body_calibrate_api_calibration_post:
-      title: Body_calibrate_api_calibration_post
+    CalibrationRename:
+      title: CalibrationRename
       required:
       - name
-      - data
       type: object
       properties:
         name:
           title: Name
           maxLength: 40
-          pattern: ^[a-zA-Z0-9 -]+$
           type: string
-        data:
-          title: Data
-          type: string
-          format: binary
-    ValidationError:
-      title: ValidationError
+    Pagination:
+      title: Pagination
       required:
-      - loc
-      - msg
-      - type
+      - count
+      - limit
+      - offset
       type: object
       properties:
-        loc:
-          title: Location
-          type: array
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-        msg:
-          title: Message
-          type: string
-        type:
-          title: Error Type
-          type: string
-    CalibrationStates:
-      title: CalibrationStates
-      enum:
-      - processing
-      - calibrated
-      - error
-      type: string
-      description: An enumeration.
-    HTTPValidationError:
-      title: HTTPValidationError
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        offset:
+          title: Offset
+          type: integer
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
       type: object
       properties:
         detail:
           title: Detail
+          type: string
+    CalibrationListResponse:
+      title: CalibrationListResponse
+      required:
+      - list
+      - pagination
+      type: object
+      properties:
+        list:
+          title: List
           type: array
           items:
-            $ref: '#/components/schemas/ValidationError'
+            $ref: '#/components/schemas/CalibrationResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'

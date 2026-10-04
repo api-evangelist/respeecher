@@ -142,20 +142,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    StatsProjectRequest:
-      title: StatsProjectRequest
-      required:
-      - project_ids
-      type: object
-      properties:
-        project_ids:
-          title: Project Ids
-          maxItems: 200
-          minItems: 0
-          type: array
-          items:
-            type: string
-            format: uuid4
     StatsProjectResponse:
       title: StatsProjectResponse
       required:
@@ -173,25 +159,12 @@ components:
           $ref: '#/components/schemas/StatsDuration'
         conversions:
           $ref: '#/components/schemas/ConversionStats'
-    PreviousMonthDurationStat:
-      title: PreviousMonthDurationStat
-      required:
-      - month
-      - duration
-      type: object
-      properties:
-        month:
-          title: Month
-          type: string
-          format: date
-        duration:
-          title: Duration
-          type: number
-    StatsDuration:
-      title: StatsDuration
+    StatsDurationPreviousMonthes:
+      title: StatsDurationPreviousMonthes
       required:
       - total
       - current_month
+      - previous_monthes
       type: object
       properties:
         total:
@@ -200,44 +173,34 @@ components:
         current_month:
           title: Current Month
           type: integer
-    StatsUserResponse:
-      title: StatsUserResponse
-      required:
-      - time_converted
-      - conversions
-      - models
-      type: object
-      properties:
-        time_converted:
-          $ref: '#/components/schemas/StatsDurationPreviousMonthes'
-        conversions:
-          $ref: '#/components/schemas/ConversionStats'
-        models:
-          title: Models
+        previous_monthes:
+          title: Previous Monthes
           type: array
           items:
-            $ref: '#/components/schemas/ModelStats'
-    ConversionStats:
-      title: ConversionStats
+            $ref: '#/components/schemas/PreviousMonthDurationStat'
+    StatsProjectRequest:
+      title: StatsProjectRequest
       required:
-      - total
-      - completed
-      - in_progress
-      - failed
+      - project_ids
       type: object
       properties:
-        total:
-          title: Total
-          type: integer
-        completed:
-          title: Completed
-          type: integer
-        in_progress:
-          title: In Progress
-          type: integer
-        failed:
-          title: Failed
-          type: integer
+        project_ids:
+          title: Project Ids
+          maxItems: 200
+          minItems: 0
+          type: array
+          items:
+            type: string
+            format: uuid4
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
     ValidationError:
       title: ValidationError
       required:
@@ -259,6 +222,19 @@ components:
         type:
           title: Error Type
           type: string
+    StatsDuration:
+      title: StatsDuration
+      required:
+      - total
+      - current_month
+      type: object
+      properties:
+        total:
+          title: Total
+          type: integer
+        current_month:
+          title: Current Month
+          type: integer
     FolderStats:
       title: FolderStats
       required:
@@ -287,25 +263,58 @@ components:
           items:
             type: string
             format: uuid4
-    StatsDurationPreviousMonthes:
-      title: StatsDurationPreviousMonthes
+    StatsUserResponse:
+      title: StatsUserResponse
+      required:
+      - time_converted
+      - conversions
+      - models
+      type: object
+      properties:
+        time_converted:
+          $ref: '#/components/schemas/StatsDurationPreviousMonthes'
+        conversions:
+          $ref: '#/components/schemas/ConversionStats'
+        models:
+          title: Models
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelStats'
+    PreviousMonthDurationStat:
+      title: PreviousMonthDurationStat
+      required:
+      - month
+      - duration
+      type: object
+      properties:
+        month:
+          title: Month
+          type: string
+          format: date
+        duration:
+          title: Duration
+          type: number
+    ConversionStats:
+      title: ConversionStats
       required:
       - total
-      - current_month
-      - previous_monthes
+      - completed
+      - in_progress
+      - failed
       type: object
       properties:
         total:
           title: Total
           type: integer
-        current_month:
-          title: Current Month
+        completed:
+          title: Completed
           type: integer
-        previous_monthes:
-          title: Previous Monthes
-          type: array
-          items:
-            $ref: '#/components/schemas/PreviousMonthDurationStat'
+        in_progress:
+          title: In Progress
+          type: integer
+        failed:
+          title: Failed
+          type: integer
     ModelStats:
       title: ModelStats
       required:
@@ -328,12 +337,3 @@ components:
         converted_time:
           title: Converted Time
           type: number
-    HTTPValidationError:
-      title: HTTPValidationError
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'

@@ -122,166 +122,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    Role:
-      title: Role
-      enum:
-      - admin
-      - prepaid
-      - reviewer
-      - user
-      - techsmith
-      type: string
-      description: An enumeration.
-    ErrorResponse:
-      title: ErrorResponse
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: string
-    ValidationError:
-      title: ValidationError
-      required:
-      - loc
-      - msg
-      - type
-      type: object
-      properties:
-        loc:
-          title: Location
-          type: array
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-        msg:
-          title: Message
-          type: string
-        type:
-          title: Error Type
-          type: string
-    User:
-      title: User
-      required:
-      - id
-      - email
-      - verified
-      - username
-      - roles
-      - groups
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid4
-          example: 00000000-0000-0000-0000-000000000001
-        email:
-          title: Email
-          type: string
-          format: email
-        verified:
-          title: Verified
-          type: boolean
-        username:
-          title: Username
-          type: string
-        first_name:
-          title: First Name
-          type: string
-        last_name:
-          title: Last Name
-          type: string
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/Role'
-        groups:
-          title: Groups
-          type: array
-          items:
-            $ref: '#/components/schemas/Group'
-        data:
-          $ref: '#/components/schemas/UserData'
-    UserRateLimits:
-      title: UserRateLimits
-      required:
-      - fast
-      - slow
-      type: object
-      properties:
-        fast:
-          $ref: '#/components/schemas/RateLimit'
-        slow:
-          $ref: '#/components/schemas/RateLimit'
-    TrustLevel:
-      title: TrustLevel
-      enum:
-      - gray
-      - red
-      - orange
-      - green
-      type: string
-      description: An enumeration.
-    DefaultSuccessResponse:
-      title: DefaultSuccessResponse
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: string
-          default: OK
-    DemoWizard:
-      title: DemoWizard
-      required:
-      - show
-      type: object
-      properties:
-        show:
-          title: Show
-          type: boolean
-        skipped:
-          title: Skipped
-          type: boolean
-          default: false
-        completed:
-          title: Completed
-          type: boolean
-          default: false
-        converting:
-          title: Converting
-          type: boolean
-          default: false
-        project_id:
-          title: Project Id
-          type: string
-          format: uuid4
-        folder_id:
-          title: Folder Id
-          type: string
-          format: uuid4
-        original_id:
-          title: Original Id
-          type: string
-          format: uuid4
-    IdentityProvider:
-      title: IdentityProvider
-      enum:
-      - google
-      - facebook
-      - apple
-      - linkedin
-      type: string
-      description: An enumeration.
-    SubscriptionInterval:
-      title: SubscriptionInterval
-      enum:
-      - month
-      - year
-      type: string
-      description: An enumeration.
     UserData:
       title: UserData
       type: object
@@ -352,23 +192,88 @@ components:
           $ref: '#/components/schemas/MarketingInfo'
         advanced_settings:
           $ref: '#/components/schemas/AdvancedSettings'
-    OpenIDInfo:
-      title: OpenIDInfo
+    ValidationError:
+      title: ValidationError
       required:
-      - sub
-      - provider
+      - loc
+      - msg
+      - type
       type: object
       properties:
-        sub:
-          title: Sub
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
           type: string
-        provider:
-          $ref: '#/components/schemas/IdentityProvider'
-    Group:
-      title: Group
+        type:
+          title: Error Type
+          type: string
+    DefaultSuccessResponse:
+      title: DefaultSuccessResponse
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
+          default: OK
+    AdvancedSettings:
+      title: AdvancedSettings
+      type: object
+      properties:
+        normalize:
+          title: Normalize
+          type: boolean
+        denormalize:
+          title: Denormalize
+          type: boolean
+        denoise:
+          title: Denoise
+          type: boolean
+        hft:
+          title: Hft
+          type: boolean
+        pipeline:
+          $ref: '#/components/schemas/PipelineType'
+        emotional_scale:
+          title: Emotional Scale
+          maximum: 2.0
+          minimum: 0.0
+          type: number
+    CalibrationUserData:
+      title: CalibrationUserData
+      required:
+      - calibration_id
+      - f0
+      type: object
+      properties:
+        calibration_id:
+          title: Calibration Id
+          type: string
+          format: uuid4
+        f0:
+          title: F0
+          type: number
+    SubscriptionInterval:
+      title: SubscriptionInterval
+      enum:
+      - month
+      - year
+      type: string
+      description: An enumeration.
+    User:
+      title: User
       required:
       - id
-      - name
+      - email
+      - verified
+      - username
+      - roles
+      - groups
       type: object
       properties:
         id:
@@ -376,9 +281,58 @@ components:
           type: string
           format: uuid4
           example: 00000000-0000-0000-0000-000000000001
-        name:
-          title: Name
+        email:
+          title: Email
           type: string
+          format: email
+        verified:
+          title: Verified
+          type: boolean
+        username:
+          title: Username
+          type: string
+        first_name:
+          title: First Name
+          type: string
+        last_name:
+          title: Last Name
+          type: string
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        groups:
+          title: Groups
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        data:
+          $ref: '#/components/schemas/UserData'
+    PromoData:
+      title: PromoData
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        extended_trial:
+          title: Extended Trial
+          type: boolean
+        no_credit:
+          title: No Credit
+          type: boolean
+        stripe_promo_code:
+          title: Stripe Promo Code
+          type: string
+        stripe_promo_codes_used:
+          title: Stripe Promo Codes Used
+          type: object
+          additionalProperties:
+            type: string
+        default_coupon_used:
+          title: Default Coupon Used
+          type: boolean
+          default: false
     SubscriptionStatuses:
       title: SubscriptionStatuses
       enum:
@@ -396,6 +350,192 @@ components:
         google_id:
           title: Google Id
           type: string
+    UserPermissions:
+      title: UserPermissions
+      type: object
+      properties:
+        long_conversions:
+          title: Long Conversions
+          type: boolean
+          default: false
+        download:
+          title: Download
+          type: boolean
+          default: false
+        can_read:
+          title: Can Read
+          type: boolean
+          default: true
+        can_write:
+          title: Can Write
+          type: boolean
+          default: false
+        access_level:
+          title: Access Level
+          type: string
+    LoginResponse:
+      title: LoginResponse
+      required:
+      - user
+      - csrf_token
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        csrf_token:
+          title: Csrf Token
+          type: string
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
+    UserDomainInfo:
+      title: UserDomainInfo
+      required:
+      - profession
+      - industry
+      type: object
+      properties:
+        profession:
+          title: Profession
+          type: string
+        industry:
+          title: Industry
+          type: string
+    IdentityProvider:
+      title: IdentityProvider
+      enum:
+      - google
+      - facebook
+      - apple
+      - linkedin
+      type: string
+      description: An enumeration.
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    OpenIDInfo:
+      title: OpenIDInfo
+      required:
+      - sub
+      - provider
+      type: object
+      properties:
+        sub:
+          title: Sub
+          type: string
+        provider:
+          $ref: '#/components/schemas/IdentityProvider'
+    DemoWizard:
+      title: DemoWizard
+      required:
+      - show
+      type: object
+      properties:
+        show:
+          title: Show
+          type: boolean
+        skipped:
+          title: Skipped
+          type: boolean
+          default: false
+        completed:
+          title: Completed
+          type: boolean
+          default: false
+        converting:
+          title: Converting
+          type: boolean
+          default: false
+        project_id:
+          title: Project Id
+          type: string
+          format: uuid4
+        folder_id:
+          title: Folder Id
+          type: string
+          format: uuid4
+        original_id:
+          title: Original Id
+          type: string
+          format: uuid4
+    RateLimit:
+      title: RateLimit
+      required:
+      - times
+      - seconds
+      type: object
+      properties:
+        times:
+          title: Times
+          type: integer
+        seconds:
+          title: Seconds
+          type: integer
+    UserRateLimits:
+      title: UserRateLimits
+      required:
+      - fast
+      - slow
+      type: object
+      properties:
+        fast:
+          $ref: '#/components/schemas/RateLimit'
+        slow:
+          $ref: '#/components/schemas/RateLimit'
+    Group:
+      title: Group
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid4
+          example: 00000000-0000-0000-0000-000000000001
+        name:
+          title: Name
+          type: string
+    LoginCreds:
+      title: LoginCreds
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          title: Email
+          type: string
+          format: email
+        password:
+          title: Password
+          type: string
+        session_duration:
+          title: Session Duration
+          type: integer
+    Role:
+      title: Role
+      enum:
+      - admin
+      - prepaid
+      - reviewer
+      - user
+      - techsmith
+      type: string
+      description: An enumeration.
     StripeInfo:
       title: StripeInfo
       type: object
@@ -431,42 +571,6 @@ components:
         payed_once:
           title: Payed Once
           type: boolean
-    CalibrationUserData:
-      title: CalibrationUserData
-      required:
-      - calibration_id
-      - f0
-      type: object
-      properties:
-        calibration_id:
-          title: Calibration Id
-          type: string
-          format: uuid4
-        f0:
-          title: F0
-          type: number
-    RateLimit:
-      title: RateLimit
-      required:
-      - times
-      - seconds
-      type: object
-      properties:
-        times:
-          title: Times
-          type: integer
-        seconds:
-          title: Seconds
-          type: integer
-    HTTPValidationError:
-      title: HTTPValidationError
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
     PipelineType:
       title: PipelineType
       enum:
@@ -474,116 +578,12 @@ components:
       - slow
       type: string
       description: An enumeration.
-    UserDomainInfo:
-      title: UserDomainInfo
-      required:
-      - profession
-      - industry
-      type: object
-      properties:
-        profession:
-          title: Profession
-          type: string
-        industry:
-          title: Industry
-          type: string
-    LoginResponse:
-      title: LoginResponse
-      required:
-      - user
-      - csrf_token
-      type: object
-      properties:
-        user:
-          $ref: '#/components/schemas/User'
-        csrf_token:
-          title: Csrf Token
-          type: string
-    LoginCreds:
-      title: LoginCreds
-      required:
-      - email
-      - password
-      type: object
-      properties:
-        email:
-          title: Email
-          type: string
-          format: email
-        password:
-          title: Password
-          type: string
-        session_duration:
-          title: Session Duration
-          type: integer
-    AdvancedSettings:
-      title: AdvancedSettings
-      type: object
-      properties:
-        normalize:
-          title: Normalize
-          type: boolean
-        denormalize:
-          title: Denormalize
-          type: boolean
-        denoise:
-          title: Denoise
-          type: boolean
-        hft:
-          title: Hft
-          type: boolean
-        pipeline:
-          $ref: '#/components/schemas/PipelineType'
-        emotional_scale:
-          title: Emotional Scale
-          maximum: 2.0
-          minimum: 0.0
-          type: number
-    UserPermissions:
-      title: UserPermissions
-      type: object
-      properties:
-        long_conversions:
-          title: Long Conversions
-          type: boolean
-          default: false
-        download:
-          title: Download
-          type: boolean
-          default: false
-        can_read:
-          title: Can Read
-          type: boolean
-          default: true
-        can_write:
-          title: Can Write
-          type: boolean
-          default: false
-        access_level:
-          title: Access Level
-          type: string
-    PromoData:
-      title: PromoData
-      type: object
-      properties:
-        code:
-          title: Code
-          type: string
-        extended_trial:
-          title: Extended Trial
-          type: boolean
-        no_credit:
-          title: No Credit
-          type: boolean
-        stripe_promo_code:
-          title: Stripe Promo Code
-          type: string
-        stripe_promo_codes_used:
-          title: Stripe Promo Codes Used
-          type: object
-          additionalProperties:
-            type: string
-        default_coupon_used:
-          title: Default Coupon Used
-          type: boolean
-          default: false
+    TrustLevel:
+      title: TrustLevel
+      enum:
+      - gray
+      - red
+      - orange
+      - green
+      type: string
+      description: An enumeration.

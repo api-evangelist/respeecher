@@ -57,43 +57,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ErrorResponse:
-      title: ErrorResponse
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: string
-    TTSVoiceVisibility:
-      title: TTSVoiceVisibility
-      enum:
-      - public
-      - private
-      type: string
-      description: An enumeration.
-    ValidationError:
-      title: ValidationError
-      required:
-      - loc
-      - msg
-      - type
-      type: object
-      properties:
-        loc:
-          title: Location
-          type: array
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-        msg:
-          title: Message
-          type: string
-        type:
-          title: Error Type
-          type: string
     TTSVoicePublic:
       title: TTSVoicePublic
       required:
@@ -126,3 +89,40 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ValidationError'
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    ErrorResponse:
+      title: ErrorResponse
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: string
+    TTSVoiceVisibility:
+      title: TTSVoiceVisibility
+      enum:
+      - public
+      - private
+      type: string
+      description: An enumeration.
