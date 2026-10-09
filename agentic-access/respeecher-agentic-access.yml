@@ -1,23 +1,29 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/respeecher-openapi.yml
+source: openapi/respeecher-accents-api-openapi.yml, openapi/respeecher-auth-api-openapi.yml,
+  openapi/respeecher-calibration-api-openapi.yml, openapi/respeecher-credits-api-openapi.yml,
+  openapi/respeecher-folders-api-openapi.yml, openapi/respeecher-healtz-api-openapi.yml, openapi/respeecher-models-api-openapi.yml,
+  openapi/respeecher-narration-styles-api-openapi.yml, openapi/respeecher-notes-api-openapi.yml,
+  openapi/respeecher-orders-api-openapi.yml, openapi/respeecher-projects-api-openapi.yml, openapi/respeecher-recordings-api-openapi.yml,
+  openapi/respeecher-stats-api-openapi.yml, openapi/respeecher-storage-api-openapi.yml, openapi/respeecher-tts-api-openapi.yml,
+  openapi/respeecher-voices-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 54
   by_action_class:
-    connected: 23
-    acting: 31
+    connected: 25
+    acting: 29
   by_consequence:
-    read: 23
-    write: 28
+    read: 25
+    write: 26
     physical: 3
   human_in_the_loop_required: 0
 operations:
-- path: /api/healtz
+- path: /api/v2/accents/samples
   method: get
-  operationId: healtz_api_healtz_get
+  operationId: accent_get_samples_api_v2_accents_samples_get
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -167,6 +173,84 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /api/folders
+  method: get
+  operationId: folder_list_api_folders_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/folders
+  method: post
+  operationId: folder_create_api_folders_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/folders/{folder_id}
+  method: get
+  operationId: folder_get_api_folders__folder_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/folders/{folder_id}
+  method: delete
+  operationId: folder_delete_api_folders__folder_id__delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/folders/{folder_id}
+  method: patch
+  operationId: folder_rename_api_folders__folder_id__patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/healtz
+  method: get
+  operationId: healtz_api_healtz_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /api/models
   method: get
   operationId: model_list_api_models_get
@@ -177,6 +261,110 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /api/v2/narration-styles/samples
+  method: get
+  operationId: narration_style_get_samples_api_v2_narration_styles_samples_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/notes
+  method: get
+  operationId: note_list_api_notes_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/notes
+  method: put
+  operationId: note_update_api_notes_put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/notes
+  method: post
+  operationId: note_create_api_notes_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/notes
+  method: delete
+  operationId: note_delete_api_notes_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v2/orders
+  method: post
+  operationId: conversion_order_create_api_v2_orders_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v2/orders/retry/{recording_id}
+  method: post
+  operationId: conversion_order_retry_api_v2_orders_retry__recording_id__post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /api/projects
   method: get
   operationId: project_list_api_projects_get
@@ -271,74 +459,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/folders
-  method: get
-  operationId: folder_list_api_folders_get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/folders
-  method: post
-  operationId: folder_create_api_folders_post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/folders/{folder_id}
-  method: get
-  operationId: folder_get_api_folders__folder_id__get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/folders/{folder_id}
-  method: delete
-  operationId: folder_delete_api_folders__folder_id__delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/folders/{folder_id}
-  method: patch
-  operationId: folder_rename_api_folders__folder_id__patch
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /api/recordings
   method: get
   operationId: recording_list_api_recordings_get
@@ -503,61 +623,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/tts-voices
-  method: get
-  operationId: tts_voice_list_api_tts_voices_get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/notes
-  method: get
-  operationId: note_list_api_notes_get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/notes
-  method: put
-  operationId: note_update_api_notes_put
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/notes
+- path: /api/v2/recordings/tts
   method: post
-  operationId: note_create_api_notes_post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/notes
-  method: delete
-  operationId: note_delete_api_notes_delete
+  operationId: recording_create_tts_v2_api_v2_recordings_tts_post
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -585,34 +653,22 @@ operations:
   method: post
   operationId: get_project_stats_api_stats_projects_post
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /api/stats/folders
   method: post
   operationId: get_folder_stats_api_stats_folders_post
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /api/{file_url}
   method: get
   operationId: get_file_api__file_url__get
@@ -623,58 +679,16 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/v2/recordings/tts
-  method: post
-  operationId: recording_create_tts_v2_api_v2_recordings_tts_post
+- path: /api/tts-voices
+  method: get
+  operationId: tts_voice_list_api_tts_voices_get
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/v2/orders
-  method: post
-  operationId: conversion_order_create_api_v2_orders_post
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/v2/orders/retry/{recording_id}
-  method: post
-  operationId: conversion_order_retry_api_v2_orders_retry__recording_id__post
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /api/v2/voices
   method: get
   operationId: voice_list_api_v2_voices_get
@@ -727,23 +741,3 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/v2/accents/samples
-  method: get
-  operationId: accent_get_samples_api_v2_accents_samples_get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2/narration-styles/samples
-  method: get
-  operationId: narration_style_get_samples_api_v2_narration_styles_samples_get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
