@@ -568,3 +568,9 @@ components:
             $ref: '#/components/schemas/CalibrationResponse'
         pagination:
           $ref: '#/components/schemas/Pagination'
+x-provenance:
+  method: harvested
+  publisher: Respeecher
+  source: https://gateway.respeecher.com/api/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
